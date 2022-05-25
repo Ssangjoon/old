@@ -1,2 +1,2 @@
 # yomojomo
-group management project
+온라인, 오프라인을 통합하는 모임 개설 서비스 입니다.
