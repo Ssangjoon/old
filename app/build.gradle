@@ -20,12 +20,12 @@ dependencies {
   // MariaDB JDBC 드라이버
   implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.3'
   implementation 'org.springframework.boot:spring-boot-starter-mail'
-  
+
   implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
   implementation 'org.springframework.boot:spring-boot-starter-jdbc'
   implementation 'org.springframework.boot:spring-boot-starter-web'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
-  
+
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -36,6 +36,6 @@ test {
 // eclipse 프로젝트 이름을 설정하기
 eclipse {
     project {
-        name = "yomojomo" // repository 이름과 같게해라
+        name = "yomojomoFork" // repository 이름과 같게해라
     }
 }
