@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.bts.yomojomo.domain.Group;
@@ -26,6 +27,7 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
 @RestController
+@RequestMapping("/group/")
 public class GroupController {
   @Autowired // Controller 객체를 만들 때 Dao인터페이스 구현체를 찾아 자동으로 주입한다.
   GroupService groupService;
@@ -65,7 +67,9 @@ public class GroupController {
   }
 
   @RequestMapping("/group/list")
-  public Object list() {
+  public Object list(
+      @RequestParam(value="pageNo", defaultValue="1") int pageNo, 
+      @RequestParam(value="pageSize", defaultValue="5") int pageSize) {
     return new ResultMap().setStatus(SUCCESS).setData(groupService.list());
   }
 
