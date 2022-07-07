@@ -19,7 +19,7 @@ public class HelloServlet implements Servlet{
 
   @Override
   public void init(ServletConfig config) throws ServletException {
-    System.out.println("init() 호출!");
+    System.out.println("init() 호출!!");
     this.config = config;
   }
 
