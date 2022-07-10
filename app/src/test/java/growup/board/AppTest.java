@@ -4,6 +4,7 @@
 package growup.board;
 
 import org.junit.Test;
+import growup.app3.App;
 import static org.junit.Assert.*;
 
 public class AppTest {

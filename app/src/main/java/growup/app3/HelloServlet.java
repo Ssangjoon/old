@@ -1,4 +1,4 @@
-package growup.board;
+package growup.app3;
 
 import java.io.IOException;
 import java.io.PrintWriter;
