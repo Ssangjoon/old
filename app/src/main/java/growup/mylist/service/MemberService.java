@@ -1,6 +1,6 @@
-package com.eomcs.mylist.service;
+package growup.mylist.service;
 
-import com.eomcs.mylist.domain.Member;
+import growup.mylist.domain.Member;
 
 public interface MemberService {
 

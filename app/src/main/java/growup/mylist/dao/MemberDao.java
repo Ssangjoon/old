@@ -1,8 +1,7 @@
-package com.eomcs.mylist.dao;
+package growup.mylist.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.eomcs.mylist.domain.Member;
 
 @Mapper  
 public interface MemberDao {

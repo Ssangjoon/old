@@ -1,4 +1,4 @@
-package com.eomcs.mylist.domain;
+package growup.mylist.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

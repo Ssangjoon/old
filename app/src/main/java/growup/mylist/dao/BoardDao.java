@@ -1,8 +1,8 @@
-package com.eomcs.mylist.dao;
+package growup.mylist.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-import com.eomcs.mylist.domain.Board;
+import growup.mylist.domain.Board;
 
 @Mapper  
 // => Mybatis에서 DAO 구현체를 자동으로 생성한다.

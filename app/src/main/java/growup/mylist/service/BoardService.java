@@ -1,7 +1,7 @@
-package com.eomcs.mylist.service;
+package growup.mylist.service;
 
 import java.util.List;
-import com.eomcs.mylist.domain.Board;
+import growup.mylist.domain.Board;
 
 public interface BoardService {
 

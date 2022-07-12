@@ -1,21 +1,15 @@
-package com.eomcs.mylist.service.impl;
+package growup.mylist.service.impl;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import com.eomcs.mylist.dao.BoardDao;
-import com.eomcs.mylist.domain.Board;
-import com.eomcs.mylist.service.BoardService;
+import growup.mylist.dao.BoardDao;
+import growup.mylist.domain.Board;
+import growup.mylist.service.BoardService;
 
-@Service // Spring IoC 컨테이너가 객체를 만들어 저장할 때 클래스 이름을 사용한다. 예) defaultBoardService
 public class DefaultBoardService implements BoardService {
 
-  @Autowired
   BoardDao boardDao;
 
   @Override
-  @Transactional
   public int add(Board board) {
     return boardDao.insert(board);
   }
@@ -35,13 +29,11 @@ public class DefaultBoardService implements BoardService {
   }
 
   @Override
-  @Transactional
   public int update(Board board) {
     return boardDao.update(board);
   }
 
   @Override
-  @Transactional
   public int delete(Board board) {
     return boardDao.delete(board);
   }
