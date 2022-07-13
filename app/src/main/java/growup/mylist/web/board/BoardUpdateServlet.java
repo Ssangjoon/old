@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import growup.mylist.domain.Board;
+import growup.mylist.domain.Member;
 import growup.mylist.service.BoardService;
 
 @SuppressWarnings("serial")

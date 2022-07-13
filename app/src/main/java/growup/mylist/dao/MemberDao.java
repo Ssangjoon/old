@@ -2,6 +2,7 @@ package growup.mylist.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import growup.mylist.domain.Member;
 
 @Mapper  
 public interface MemberDao {

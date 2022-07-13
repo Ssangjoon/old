@@ -2,11 +2,15 @@ package growup.mylist.web.board;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import growup.mylist.domain.Board;
+import growup.mylist.service.BoardService;
 
 // 서블릿 컨테이너가 실행할 클래스를 만드려면 
 @SuppressWarnings("serial")
@@ -15,9 +19,23 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/board/list") // 서블릿 컨테이너에게 이 클래스가 /hello 요청을 처리하는 서블릿임을 알려준다. 
 public class BoardListServlet extends HttpServlet{
 
+  BoardService boardService;
+
+  @Override
+  public void init() throws ServletException {
+    // BoardService 객체를 웹애플리케이션 보관소에서 꺼낸다. 
+    ServletContext 웹애플리케이션보관소 = this.getServletContext();
+    boardService = (BoardService)웹애플리케이션보관소.getAttribute("boardService");
+  }
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+
+    List<Board> boards = boardService.list();
+    for(Board board:boards) {
+
+    }
 
     resp.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = resp.getWriter();
