@@ -20,8 +20,8 @@
 </div>
 
 <div id="content">
-<h1>게시글</h1>
-<a href="form.jsp">새 게시글</a>
+<h1>게시글2</h1>
+<a href="add">새 게시글</a>
 <table id="x-board-table" border="1">
 <thead>
   <tr>
@@ -34,15 +34,15 @@
 </thead>
 <tbody>
 <%
-int pageNo = (int)request.getAttribute("pageNo");
-int pageSize = (int)request.getAttribute("pageSize");
-int totalPageSize = (int)request.getAttribute("totalPageSize");
+int pageNo = (int) request.getAttribute("pageNo");
+int pageSize = (int) request.getAttribute("pageSize");
+int totalPageSize = (int) request.getAttribute("totalPageSize");
 List<Board> boards = (List<Board>) request.getAttribute("list");
 for (Board board : boards) {
 %>
   <tr>
     <td><%=board.getNo()%></td>
-    <td><a href='view?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
+    <td><a href='detail?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
     <td><%=board.getWriter().getName()%></td>
     <td><%=board.getViewCount()%></td>
     <td><%=board.getCreatedDate()%></td>
@@ -52,7 +52,7 @@ for (Board board : boards) {
 %>
 </tbody>
 </table>
-</div>
+<div>
 <%if (pageNo > 1) {%>
 <a href="list?pageNo=<%=pageNo - 1%>&pageSize=<%=pageSize%>">[이전]</a>
 <%} else {%>
@@ -64,6 +64,8 @@ for (Board board : boards) {
 <%} else {%>
 [다음]
 <%} %>
+</div>
+</div>
 
 <div id="footer">
 <jsp:include page="/jsp/footer.jsp"></jsp:include>
@@ -72,4 +74,3 @@ for (Board board : boards) {
 </div>
 </body>
 </html>
- 

@@ -17,7 +17,7 @@ import growup.mylist.service.BoardService;
 @SuppressWarnings("serial")
 // Servlet API규칙에 따라 작성해야 한다. 
 //
-@WebServlet("/board/list") // 서블릿 컨테이너에게 이 클래스가 /hello 요청을 처리하는 서블릿임을 알려준다. 
+@WebServlet("/board/list0") // 서블릿 컨테이너에게 이 클래스가 /hello 요청을 처리하는 서블릿임을 알려준다. 
 public class BoardListServlet extends HttpServlet{
 
   BoardService boardService;

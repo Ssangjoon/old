@@ -12,7 +12,7 @@ import growup.mylist.domain.Board;
 import growup.mylist.domain.Member;
 import growup.mylist.service.BoardService;
 @SuppressWarnings("serial")
-@WebServlet("/board/add") 
+@WebServlet("/board/add0") 
 public class BoardAddServlet extends HttpServlet {
 
   BoardService boardService;
