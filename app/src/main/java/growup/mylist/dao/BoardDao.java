@@ -15,7 +15,7 @@ public interface BoardDao {
 
   int countAll();
 
-  List<Board> findAll();
+  List<Board> findAll(@Param("rowCount") int rowCount,@Param("offSet") int offSet);
 
   int insert(Board board);
 
