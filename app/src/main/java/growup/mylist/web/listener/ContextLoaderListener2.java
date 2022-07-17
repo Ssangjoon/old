@@ -5,7 +5,6 @@ import javax.annotation.Resources;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import growup.mylist.controller.board.BoardAddController3;
@@ -17,13 +16,13 @@ import growup.mylist.service.BoardService;
 import growup.mylist.service.impl.DefaultBoardService;
 
 //역할:
-// - 웹 애플리케이션이 시작될 때 Service 객체, DAO 객체, Mybatis 객체를 준비한다. 
-@WebListener
+// - 웹 애플리케이션이 시작될 때 Service 객체, DAO 객체, Mybatis, 페이지 컨트롤러 객체를 준비한다. 
+//@WebListener
 public class ContextLoaderListener2 implements ServletContextListener{
   @Override
   public void contextInitialized(ServletContextEvent sce) {
     // 웹애플리케이션이 시작되면 이 메서드가 호출된다. 
-    System.out.println("서비스 및 DAO, Mybatis객체 준비!");
+    System.out.println("서비스 및 DAO, Mybatis, 페이지 컨트롤러 객체 준비!");
 
     //1) DB 커넥션풀 준비
     try {
@@ -50,4 +49,5 @@ public class ContextLoaderListener2 implements ServletContextListener{
       e.printStackTrace();
     }
   }
+
 }
