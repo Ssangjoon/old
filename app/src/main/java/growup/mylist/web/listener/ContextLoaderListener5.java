@@ -3,22 +3,26 @@ package growup.mylist.web.listener;
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Enumeration;
-import javax.annotation.Resources;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import growup.mylist.controller.Component;
+import growup.mylist.controller.RequestMapping;
+import growup.mylist.controller.RequestMappingHandler;
 import growup.mylist.service.BoardService;
 import growup.mylist.service.impl.DefaultBoardService;
 
 //역할:
 // - 웹 애플리케이션이 시작될 때 Service 객체, DAO 객체, Mybatis, 페이지 컨트롤러 객체를 준비한다. 
-//@WebListener
-public class ContextLoaderListener3 implements ServletContextListener{
+@WebListener
+public class ContextLoaderListener5 implements ServletContextListener{
 
   ServletContext sc;
   @Override
@@ -105,9 +109,28 @@ public class ContextLoaderListener3 implements ServletContextListener{
         // 생성자를 호출하여 객첵를 생성한다.
         Object obj = constructor.newInstance(args);
 
-        // 생성된 객체를 ServletContext 보관소에 담는다.
-        // 이때 이름은 @Component 애노테이션의 value 값을 사용한다.
-        sc.setAttribute(compAnno.value(), obj);
+        // 클래스 정보에서 @RequestMapping 애노테이션을 추출한다.
+        String rootPath = "";
+        RequestMapping requestMappingAnno = classInfo.getAnnotation(RequestMapping.class);
+        if (requestMappingAnno != null) {
+          rootPath = requestMappingAnno.value();
+        }
+
+        // @RequestMapping이 붙은 메서드를 알아낸다.
+        Method[] methods = classInfo.getDeclaredMethods();
+
+        for (Method m : methods) {
+          RequestMapping anno = m.getAnnotation(RequestMapping.class);
+          String ControllerPath = rootPath + anno.value();
+          if (anno != null) {
+            // 생성된 request handler 객체를 ServletContext 보관소에 담는다.
+            sc.setAttribute(ControllerPath, 
+                new RequestMappingHandler()
+                .setObj(obj)
+                .setMethod(m)
+                .setPathInfo(ControllerPath));
+          }
+        }
       }
     }
   }

@@ -2,13 +2,12 @@ package growup.mylist.controller.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import growup.mylist.controller.Component;
 import growup.mylist.controller.Controller;
 import growup.mylist.domain.Board;
 import growup.mylist.domain.Member;
 import growup.mylist.service.BoardService;
 
-@Component("/board/add")
+//@Component("/board/add")
 public class BoardAddController3 implements Controller{
 
   BoardService boardService;

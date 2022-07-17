@@ -3,15 +3,14 @@ package growup.mylist.controller.board;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import growup.mylist.domain.Board;
 import growup.mylist.service.BoardService;
 
-@SuppressWarnings("serial")
-@WebServlet("/board/detail0") 
+//@SuppressWarnings("serial")
+//@WebServlet("/board/detail") 
 public class BoardDetailController extends HttpServlet {
 
   BoardService boardService;

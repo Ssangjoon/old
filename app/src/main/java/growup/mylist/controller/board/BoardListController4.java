@@ -3,21 +3,21 @@ package growup.mylist.controller.board;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import growup.mylist.controller.Controller;
+import growup.mylist.controller.RequestMapping;
 import growup.mylist.domain.Board;
 import growup.mylist.service.BoardService;
 
 //@Component("/board/list")
-public class BoardListController3 implements Controller{
+public class BoardListController4 {
 
   BoardService boardService;
 
-  public BoardListController3(BoardService boardService) {
+  public BoardListController4(BoardService boardService) {
     this.boardService = boardService;
   }
 
-  @Override
-  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  @RequestMapping
+  public String list(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     // 1) 입력 데이터 가공 및 검증
     int pageNo = 1; 
