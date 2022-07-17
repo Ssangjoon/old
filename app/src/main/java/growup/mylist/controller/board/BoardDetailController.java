@@ -11,7 +11,7 @@ import growup.mylist.domain.Board;
 import growup.mylist.service.BoardService;
 
 @SuppressWarnings("serial")
-@WebServlet("/board/detail") 
+@WebServlet("/board/detail0") 
 public class BoardDetailController extends HttpServlet {
 
   BoardService boardService;

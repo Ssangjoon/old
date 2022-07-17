@@ -3,7 +3,6 @@ package growup.mylist.controller.board;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +10,9 @@ import growup.mylist.domain.Board;
 import growup.mylist.domain.Member;
 import growup.mylist.service.BoardService;
 
-@SuppressWarnings("serial")
-@WebServlet("/board/add0") 
-public class BoardAddController extends HttpServlet {
+//@SuppressWarnings("serial")
+//@WebServlet("/board/add") 
+public class BoardAddController2 extends HttpServlet {
 
   BoardService boardService;
 
@@ -26,7 +25,7 @@ public class BoardAddController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.getRequestDispatcher("/jsp/board/form.jsp").forward(request, response);
+    request.setAttribute("viewUrl", "/jsp/board/form.jsp");
   }
 
   @Override
@@ -43,11 +42,10 @@ public class BoardAddController extends HttpServlet {
 
       boardService.add(board);
 
-      response.sendRedirect("list");
+      request.setAttribute("viewUrl", "redirect:list");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
     }
   }
 }

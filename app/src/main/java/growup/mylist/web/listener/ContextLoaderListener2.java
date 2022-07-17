@@ -5,17 +5,21 @@ import javax.annotation.Resources;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import growup.mylist.controller.board.BoardAddController3;
+import growup.mylist.controller.board.BoardDeleteController3;
+import growup.mylist.controller.board.BoardDetailController3;
+import growup.mylist.controller.board.BoardListController3;
+import growup.mylist.controller.board.BoardUpdateController3;
 import growup.mylist.service.BoardService;
-import growup.mylist.service.MemberService;
 import growup.mylist.service.impl.DefaultBoardService;
-import growup.mylist.service.impl.DefaultMemberService;
 
 //역할:
 // - 웹 애플리케이션이 시작될 때 Service 객체, DAO 객체, Mybatis 객체를 준비한다. 
-//@WebListener
-public class ContextLoaderListener implements ServletContextListener{
+@WebListener
+public class ContextLoaderListener2 implements ServletContextListener{
   @Override
   public void contextInitialized(ServletContextEvent sce) {
     // 웹애플리케이션이 시작되면 이 메서드가 호출된다. 
@@ -31,12 +35,16 @@ public class ContextLoaderListener implements ServletContextListener{
 
       // 2) 서비스 객체 생성
       BoardService boardService = new DefaultBoardService(sqlSessionFactory);
-      MemberService memberService = new DefaultMemberService(sqlSessionFactory);
+      //MemberService memberService = new DefaultMemberService(sqlSessionFactory);
 
-      // 3) 서블릿에서 서비스 객체를 사용할 수 있도록 ServletContext보관소에 저장한다. 
+      // 3) 페이지 컨트롤러 객체 생성 및 서블릿에서 서비스 객체를 사용할 수 있도록 
+      //    ServletContext보관소에 저장한다.
       ServletContext 웹애플리케이션보관소 = sce.getServletContext();
-      웹애플리케이션보관소.setAttribute("boardService", boardService);
-      웹애플리케이션보관소.setAttribute("memberService", memberService);
+      웹애플리케이션보관소.setAttribute("/board/list", new BoardListController3(boardService));
+      웹애플리케이션보관소.setAttribute("/board/detail", new BoardDetailController3(boardService));
+      웹애플리케이션보관소.setAttribute("/board/update", new BoardUpdateController3(boardService));
+      웹애플리케이션보관소.setAttribute("/board/delete", new BoardDeleteController3(boardService));
+      웹애플리케이션보관소.setAttribute("/board/add", new BoardAddController3(boardService));
 
     } catch (Exception e) {
       e.printStackTrace();

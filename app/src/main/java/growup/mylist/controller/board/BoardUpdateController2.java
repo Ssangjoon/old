@@ -3,7 +3,6 @@ package growup.mylist.controller.board;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +10,9 @@ import growup.mylist.domain.Board;
 import growup.mylist.domain.Member;
 import growup.mylist.service.BoardService;
 
-@SuppressWarnings("serial")
-@WebServlet("/board/add0") 
-public class BoardAddController extends HttpServlet {
+//@SuppressWarnings("serial")
+//@WebServlet("/board/update") 
+public class BoardUpdateController2 extends HttpServlet {
 
   BoardService boardService;
 
@@ -24,42 +23,24 @@ public class BoardAddController extends HttpServlet {
   }
 
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    request.getRequestDispatcher("/jsp/board/form.jsp").forward(request, response);
-  }
-
-  @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
       Board board = new Board();
+      board.setNo(Integer.parseInt(request.getParameter("no")));
       board.setTitle(request.getParameter("title"));
       board.setContent(request.getParameter("content"));
 
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
       board.setWriter(loginUser);
 
-      boardService.add(board);
+      boardService.update(board);
 
-      response.sendRedirect("list");
+      request.setAttribute("viewUrl", "redirect:list");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
     }
-  }
+  } 
 }
-
-
-
-
-
-
-
-
-
-
-
-

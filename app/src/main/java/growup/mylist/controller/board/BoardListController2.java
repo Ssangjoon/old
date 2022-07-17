@@ -2,7 +2,6 @@ package growup.mylist.controller.board;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +15,8 @@ import growup.mylist.service.BoardService;
 @SuppressWarnings("serial")
 // Servlet API규칙에 따라 작성해야 한다. 
 //
-@WebServlet("/board/list0") // 서블릿 컨테이너에게 이 클래스가 /hello 요청을 처리하는 서블릿임을 알려준다. 
-public class BoardListController extends HttpServlet{
+@WebServlet("/board/list") // 서블릿 컨테이너에게 이 클래스가 /hello 요청을 처리하는 서블릿임을 알려준다. 
+public class BoardListController2 extends HttpServlet{
 
   BoardService boardService;
 
@@ -68,12 +67,11 @@ public class BoardListController extends HttpServlet{
       request.setAttribute("pageSize", pageSize);
       request.setAttribute("totalPageSize", totalPageSize);
 
-      // 4) 뷰 객체에게 실행을 위임한다. 
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/jsp/board/list.jsp");
-      요청배달자.forward(request, response);
+      // 4) 실행할 뷰 URL 설정
+      request.setAttribute("viewUrl", "/jsp/board/list.jsp");
+
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
     }
   }
 }
