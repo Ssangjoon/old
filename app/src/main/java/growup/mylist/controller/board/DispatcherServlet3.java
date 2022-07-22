@@ -3,14 +3,13 @@ package growup.mylist.controller.board;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import growup.mylist.controller.RequestMappingHandler;
 
-@WebServlet("/app/*")
-@SuppressWarnings("serial")
+//@WebServlet("/app/*")
+//@SuppressWarnings("serial")
 public class DispatcherServlet3 extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -25,6 +24,7 @@ public class DispatcherServlet3 extends HttpServlet {
       ServletContext  애플리케이션보관소 = request.getServletContext();
       RequestMappingHandler requestMappingHandler = (RequestMappingHandler) 애플리케이션보관소.getAttribute(controllerPath);
 
+      //111-2수업
       String viewUrl = (String) requestMappingHandler.getMethod().invoke(requestMappingHandler.getObj(), request, response);
 
       if (viewUrl.startsWith("redirect:")) { // 예) redirect:list

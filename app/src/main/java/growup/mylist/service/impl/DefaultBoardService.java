@@ -3,10 +3,12 @@ package growup.mylist.service.impl;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Service;
 import growup.mylist.dao.BoardDao;
 import growup.mylist.domain.Board;
 import growup.mylist.service.BoardService;
 
+@Service
 public class DefaultBoardService implements BoardService {
 
   SqlSessionFactory sqlSessionFactory;

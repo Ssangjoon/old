@@ -1,25 +1,29 @@
 package growup.mylist.controller.board;
 
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import growup.mylist.controller.Component;
 import growup.mylist.controller.RequestMapping;
+import growup.mylist.controller.RequestParam;
 import growup.mylist.domain.Board;
 import growup.mylist.domain.Member;
 import growup.mylist.service.BoardService;
 
 @Component
-public class BoardController {
+@RequestMapping("/board/")
+public class BoardController2 {
 
   BoardService boardService;
 
-  public BoardController(BoardService boardService) {
+  public BoardController2(BoardService boardService) {
     this.boardService = boardService;
   }
 
   // 한 클래스에 여러게의 RequestMapping이 존재하려면 
-  //  @RequestMapping("list")
+  @RequestMapping("list")
   public String list(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
     // 1) 입력 데이터 가공 및 검증
@@ -63,10 +67,9 @@ public class BoardController {
   } 
 
   @RequestMapping("detail")
-  public String detail(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("no"));
+  public String detail(@RequestParam("no") int no, Map<String, Object> model) throws Exception {
     Board board = boardService.get(no);
-    request.setAttribute("board", board);
+    model.put("board", board);
     return "/jsp/board/detail.jsp";
 
   }
@@ -89,7 +92,7 @@ public class BoardController {
   } 
 
   @RequestMapping("delete")
-  public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  public String delete(@RequestParam("no") int no, HttpSession session) throws Exception {
 
 
     Board board = new Board();
