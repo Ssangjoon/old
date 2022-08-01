@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+  "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<!-- main -->
+	<definition name="mainLayout" template="/WEB-INF/views/layout/mainLayout.jsp">
+		<put-attribute name="dtd" value="/WEB-INF/views/layout/dtd.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="*.main" extends="mainLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+
+	<!-- sub -->
+	<definition name="tilesLayout" template="/WEB-INF/views/layout/tilesLayout.jsp">
+		<put-attribute name="dtd" value="/WEB-INF/views/layout/dtd.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="aside" value="/WEB-INF/views/layout/aside.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+ 
+	<definition name="*.tiles" extends="tilesLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	
+	<definition name="*/*.tiles" extends="tilesLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+
+	<!-- login -->
+	<definition name="loginLayout" template="/WEB-INF/views/layout/loginLayout.jsp">
+		<put-attribute name="admDtd" value="/WEB-INF/views/layout/admDtd.jsp" />
+		<put-attribute name="content" value="" />
+	</definition>
+	
+	<definition name="*/*.login" extends="loginLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+
+	<!-- 관리자 -->
+	<definition name="admLayout" template="/WEB-INF/views/layout/admLayout.jsp">
+		<put-attribute name="admDtd" value="/WEB-INF/views/layout/admDtd.jsp" />
+		<put-attribute name="admHeader" value="/WEB-INF/views/layout/admHeader.jsp" />
+		<put-attribute name="content" value="" />
+	</definition>
+	
+	<definition name="*/*.adm" extends="admLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	<!-- 타일즈 미 적용 -->
+	<definition name="normalLayout" template="/WEB-INF/views/layout/normalLayout.jsp">
+		<put-attribute name="NormalLayout" value="" />
+	</definition>
+	
+	<definition name="*.jsp" extends="normalForm">
+		<put-attribute name="NormalLayout" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+		
+	<definition name="*/*.jsp" extends="normalForm">
+		<put-attribute name="NormalLayout" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+</tiles-definitions>
