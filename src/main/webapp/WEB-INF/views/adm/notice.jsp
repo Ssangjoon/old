@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<head>
 
+</head>
+<body>
 	<div class="title">공지사항</div>
 	<div class="content">
 
@@ -80,6 +83,7 @@
 		</div>
 
 	</div>
+</body>
 	<script>
 	function noticeDelete(seq){
 		var con_test = confirm("삭제하시겠습니까?");
