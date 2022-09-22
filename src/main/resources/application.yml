@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    hikari:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://211.222.25.101:5432/ATproject4
+      username: ATproject4
+      password: at1234
+      idle-timeout: 30000
+      connection-timeout: 60000
