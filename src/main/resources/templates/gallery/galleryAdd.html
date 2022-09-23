@@ -1,0 +1,20 @@
+<main class="container" style="margin-top:130px">
+    <form action="/galleryAdd" method="post" enctype="multipart/form-data">
+        <div>
+            <div>
+                <div>
+                    <label for="gb_title">제목</label>
+                    <input id="gb_title" name="gb_title">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="gb_content">내용</label>
+                    <textarea id="gb_content" name="gb_content" style="width:50vw; height:40vh"></textarea>
+                </div>
+                <input type="file" name="file" multiple="multiple">
+            </div>
+        </div>
+        <input type="submit" value="추가">
+    </form>
+</main>

@@ -1,0 +1,86 @@
+<style>
+    .table a {
+        color : black;
+        text-decoration: none;
+    }
+    #search-container{
+        float:right
+    }
+</style>
+
+<main class="container" style="margin-top:130px">
+    <div id="search-container">
+        <input id=search><button id="search-btn">검색</button>
+    </div>
+    <table class="table" >
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>content</th>
+            <th>writer</th>
+            <th>createDate</th>
+        </tr>
+        </thead>
+        <tbody id="content">
+
+        </tbody>
+    </table>
+    <a href="/noticeAddPage">새글</a>
+</main>
+
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        $.ajax({-->
+<!--            type : 'GET',-->
+<!--            url : "/getNoticeList",-->
+<!--            data : {},-->
+<!--            error : function(error) {-->
+<!--                alert("Error!");-->
+<!--            },-->
+<!--            success : function(value) {-->
+<!--                console.log(value);-->
+<!--                let html = '';-->
+
+<!--                value.forEach((it) => {-->
+<!--                    html += "<tr>";-->
+<!--                    html += "<td>" + it.nb_id + "</td>";-->
+<!--                    html += "<td><a href='/noticeDetailPage?nb_id="+it.nb_id+"'>" + it.nb_title + "</a></td>";-->
+<!--                    html += "<td>" + it.nb_content + "</td>";-->
+<!--                    html += "<td>" + it.nb_writer + "</td>";-->
+<!--                    html += "<td>" + it.nb_createdat + "</td>";-->
+<!--                    html += "</tr>";-->
+<!--                });-->
+<!--                $("#content").append(html)-->
+<!--            }-->
+<!--        }); // list-end-->
+
+        $("#search-btn").on("click",(e)=>{
+            let keyword = $("#search").val();
+            $.ajax({
+                type : 'GET',
+                url : "/getSearch",
+                data : {
+                    "keyword" : keyword
+                },
+                error : function(error) {
+                    alert("Error!");
+                },
+                success : function(value) {
+                    console.log(value);
+                    let html = ""
+                    value.forEach((it) => {
+                        html += "<tr>";
+                        html += "<td>" + it.nb_id + "</td>";
+                        html += "<td><a href='/noticeDetailPage?nb_id="+it.nb_id+"'>" + it.nb_title + "</a></td>";
+                        html += "<td>" + it.nb_content + "</td>";
+                        html += "<td>" + it.nb_writer + "</td>";
+                        html += "<td>" + it.nb_createdat + "</td>";
+                        html += "</tr>";
+                    })
+                    $("#content").html(html)
+                }
+            });
+        }) // search-end
+    });
+</script>

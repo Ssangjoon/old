@@ -27,7 +27,7 @@ public class HomeController {
     public String home(Model model) {
         logger.info("메인화면");
 
-        model.addAttribute("content", "main.jsp");
+        model.addAttribute("content", "main.html");
 
         return "home";
     }
@@ -36,7 +36,7 @@ public class HomeController {
     public String gallery(Model model) {
         logger.info("갤러리");
 
-        model.addAttribute("content", "gallery.jsp" );
+        model.addAttribute("content", "gallery.html" );
 
         return "home";
     }
@@ -45,7 +45,7 @@ public class HomeController {
     public String notice(Model model) {
         logger.info("공지사항");
 
-        model.addAttribute("content", "notice.jsp" );
+        model.addAttribute("content", "notice.html" );
 
         return "home";
     }
@@ -54,7 +54,7 @@ public class HomeController {
     public String myPage(Model model) {
         logger.info("마이페이지");
 
-        model.addAttribute("content", "myPage.jsp" );
+        model.addAttribute("content", "myPage.html" );
 
         return "home";
     }
