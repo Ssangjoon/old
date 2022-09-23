@@ -1,0 +1,28 @@
+<main class="container" style="margin-top:130px">
+    <form action="/noticeEdit" method="post">
+        <input type="hidden" name="nb_id" value="${boardContent.nb_id }">
+        <div>
+            <div>
+                <div>
+                    <label for="nb_title">제목</label>
+                </div>
+                <div>
+                    <input id="nb_title" name="nb_title" value="${boardContent.nb_title}" readonly>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="nb_content">내용</label>
+                </div>
+                <div>
+                    <textarea id="nb_content" name="nb_content" style="width:50vw; height:40vh">${boardContent.nb_content}</textarea>
+                </div>
+            </div>
+        </div>
+        <div>일시 : ${boardContent.nb_createdat}</div>
+        <c:if test="${boardContent.nb_writer eq loginUser.mi_id}">
+            <input type="submit" value="수정">
+            <a href="/noticeDelete?nb_id=${boardContent.nb_id}">삭제</a>
+        </c:if>
+    </form>
+</main>
