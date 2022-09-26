@@ -20,6 +20,13 @@ public class HomeController {
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+    @RequestMapping("/home")
+    public String home1(Model model) {
+        logger.info("실행");
+        model.addAttribute("welcome", "안녕하세요!");
+        return "home";
+    }
+
     /**
      * Simply selects the home view to render by returning its name.
      */

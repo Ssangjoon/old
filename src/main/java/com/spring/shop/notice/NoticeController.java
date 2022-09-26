@@ -3,9 +3,13 @@ package com.spring.shop.notice;
 import com.spring.shop.notice.dto.NoticeCreateDto.NoticeCreateData;
 import com.spring.shop.notice.dto.NoticeCreateDto.NoticeCreateRequest;
 import com.spring.shop.notice.dto.NoticeCreateDto.NoticeCreateResponse;
-import com.spring.shop.notice.dto.NoticeCreateDto.NoticeUpdateRequest;
-import com.spring.shop.notice.dto.NoticeCreateDto.NoticeUpdateResponse;
-import com.spring.shop.notice.dto.NoticeCreateDto.NoticeUpdateData;
+import com.spring.shop.notice.dto.NoticeDeleteDto.NoticeDeleteRequest;
+import com.spring.shop.notice.dto.NoticeSelectDto.NoticeSelectData;
+import com.spring.shop.notice.dto.NoticeSelectDto.NoticeSelectRequest;
+import com.spring.shop.notice.dto.NoticeSelectDto.NoticeSelectResponse;
+import com.spring.shop.notice.dto.NoticeUpdateDto.NoticeUpdateData;
+import com.spring.shop.notice.dto.NoticeUpdateDto.NoticeUpdateRequest;
+import com.spring.shop.notice.dto.NoticeUpdateDto.NoticeUpdateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +39,25 @@ public class NoticeController {
         return noticeList;
     }
 
+    @PostMapping(value = "/select")
+    @ResponseBody
+    public NoticeSelectResponse select(@RequestBody NoticeSelectRequest req){
+        Notice notice = noticeService.findById(req.toEntity());
+        return new NoticeSelectResponse(NoticeSelectData.select(notice));
+    }
+
     @PostMapping("/update")
     @ResponseBody
     public NoticeUpdateResponse update(@RequestBody NoticeUpdateRequest req) {
         Notice notice = noticeService.create(req.toEntity());
 
         return new NoticeUpdateResponse(NoticeUpdateData.update(notice));
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public void delete(@RequestBody NoticeDeleteRequest req) {
+        noticeService.delete(req.toEntity());
     }
 
 }
