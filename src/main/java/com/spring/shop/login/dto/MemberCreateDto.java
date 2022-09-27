@@ -1,4 +1,4 @@
-package com.spring.shop.login.dto.member;
+package com.spring.shop.login.dto;
 
 import com.spring.shop.login.Member;
 import lombok.AllArgsConstructor;

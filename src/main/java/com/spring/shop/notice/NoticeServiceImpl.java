@@ -24,6 +24,7 @@ public class NoticeServiceImpl implements NoticeService {
     public Notice findById(Notice notice) {
         Optional<Notice> selectNotice = noticeRepository.findById(notice.getId());
         Notice select = selectNotice.get();
+//        select.getMember().getId()
         return select;
     }
 

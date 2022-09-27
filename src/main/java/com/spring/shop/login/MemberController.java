@@ -1,8 +1,8 @@
 package com.spring.shop.login;
 
-import com.spring.shop.login.dto.member.MemberCreateDto.MemberCreateRequest;
-import com.spring.shop.login.dto.member.MemberCreateDto.MemberCreateResponse;
-import com.spring.shop.login.dto.member.MemberCreateDto.MemberCreateData;
+import com.spring.shop.login.dto.MemberCreateDto.MemberCreateRequest;
+import com.spring.shop.login.dto.MemberCreateDto.MemberCreateResponse;
+import com.spring.shop.login.dto.MemberCreateDto.MemberCreateData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

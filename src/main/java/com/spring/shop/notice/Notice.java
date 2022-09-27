@@ -1,16 +1,14 @@
 package com.spring.shop.notice;
 
 import com.spring.shop.login.Member;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity // JPA에서 해당 객체를 관리하겠다는 어노테이션
 @Getter
+@ToString(exclude = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Notice {
 

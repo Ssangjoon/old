@@ -1,4 +1,4 @@
-package com.spring.shop.notice.dto.notice;
+package com.spring.shop.notice.dto;
 
 import com.spring.shop.login.Member;
 import com.spring.shop.notice.Notice;
@@ -18,7 +18,6 @@ public class NoticeUpdateDto {
         private String title;
         private String content;
         private String writer;
-
         private Member member;
         public Notice toEntity() {
             return new Notice(this.id, this.title, this.content, this.writer, this.member);

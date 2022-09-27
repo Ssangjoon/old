@@ -1,4 +1,4 @@
-package com.spring.shop.notice.dto.notice;
+package com.spring.shop.notice.dto;
 
 import com.spring.shop.login.Member;
 import com.spring.shop.notice.Notice;
