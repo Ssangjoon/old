@@ -1,5 +1,6 @@
-package com.spring.shop.notice.dto;
+package com.spring.shop.notice.dto.notice;
 
+import com.spring.shop.login.Member;
 import com.spring.shop.notice.Notice;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +17,10 @@ public class NoticeDeleteDto {
         private String content;
         private String writer;
 
+        private Member member;
+
         public Notice toEntity() {
-            return new Notice(this.id, this.title, this.content, this.writer);
+            return new Notice(this.id, this.title, this.content, this.writer, this.member);
         }
     }
 

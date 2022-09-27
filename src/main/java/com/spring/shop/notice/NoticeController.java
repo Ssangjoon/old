@@ -1,15 +1,15 @@
 package com.spring.shop.notice;
 
-import com.spring.shop.notice.dto.NoticeCreateDto.NoticeCreateData;
-import com.spring.shop.notice.dto.NoticeCreateDto.NoticeCreateRequest;
-import com.spring.shop.notice.dto.NoticeCreateDto.NoticeCreateResponse;
-import com.spring.shop.notice.dto.NoticeDeleteDto.NoticeDeleteRequest;
-import com.spring.shop.notice.dto.NoticeSelectDto.NoticeSelectData;
-import com.spring.shop.notice.dto.NoticeSelectDto.NoticeSelectRequest;
-import com.spring.shop.notice.dto.NoticeSelectDto.NoticeSelectResponse;
-import com.spring.shop.notice.dto.NoticeUpdateDto.NoticeUpdateData;
-import com.spring.shop.notice.dto.NoticeUpdateDto.NoticeUpdateRequest;
-import com.spring.shop.notice.dto.NoticeUpdateDto.NoticeUpdateResponse;
+import com.spring.shop.notice.dto.notice.NoticeCreateDto.NoticeCreateData;
+import com.spring.shop.notice.dto.notice.NoticeCreateDto.NoticeCreateRequest;
+import com.spring.shop.notice.dto.notice.NoticeCreateDto.NoticeCreateResponse;
+import com.spring.shop.notice.dto.notice.NoticeDeleteDto.NoticeDeleteRequest;
+import com.spring.shop.notice.dto.notice.NoticeSelectDto.NoticeSelectData;
+import com.spring.shop.notice.dto.notice.NoticeSelectDto.NoticeSelectRequest;
+import com.spring.shop.notice.dto.notice.NoticeSelectDto.NoticeSelectResponse;
+import com.spring.shop.notice.dto.notice.NoticeUpdateDto.NoticeUpdateData;
+import com.spring.shop.notice.dto.notice.NoticeUpdateDto.NoticeUpdateRequest;
+import com.spring.shop.notice.dto.notice.NoticeUpdateDto.NoticeUpdateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

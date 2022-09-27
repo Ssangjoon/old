@@ -1,5 +1,6 @@
 package com.spring.shop.notice;
 
+import com.spring.shop.login.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,25 +27,24 @@ public class Notice {
     @Column(length = 30, nullable = false)
     private String writer;
 
+    @ManyToOne(fetch = FetchType.LAZY) // 다대일 매핑,엔티티 조회할 때, 연관된 엔티티는 실제 사용 시점에 조회한다.
+    @JoinColumn(name = "member_id") //
+    private Member member;
+
     private OffsetDateTime createdAt = OffsetDateTime.now();
 
-    public Notice(String title, String content, String writer) {
+    public Notice(String title, String content, String writer, Member member) {
         this.title = title;
         this.content = content;
         this.writer = writer;
+        this.member = member;
     }
 
-    public Notice(Long id, String title, String content, String writer) {
+    public Notice(Long id, String title, String content, String writer, Member member) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.writer = writer;
-    }
-    @Builder // 해당클래스의 빌터 패턴 클래스를 생성
-    //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    public void updateNotice(String title, String content, String writer) {
-        this.title = title;
-        this.content = content;
-        this.writer = writer;
+        this.member = member;
     }
 }
