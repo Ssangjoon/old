@@ -9,7 +9,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity // JPA에서 해당 객체를 관리하겠다는 어노테이션
 @Getter
@@ -22,8 +24,7 @@ public class Member {
     @Column(length = 50, nullable = false) // 해당 필드가 db에 적용되는 속성들
     private String name;
 
-    @OneToMany(mappedBy = "member") // 양방향 매핑에서 참조 당하는 엔티티에서 사용한다.
-    private List<Notice> notice = new ArrayList<>();
+
 
     private OffsetDateTime createdAt = OffsetDateTime.now();
 

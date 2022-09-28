@@ -29,9 +29,7 @@ public class NoticeController {
     @ResponseBody
     public NoticeCreateResponse create(@RequestBody NoticeCreateRequest req) {
         Notice notice = noticeService.create(req.toEntity());
-        // 여기서 저장이 된다?
         return new NoticeCreateResponse(NoticeCreateData.create(notice));
-        // 그렇다면 여기서 응답 데이터를 만드는 이유가 뭘까?
     }
 
     @GetMapping(value = "/read")

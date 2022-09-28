@@ -25,11 +25,17 @@ public class Notice {
     @Column(length = 30, nullable = false)
     private String writer;
 
-    @ManyToOne(fetch = FetchType.LAZY) // 다대일 매핑,엔티티 조회할 때, 연관된 엔티티는 실제 사용 시점에 조회한다.
-    @JoinColumn(name = "member_id") //
-    private Member member;
+
 
     private OffsetDateTime createdAt = OffsetDateTime.now();
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     public Notice(String title, String content, String writer, Member member) {
         this.title = title;
