@@ -20,7 +20,11 @@ public class Member {
     private Team team;
 
     public Member(String userName) {
-        this.userName = userName;
+        this(userName,0);
+    }
+
+    public Member(String userName, int age){
+        this(userName, age, null);
     }
 
     public Member(String userName, int age, Team team) {

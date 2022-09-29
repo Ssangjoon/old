@@ -12,14 +12,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-@Transactional
-@Rollback(value = false)
 class MemberTest {
 
     @PersistenceContext
     EntityManager em;
 
     @Test
+    @Transactional
+    @Rollback(false)
     public void testEntity(){
         Team teamA = new Team("temaA");
         Team teamB = new Team("temaB");

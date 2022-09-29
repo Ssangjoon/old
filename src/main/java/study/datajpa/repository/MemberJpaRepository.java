@@ -5,6 +5,7 @@ import study.datajpa.Entity.Member;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class MemberJpaRepository {
                 .getResultList();
     }
 
-    public Optional<Member> findById(Long Id){
+    public Optional<Member> findById(Long id){
         Member member =em.find(Member.class, id);
         return Optional.ofNullable(member);
     }
@@ -42,5 +43,12 @@ public class MemberJpaRepository {
 
     public Member find(Long id){
         return em.find(Member.class, id);
+    }
+
+    public List<Member> findByUsernameAndAgeGreaterThen(String username, int age){
+        return em.createQuery("select m from Member m where m.userName=:username and m.age > :age")
+                .setParameter("username", username)
+                .setParameter("age",age)
+                .getResultList();
     }
 }
