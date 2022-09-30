@@ -237,4 +237,34 @@ public class MemberRepositoryTest {
         //select Member 1
         List<Member> members = memberRepository.findAll();
     }
+
+    @Test
+    public void queryHint(){
+        //given
+        Member member1 = memberRepository.save(new Member("member1", 10));
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        //when
+        Member findMember = memberRepository.findReadOnlyByUserName("member1");
+        findMember.setUserName("member2");
+
+        em.flush();
+    }
+    
+    @Test
+    public void lock(){
+        Member member1 = memberRepository.save(new Member("member1", 10));
+        memberRepository.save(member1);
+        em.flush();
+        em.clear();
+
+        List<Member> result = memberRepository.findLockByUserName("member1");
+    }
+
+    @Test
+    public void callCustom(){
+        List<Member> result = memberRepository.findMemberCustom();
+    }
 }
