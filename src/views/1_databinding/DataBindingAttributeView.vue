@@ -6,7 +6,7 @@
         <img :src="imgSrc" alt="" style="width:100px; height:auto;">
         <br>
         <input type="search" name="" id="" v-model="txt1">
-        <button>조회</button>
+        <button :disabled="txt1 == ''">조회</button>
     </div>
 </template>
 <script>
