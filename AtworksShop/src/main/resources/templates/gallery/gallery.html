@@ -1,0 +1,61 @@
+<main style="margin-top:20px">
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <div>
+                    <a href="/galleryAddPage">새글</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+    </div>
+</main>
+
+<script>
+    $(document).ready(function(){
+        getList();
+    });
+
+
+    function getList() {
+        let data = {};
+        data.pagePerCnt = 2;
+        data.curPage = 1;
+
+        $.ajax({
+            type : 'GET',
+            url : "/getGalleryList",
+            data : data,
+            error : function(error) {
+                alert("Error!");
+            },
+            success : function(value) {
+                console.log(value);
+                let html = '';
+
+                value.forEach((it) => {
+                    html+=`<div class=" " style="display:inline-block">
+					        <div class="col">
+					          <div class="card shadow-sm">
+				            	<img src="/files/\${it.saved_file_name}" style="width:200px; height:200px">
+					            <div class="card-body">
+					              <p class="card-text">\${it.gb_title}</p>
+					              <div class="d-flex justify-content-between align-items-center">
+					                <div class="btn-group">
+					                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/galleryDetailPage?gb_id=\${it.gb_id}'">View</button>
+					                </div>
+					                <small class="text-muted">\${it.gb_createdat}</small>
+					              </div>
+					            </div>
+					          </div>
+					        </div>
+					      </div>`
+                });
+                $(".album").append(html)
+            }
+        }); // list-end
+    }
+</script>

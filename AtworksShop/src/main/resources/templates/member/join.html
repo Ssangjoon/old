@@ -1,0 +1,97 @@
+<main>
+    <div class="py-5 text-center" style="margin-top:40px">
+        <h2>join</h2>
+    </div>
+    <div class="row g-5" style="margin-left: 240px;" >
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">회원가입</h4>
+            <form class="needs-validation" novalidate="" action="/joinUp" method="post">
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label for="mi_id" class="form-label">Id</label>
+                        <input type="text" class="form-control" id="mi_id" name="mi_id" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="mi_name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="mi_name" name="mi_name" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="mi_pw" class="form-label">password</label>
+                        <input type="password" class="form-control" id="mi_pw" name="mi_pw">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="mi_mobile" class="form-label">mobile</label>
+                        <input type="text" class="form-control" id="mi_mobile" name="mi_mobile" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="mi_tell" class="form-label">tell(optional)</label>
+                        <input type="text" class="form-control" id="mi_tell" name="mi_tell" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="mi_email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+                    <input type="email" class="form-control" id="mi_email" name="mi_email" placeholder="you@example.com">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <label for="mi_postcode" class="form-label">Post Number</label>
+                    <button id="address-btn" type="button" style="float:right">주소 입력</button>
+                    <input type="text" class="form-control" id="mi_postcode" name="mi_postcode" placeholder="1234 Main St" required="">
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="mi_address" class="form-label">RoadName Address<span class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" id="mi_address" name="mi_address" placeholder="Apartment or suite">
+                </div>
+
+                <div class="col-12">
+                    <label for="mi_detailaddress" class="form-label">Address <span class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" id="mi_detailaddress" name="mi_detailaddress" placeholder="Apartment or suite">
+                </div>
+
+
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit" id="joinUp-btn">join up</button>
+            </form>
+        </div>
+    </div>
+</main>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    const postNo = document.querySelector("#mi_postcode")
+    const roadNameAddrress = document.querySelector("#mi_address")
+
+    document.querySelector("#address-btn").addEventListener("click", (e) => {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                postNo.value = data.zonecode
+                roadNameAddrress.value = data.roadAddress
+            }
+        }).open();
+    })
+</script>

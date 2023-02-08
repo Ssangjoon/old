@@ -1,0 +1,63 @@
+<main class="container" style="margin-top:130px">
+    <form action="/galleryEdit" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="gb_id" value="${galleryContent.gb_id}">
+        <div>
+            <div>
+                <div>
+                    <label for="gb_title">제목</label>
+                </div>
+                <div>
+                    <input id="gb_title" name="gb_title" value="${galleryContent.gb_title}">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="gb_content">내용</label>
+                </div>
+                <div>
+                    <textarea id="gb_content" name="gb_content" style="width:50vw; height:40vh">${galleryContent.gb_content}</textarea>
+                </div>
+            </div>
+        </div>
+        <input type="file" name="file" multiple="multiple">
+        <div>일시 : ${galleryContent.gb_createdat}</div>
+        <input type="submit" value="수정">
+        <a href="/galleryDelete?gb_id=${galleryContent.gb_id}">삭제</a>
+    </form>
+    <div id="photo-container">
+        <c:if test="${!empty galleryContent.fileList  }">
+            <c:forEach items="${galleryContent.fileList}"  var="file" >
+                <img src="/files/${file.saved_file_name}" style="width:100px; height:100px" data-no = "${file.file_num}" data-name="${file.saved_file_name} ">
+            </c:forEach>
+        </c:if>
+    </div>
+</main>
+<script>
+    $(document).ready(function(){
+        $("#photo-container").on("click", (e)=>{
+
+            let no = $(e.target).data("no")
+            let name = $(e.target).data("name")
+
+            if(confirm("삭제?")==true){
+                $.ajax({
+                    type : 'GET',
+                    url : "/photoDelete",
+                    data : {
+                        board_id : ${galleryContent.gb_id},
+                        file_num : no,
+                        saved_file_name : name
+                    },
+                    error : function(error) {
+                        alert("Error!");
+                    },
+                    success : function(value) {
+                        alert("value")
+                        location.reload()
+                    }
+                }); // list-end
+            }
+
+        })
+    })
+</script>
