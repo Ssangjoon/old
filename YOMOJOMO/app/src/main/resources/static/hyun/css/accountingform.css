@@ -1,0 +1,56 @@
+#form-content{ 
+  padding-top: 5vh;
+  padding-bottom: 10vh;
+  position: relative;
+}
+form {
+  margin-top: 100px;
+}
+#x-add-btn, #x-cancel-btn {
+  float: right;
+  margin: 5px;
+}
+table > tbody > tr > td:nth-child(odd) {
+  text-align: center;
+}
+table > tbody > tr > td:first-child {
+  text-align: right;
+  column-span: 300px;
+}
+#x-deleteMemb-btn { /*멤버 삭제버튼*/
+  margin: 10px auto;
+}
+.List-Container {
+  margin:auto; /*가운데 정렬*/
+  text-align:center;
+  padding: 50px;
+}
+#x-membList-container{
+  border: 1px solid rgb(17, 147, 218);
+  padding: 5px;
+}
+.x-membList {
+  padding: 10px, 0px;
+  display: inline;
+}
+.x-membList > .material-icons{
+  font-size: 60px;
+  color: rgb(17, 147, 218);
+  vertical-align: middle;
+}
+.x-membList > #listmembName, #paydt {
+  padding : 0px, 50px, 0px, 0px;
+  text-align: center;
+}
+.modal-content >.modal-header > .modal-title{
+  font-size: 25px;
+}
+.form-check {
+  vertical-align: middle;
+  font-size: 20px;
+}
+.form-check > .form-check-label > .material-icons {
+  font-size: 60px;
+  color: rgb(17, 147, 218);
+  vertical-align: middle;
+}

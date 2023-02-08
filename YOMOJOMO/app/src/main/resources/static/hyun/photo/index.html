@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="icon" href="/junho/img/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link href="/node_modules/fullcalendar/main.min.css" rel="stylesheet" />
+  <script src="/node_modules/fullcalendar/main.min.js"></script>
+  <script src="/node_modules/fullcalendar/locales/ko.js"></script>
+  <link rel="stylesheet" href="/hyun/css/calendarindex.css">
+  <title>사진첩</title>
+
+  <style>
+    #width-fix-div{
+      min-height: 600px;
+      width: 700px;
+      margin: 20px auto;
+      border-radius: 9px;
+    }
+    #formFile{
+      width: 400px;
+      display: inline;
+    }
+    #photoInput {
+      margin: 30px;
+    }
+    .mb-3{
+      margin: 20px;
+    }
+      .row {
+      width:700px;
+      margin:0 auto;
+    }      
+    .row ul {
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .row ul li {
+      display:inline-table;        
+    }
+    
+    /* 라이트 박스 스타일 */
+    #lightbox {
+      position: fixed;  /* 위치 고정 */
+      width:100%;  /* 너비 */
+      height:100%;  /* 높이 */
+      background-color:rgba(0,0,0,0.7);  /* 배경색 */
+      top:0;  /* 시작 위치 - 위쪽 끝 */
+      left:0; /* 시작 위치 - 왼쪽 끝 */
+      display:none;  /* 화면에서 감추기 */
+    }
+
+  /* 라이트 박스 안의 이미지 */
+    #lightbox img {
+      position:absolute;  /* top, left에 의해 위치 지정 */
+      top:50%;  /* 위쪽에서 50% 부터 */
+      left:50%;  /* 왼쪽에서 50% 부터 */
+      transform:translate(-50%, -50%);  /* 요소를 화면 중앙에 표시하기 위해 이동 */
+      border:5px solid #eee; /* 이미지 테두리 */       
+    }
+  </style>
+</head>
+
+<body class="menu2">
+  
+  <div id="header"></div>
+  <div id="top"></div>
+
+  <div id="width-fix-div">
+    <div id="photoInput">
+      <div class="mb-3">
+        <label for="formFile" class="form-label">사진을 선택해주세요</label><br>
+        <input class="form-control" type="file" id="formFile">
+          <button type="button" class="btn btn-primary">올리기</button>
+      </div>
+    </div>
+    <div class="row">
+      <ul>
+        <li><img src="/hyun/images/tree-1-thumb.jpg" data-src="/hyun/images/tree-1.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-2-thumb.jpg" data-src="/hyun/images/tree-2.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-3-thumb.jpg" data-src="/hyun/images/tree-3.jpg" class="pic"></li> 
+        <li><img src="/hyun/images/tree-4-thumb.jpg" data-src="/hyun/images/tree-4.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-5-thumb.jpg" data-src="/hyun/images/tree-5.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-6-thumb.jpg" data-src="/hyun/images/tree-6.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-7-thumb.jpg" data-src="/hyun/images/tree-7.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-8-thumb.jpg" data-src="/hyun/images/tree-8.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-10-thumb.jpg" data-src="/hyun/images/tree-10.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-9-thumb.jpg" data-src="/hyun/images/tree-9.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-11-thumb.jpg" data-src="/hyun/images/tree-11.jpg" class="pic"></li>
+        <li><img src="/hyun/images/tree-12-thumb.jpg" data-src="/hyun/images/tree-12.jpg" class="pic"></li>  
+      </ul>    
+    </div>
+
+    <div id="lightbox">
+      <img src="/hyuns/images/tree-1.jpg" alt="" id="lightboxImage">			
+    </div>
+  </div>
+ 
+  <div= id="footer"></div>
+
+
+  <script>
+    $(document).ready(function () {
+    $('#header').load('/junho/mainHeader.html'); 
+    $('#top').load('/ssang/groupBoard/none-search-top.html');
+    $('#footer').load('/junho/mainfooter.html'); 
+  });
+
+var calNoparameter = 0;
+var arr = location.href.split("?");
+  if (arr.length == 1) {
+    alert("요청 형식이 올바르지 않습니다.")
+    throw "URL 형식 오류!";
+  }
+  var qs = arr[1];
+  var params = new URLSearchParams(qs);
+  var gno = params.get("gno");
+
+  var pics = document.querySelectorAll(".pic");
+  // console.log(pics);
+  var lightbox = document.querySelector("#lightbox");
+  var lightboxImage = document.querySelector("#lightboxImage");
+
+  for (let i = 0; i < pics.length; i++) {
+    pics[i].addEventListener("click", showLightbox);    
+  }
+
+  function showLightbox() {
+    var bigLocation = this.getAttribute("data-src");
+    lightboxImage.setAttribute("src", bigLocation);
+    lightbox.style.display = "block";
+  }
+
+  lightbox.onclick = function() {
+    lightbox.style.display = "none";
+  }
+
+  </script>
+
+</body>
+</html>

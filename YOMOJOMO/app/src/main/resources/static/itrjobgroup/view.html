@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관심직군</title>
+</head>
+<body>
+  <h1>관심직군 상세</h1>
+  <span>번호</span>
+  <input type="text" class ="no"><br>
+  <span>유형</span>
+  <input type="text" class ="cate"><br>
+  <span>제목</span>
+  <input type="text" class ="title"><br>
+  <span>내용</span>
+  <input type="text" class="content">
+  <button type = "button"  class="update-btn">수정하기</button>
+  <button type = "button"  class="delete-btn">삭제하기</button>
+  <button type = "button"  class="cancel-btn">취소하기</button>
+ 
+<script>
+  var arr = location.href.split("?")
+  console.log(arr)
+
+  if(arr.length == 1) {
+    alert("올바르지 않은 요청입니다")
+    throw "URL 오류!"
+  }
+  var qs = arr[1];
+  console.log(qs)
+
+  var params = new URLSearchParams(qs)
+  var no = params.get('no')
+  var xNo = document.querySelector('.no')
+  var xCate = document.querySelector('.cate')
+  var xTitle = document.querySelector('.title')
+  var xContent = document.querySelector('.content')
+  console.log(no)
+  
+  if (no == null) {
+    alert("해당 번호가 없습니다")
+    throw  "오류!"
+  }
+
+  fetch(`/notice/get?no=${no}`)
+  .then(function(response) {
+    return response.json()
+  })
+  .then(function(notice){
+    xNo.value = notice.no
+    xTitle.value = notice.title
+    xContent.value = notice.content
+
+  }) 
+  document.querySelector('.update-btn').addEventListener('click', function() {
+    fetch(`/notice/update?no=${xNo.value}&cate=${xCate.value}&title=${xTitle.value}&content=${xContent.value}`)
+    .then(function(response){
+      return response.text()
+    })
+    .then(function(text){
+    console.log(text)
+    window.location.href="index.html"
+    
+    })
+  })
+  document.querySelector('.delete-btn').addEventListener('click', function() {
+    fetch(`/notice/delete?no=${xNo.value}`)
+    .then(function(response){
+      return response.text()
+    })
+    .then(function(text){
+    console.log(text)
+    window.location.href="index.html"
+    
+    })
+  })
+  document.querySelector('.cancel-btn').addEventListener('click', function() {
+    window.location.href = "index.html"
+  })
+</script>
+</body>
+</html>

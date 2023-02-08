@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>소모임 등록하기</title>
+</head>
+<body>
+  <span>소모임 개설</span><br>
+  활동 지역    : <input type="text" class ="actlocalno"><br>
+  모임 목적    : <input type="text" class ="pupsno"><br>
+  소모임 이름  : <input type="text" class ="name"><br>
+  로고사진 경로 : <input type="text" class ="logo"><br>
+  회비        : <input type="text" class ="fee"><br>
+  <span>소개글</span> <br> <textarea type="text" class ="intro" cols="60" rows="10"></textarea> <br>
+  <button type="button" class ="add-btn">입력하기</button>
+  <button type="button" class ="cancel-btn">취소하기</button>
+
+  <script>
+    var xactlocalno = document.querySelector('.actlocalno')
+    var xpupsno = document.querySelector('.pupsno')
+    var xname = document.querySelector('.name')
+    var xlogo = document.querySelector('.logo')
+    var xintro = document.querySelector('.intro')
+    var xfee = document.querySelector('.fee')
+
+    document.querySelector('.add-btn').addEventListener("click", function() {
+      fetch(`/group/add?actlocalno=${xactlocalno.value}&pupsno=${xpupsno.value}&name=${xname.value}&logo=${xlogo.value}&intro=${xintro.value}&fee=${xfee.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text)
+        location.href = "index.html"
+      })
+    })
+    document.querySelector('.cancel-btn').addEventListener('click', function() {
+      window.location.href = "index.html"
+    })
+
+  </script>
+  
+</body>
+</html>

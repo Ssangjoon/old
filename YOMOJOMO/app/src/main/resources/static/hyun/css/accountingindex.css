@@ -1,0 +1,22 @@
+#body-content{
+  padding-top: 2vh;
+  height: 70vh;
+  position: relative;
+}
+#selectCate{
+  display: inline-block;
+  width: 150px;
+}
+table > thead {
+  text-align: center;
+}
+table > tbody > tr > td {
+  text-align: center;
+}
+#listnone {
+      font-size: x-large;
+      text-align: center;
+}
+#cateDiv{
+  margin-bottom: 20px;
+}

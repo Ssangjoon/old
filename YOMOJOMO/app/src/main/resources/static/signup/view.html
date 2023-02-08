@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>맴버 정보 상세</h1>
+  <span>이메일(아이디)</span>
+  <input type="text" class="email"><br>
+  <span>비밀번호</span>
+  <input type="text" class="pwd"><br>
+  <span>이름</span>
+  <input type="text" class="name"><br>
+  <span>휴대전화번호</span>
+  <input type="text" class="tel"><br>
+  <span>주소</span>
+  <input type="text" placeholder="우편번호" class="postno"><br>
+  <input type="text" placeholder="기본주소" class="baseaddr"><br>
+  <input type="text" placeholder="상세주소" class="addr"><br>
+  <button type="button" class="update-btn">수정하기</button>
+  <button type="button" class="delete-btn">삭제하기</button>
+  <button type="button" class="cancel-btn">취소하기</button>
+
+  <script>
+    var arr = location.href.split("?")
+    console.log(arr)
+
+    if (arr.length == 1){
+      alert("요청 형식이 옳바르지 않습니다.")
+      throw "URL 형식 오류 !"
+    }
+
+    var qs = arr[1];
+    console.log(qs)
+
+    var params = new URLSearchParams(qs)
+    var no = params.get('no')
+    console.log(no)
+
+    if (no == null) {
+      alert("해당 번호의 회원이 없습니다")
+      throw "파라미터 오류!"
+    }
+
+    var eMail = document.querySelector('.email')
+    var pwd =document.querySelector('.pwd')
+    var xname =document.querySelector('.name')
+    var tel =document.querySelector('.tel')
+    var postNo =document.querySelector('.postno')
+    var baseAddr =document.querySelector('.baseaddr')
+    var addr =document.querySelector('.addr')
+
+    fetch(`/member/get?no=${no}`)
+      .then(function(response) {
+        return response.json()
+      }) 
+      .then(function(member) {
+        eMail.value = member.email
+        pwd.value = member.pwd
+        xname.value = member.name
+        tel.value = member.tel
+        postNo.value = member.postno
+        baseAddr.value = member.baseaddr
+        addr.value = member.addr
+      })
+
+
+    document.querySelector('.update-btn').addEventListener('click', function() {
+      fetch(`/member/update?no=${no}&name=${xname.value}&pwd=${pwd.value}&email=${eMail.value}&tel=${tel.value}&postno=${postNo.value}&baseaddr=${baseAddr.value}&addr=${addr.value}&type=일반회원&unsubscribe=0`)
+      .then(function(response) {
+        return response.text()
+      })
+      .then(function(text) {
+        console.log(text)
+        window.location.href="index.html"
+      })
+    })
+
+    document.querySelector('.delete-btn').addEventListener('click', function() {
+      fetch(`/member/delete?no=${no}`)
+      .then(function(response) {
+        return response.text()
+      })
+      .then(function(text) {
+        console.log(text)
+        location.href = "index.html"
+      })
+    })
+
+    document.querySelector('.cancel-btn').addEventListener('click', function() {
+      window.location.href = "index.html"
+    })
+    
+
+  </script>
+</body>
+
+
+
+</html>

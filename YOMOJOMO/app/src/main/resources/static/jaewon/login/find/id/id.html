@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/jaewon/css/basic.css">
+<div class="body-inner">
+	<div class="container fluid">
+		<div class="container-inner">
+			<div class="shadow-sm p-3 mb-5 bg-body rounded box">
+				<div class="tab">
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/jaewon/login/find/id/idindex.html">아이디
+								찾기</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/jaewon/login/find/pwd/pwdindex.html">비밀번호 찾기</a></li>
+
+					</ul>
+				</div>
+				<div class="text-center">
+					<img src="/jaewon/1.png" class="img-fluid logo">
+				</div>
+				<form name="findid">
+					<div class="col-md-7" style="float: none; margin: 0 auto;">
+						<div class="input-group mb-5"></div>
+						<div class="input-group mb-3">
+							<input name="name" class="form-control form-control-sm input fs-5"
+								type="text" placeholder="이름을 입력해주세요"
+								aria-label=".form-control-sm example">
+						</div>
+						<div class="input-group mb-3">
+							<input name="tel" class="form-control form-control-sm input fs-5"
+								type="text" placeholder="전화번호를 입력해주세요"
+								aria-label=".form-control-sm example">
+						</div>
+						<button type="submit" class="btn btn-primary searchBtn">아이디
+							찾기</button>
+
+					</div>
+				</form>
+				<div class="modal" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">아이디 찾기 결과</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body email"></div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary close"
+									data-bs-dismiss="modal">닫기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<script src="/jaewon/login/find/id/findid.js"></script>

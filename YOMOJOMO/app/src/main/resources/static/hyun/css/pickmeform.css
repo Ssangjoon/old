@@ -1,0 +1,29 @@
+#form-content{ 
+  padding-top: 150px;
+  padding-bottom: 180px;
+  position: relative;
+}
+
+#outline{
+  margin: 20px;
+  padding: 20px;
+}
+form {
+  margin: 10px auto;
+  
+}
+#localSelect{
+  width: 500px;
+  display: flex;
+}
+textarea { /*사이즈 고정*/
+  resize: none;
+}
+#x-add-btn, #x-cancel-btn {
+  float: right;
+  margin: 5px;
+}
+table > tbody > tr > td:first-child {
+  text-align: right;
+  column-span: 300px;
+}

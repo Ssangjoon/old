@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항</title>
+  <!-- JQUERY -->
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="/yoseob/css/style.css">
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  
+
+  <!-- 아이콘 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body onload="allList()" >
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+  <div id="header"></div>
+  
+<div class = "container">
+  <div class = "all-notice-explanation">
+    <div class ="notice-explanation">
+     <img class = "exclamation-mark"src="../image/announcement.png" >
+      <h1 class ="notice-head">공지사항</h1>
+        <p class ="notice-explanation-text">
+          요모조모가 여러분께 알려드리는<br>
+                     안내 내역입니다.</p>
+
+      </div>         
+      </div>
+    <div class ="image">
+      <img class ="service_center" src="../image/service_center.png" >
+    </div>
+    <div class ="notice-category">
+      <span class="material-icons">question_mark</span>
+      <span id ="faq-btn" class ="faq"><a>자주하는 질문</a></span>
+      <span class="material-icons">volume_up</span>
+      <span id ="announcement-btn"class ="announcement"><a>공지사항</a></span>
+      <span class="material-icons">search</span>
+      <span id ="information-btn" class ="announcement"><a>서비스 안내</a></span>
+      <span class="material-icons">call</span>
+      <span id="inquiry-btn" class ="announcement"><a>문의사항</a></span>
+    </div>
+        
+          <div class = "announcement_title">
+            <span style="vertical-align: middle; font-weight: bold;">공지사항</span>
+          </div>
+          <script>
+            document.querySelector("#x-create-btn").onclick = function(){
+            location.href="announcement_form.html";
+              };
+          </script>
+       <div class = "faq_list_table" style="margin-left: 140px;">
+        <table style="border-collapse: collapse;
+        text-align: left;
+        line-height: 1.5;">
+          <thead>
+            <tr>
+              <th style="display: none;">번호</th>
+              <th style="width:40px;">유형</th>
+              <th>제목</th>
+            </tr>
+            <tbody class="faq_tr">
+            </tbody>
+          </thead>
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center" style="margin-right:500px;">
+            <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+        </div>
+
+      <div id="footer"></div>
+       
+       
+
+</body>
+</html>
+<script src="../js/faq.js"></script>
+<script src="../js/location.js"></script>

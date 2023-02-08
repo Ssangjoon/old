@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.GroupApplyFormDao">
+
+	<!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+	<resultMap type="GroupApplyForm" id="GroupApplyFormMap">
+    <result column="content" property="content"/>
+    <result column="appl_dt" property="regdt"/>
+    
+
+    <association property="group" javaType="Group">
+      <id column="gno" property="no"/>
+      <result column="gname" property="GroupName"/>
+      <result column="glogo" property="logo"/>
+    </association>
+    
+    <association property="sendMember" javaType="Member">
+       <id column = "sendMemberno" property="no"/>
+       <result column="sendMemberName" property="memberName"/>
+       
+    </association>
+    
+    <association property="reciveMember" javaType="Member">
+       <id column = "reciveMemberno" property="no"/>
+       <result column="reciveMemberName" property="memberName"/>
+       
+    </association>
+    
+  </resultMap>
+	
+	<insert id="insert" parameterType="GroupApplyForm">
+    insert into gms_join_memb(memb_no, g_no, g_memb_grd_no)
+    values(#{sendMember.no},#{group.no},2)
+  </insert>
+  
+	<insert id="membCnt" parameterType="int">
+    update gms_group set 
+      memb_cnt=memb_cnt + 1 
+    where g_no=#{no}
+    </insert>
+
+
+	<select id="sendListFindALL" resultMap="GroupApplyFormMap">
+		select
+		  ad.g_no gno,
+		  ad.memb_no sendMemberName,
+		  g.name gname,
+		  g.logo glogo
+    from
+		  gms_applyform_default ad
+		  inner join gms_group g on g.g_no = ad.g_no
+    where
+      ad.memb_no= #{sendMember.no}
+	</select>
+	
+	<delete id="sendListDelete" parameterType="int">
+    delete from gms_applyform_default
+    where
+       g_no = #{group.no} and memb_no=#{sendMember.no}
+  </delete>
+  
+  <delete id="reciveListDelete" parameterType="int">
+    delete from gms_applyform_default
+    where 
+      g_no = #{group.no} and memb_no=#{reciveMember.no}
+  </delete>
+  
+  <select id="reciveListFindAll" resultMap="GroupApplyFormMap">
+    select
+      ad.g_no gno,
+      ad.memb_no sendMemberno,
+      ad.memb_no2 reciveMemberno,
+      ad.content,
+      ad.appl_dt,
+      g.name gname,
+      g.logo glogo,
+      m.membername sendMemberName
+    from
+      gms_applyform_default ad
+      inner join gms_group g on g.g_no = ad.g_no
+      inner join gms_memb m on ad.memb_no = m.memb_no
+    where
+      ad.memb_no2= #{reciveMember.no}
+  </select>
+	
+	
+	
+	
+<!-- 회원 그룹 리스트 
+<select id="memberGroupList" resultMap="MainPageMap" parameterType="int">
+       select
+        g.g_no,
+        g.act_local_no,       
+        g.pups_no,
+        g.name,
+        g.reg_dt,
+        g.logo,
+        g.intro,
+        g.max_cnt,
+        g.view_cnt,
+        g.g_delete_stat,
+        jm.g_memb_out_stat
+    from
+        gms_join_memb jm
+        inner join gms_group g on jm.g_no = g.g_no
+    where
+        jm.memb_no = #{no} and g.g_delete_stat = 1 and g_memb_out_stat=1
+    order by
+        g.g_no asc 
+        limit 8;
+  </select>
+  -->
+	
+</mapper>

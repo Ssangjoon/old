@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyPage</title>
+  <!-- 제이쿼리 -->
+  <script src="/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!--공용css-->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/sweetalert2/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/mypage/css/main.css">
+  <link rel="stylesheet" href="/mypage/css/edit.css">
+  <!--인클루드-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+      $('#footers').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+  <style>
+   
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+  <div class="main">
+    <div class="inner">
+      <div class="list-group sidebar">
+        <a href="edit.html" class="list-group-item list-group-item-action active">개인 정보 수정</a>
+        <a href="mypost.html" class="list-group-item list-group-item-action">내가 쓴 글</a>
+        <a href="favor.html" class="list-group-item list-group-item-action">즐겨찾기한 글</a>
+        <a href="group.html" class="list-group-item list-group-item-action">가입 승인/대기</a>
+        <a href="pickme.html" class="list-group-item list-group-item-action">픽미 요청/게시글</a>
+        <a href="inquiry.html" class="list-group-item list-group-item-action">문의 내역</a>
+      </div>
+      <div class="base">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">마이페이지</a></li>
+            <li class="breadcrumb-item active" aria-current="page">개인 정보 수정</li>
+          </ol>
+        </nav>
+        <div class="content d-flex flex-column">
+          <h3>개인 정보 수정</h3>
+          <br>
+          <div class="my-info">
+            <div>
+              <div class="col-3 p-2"></div>
+              <div class="text-muted notice">* 프로필 사진을 제외한 모든 항목은 필수입력 항목입니다</div>
+              <br>
+              <div class="row">
+                <div class="col-3 p-2 text-center fw-bold">프로필 사진</div>
+                <div class="col input-group mb-3">
+                  <input class="form-control" name="file" type="file" accept=".png, .jpg, .jpeg, .jifi">
+                </div>
+                <div class="col-3 p-2"></div>
+              </div>
+              <div class="profile-img">
+                <img class="img-thumbnail">
+                <button type="button" class="btn btn-outline-primary btn-sm default-thumbnail">기본 이미지로 변경</button>
+                <p class="text-muted img-text">150 * 200 크기 이상의 파일은 자동 조정됩니다</p>
+              </div>
+              <div class="row">
+              </div>
+              <div class="row">
+                <div class="col-3 p-2 text-center fw-bold">이메일(아이디)</div>
+								<div class="col input-group mb-3 ">
+									<input class="form-control form-control-sm input fs-6"
+										name="email" type="email" placeholder="이메일(아이디) 입력"
+										aria-label=".form-control-sm example" readonly>
+								</div>
+								<div class="col-3"></div>
+              </div>
+              <div class="row">
+                <div class="col-3 p-2 text-center fw-bold">비밀번호</div>
+                <div class="col input-group mb-3 ">
+                  <input class="form-control form-control-sm input fs-6"
+                    name="pwd" type="password" placeholder="비밀번호 입력"
+                    aria-label=".form-control-sm example">
+                    <button type="button" class="pwd-check btn btn-outline-primary">확인</button>
+                </div>
+                <div class="col-3 p-2"></div>
+              </div>
+              <div class="row">
+                <div class="col-3 p-2 text-center fw-bold">비밀번호 확인</div>
+                <div class="col input-group mb-3 ">
+                  <input class="form-control form-control-sm input fs-6"
+                    name="pwdCheck" type="password" placeholder="비밀번호를 다시 입력해주세요"
+                    aria-label=".form-control-sm example">
+                    <button type="button" class="pwdCheck-check btn btn-outline-primary">확인</button>
+                </div>
+                <div class="col-3 p-2"></div>
+              </div>
+              <div class="row">
+                <div class="col-3 p-2 text-center fw-bold">이름</div>
+                <div class="col input-group mb-3 ">
+                  <input class="form-control" name="name" type="text" value="" aria-label="readonly input example" readonly>
+                </div>
+                <div class="col-3 p-2"></div>
+              </div>
+              <div class="row">
+                <div class="col-3 p-2 text-center fw-bold">휴대전화 번호</div>
+                <div class="col input-group mb-3 ">
+                  <input class="form-control form-control-sm input fs-6"
+                    name="tel" type="text" placeholder="'-' 없이 입력해주세요"
+                    aria-label=".form-control-sm example">
+                </div>
+                <div class="col-3 p-2"></div>
+              </div>
+              <div class="row">
+								<div class="col-3 p-2 text-center fw-bold">우편 번호</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="postNo" id="sample4_postcode"
+										class="form-control form-control-sm input fs-6"
+										placeholder="우편번호"> <input type="button"
+										class="btn btn-outline-primary" Style="margin-left: 10px;"
+										onclick="searchAddress()" value="우편번호 찾기">
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">도로명 주소</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="roadNameAddr"
+										id="sample4_roadAddress"
+										class="form-control form-control-sm input fs-6"
+										placeholder="도로명주소">
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">지번 주소</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="baseAddr" id="sample4_jibunAddress"
+										class="form-control form-control-sm input fs-6"
+										placeholder="지번주소">
+
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">상세 주소</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="addr" id="sample4_detailAddress"
+										class="form-control form-control-sm input fs-6"
+										placeholder="상세주소">
+								</div>
+                <div class="col-3 p-2"></div>
+              </div>
+            <div class="edit-table border-top">
+              <div class="col-3 p-2 text-center fw-bold mb-2"></div>
+              <div class="row">
+                <div class="col-3 p-2 text-center fw-bold mb-2">활동 지역</div>
+                <div class="dropdown col-4">
+                  <select class="form-select select-si" aria-label="Default select example"
+                    id="localboard">
+                    <option hidden selected disabled name="nameSi">활동 시/도</option>
+                    
+                  </select>
+                </div>
+                <div class="dropdown col-4">
+                  <select class="form-select select-gu add-local" aria-label="Default select example"
+                    id="localboard">
+                    <option hidden selected disabled name="nameGu">활동 구/군</option>
+
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 p-2 text-center fw-bold mb-2">관심 분야</div>
+                <div class="dropdown col-4">
+                  <select class="form-select add-category" aria-label="Default select example"
+                      id="localboard">
+                      <option hidden selected disabled>관심 분야</option>
+
+                  </select>
+                </div>
+                <div class="col-3 p-2 text-center fw-bold mb-2"></div>
+              </div>
+            </div>
+            <div class="editing-table border-top">
+              <p>나의 활동지역</p>
+              <div class="edit-local d-flex justify-content-center flex-wrap text-center">
+                
+              </div>
+            </div>
+            <div class="editing-table border-top">
+              <p>나의 관심분야</p>
+              <div class="edit-category d-flex justify-content-center flex-wrap text-center">
+                
+              </div>
+            </div>
+            <button type="button" id="edit-btn" class="btn btn-outline-primary">수정하기</button>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div id="footers"></div>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script>
+    // 활동지역
+    var localArr = []
+    // 관심목적
+    var pupsArr = []
+
+    // 정보 가져오기
+    $.ajax({
+      url: '/member/getLoginUser',
+      type: 'POST',
+      dataType: 'json',
+      success: function(result) {
+        console.log(result)
+        if (result.status == "fail") {
+          location.href = "/junho/index.html"
+        }
+        $.ajax({
+          url: '/mypage/get',
+          type: 'POST',
+          dataType: 'json',
+          data: {'no': result.data.no},
+          success: function(memberInfo) {
+            console.log(memberInfo)
+            $("input[name=email]").attr('value',memberInfo.email)
+            $("input[name=name]").attr('value',memberInfo.name)
+            $("input[name=tel]").attr('value',memberInfo.tel)
+            $("input[name=postNo]").attr('value',memberInfo.postNo)
+            $("input[name=roadNameAddr]").attr('value',memberInfo.roadNameAddr)
+            $("input[name=baseAddr]").attr('value',memberInfo.baseAddr)
+            $("input[name=addr]").attr('value',memberInfo.addr)
+            if (memberInfo.photo === null || memberInfo.defaultImg === true) {
+              memberInfo.photo = "default.jpg"
+            }
+            $(".img-thumbnail").attr('src', `photo?filename=150x200_${memberInfo.photo}`)
+            for (let local of memberInfo.activeLocal) {
+              localArr.push(local.no)
+              $(`<div class="local-wrap">
+                  <span class="badge rounded-pill bg-primary local" data-no="${local.no}">${local.nameGu + " "}</span>
+                  <button type="button" class="btn-close" aria-label="Close"></button>
+                  </div>`)
+                  .appendTo(".edit-local")
+            }
+            for (let pups of memberInfo.purpose) {
+              pupsArr.push(pups.no)
+              $(`<div class="category-wrap">
+                <span class="badge rounded-pill bg-primary category" data-no="${pups.no}">${pups.purposeName + " "}</span>
+                <button type="button" class="btn-close" aria-label="Close"></button>
+                </div>`)
+                .appendTo(".edit-category")
+            }
+          }
+        })
+      }
+    })
+
+      // 리스트 불러오기
+      fetch("/activeLocal/list")
+      .then(function(response){
+        return response.json()
+      })
+      .then(function(localSi){
+        for (let local of localSi) {
+          $(`<option name="si">${local.nameSi}</option>`).appendTo(".select-si")
+        }
+      })
+      
+      $(".select-gu").on("click", function(){
+        let nowSi = $(".select-si option[name=si]:selected").val()
+        fetch(`/activeLocal/list-gu?nameGu=${nowSi}`)
+        .then(function(response){
+          return response.json()
+        })
+        .then(function(localGu){
+          $(".select-gu").find("option[name=gu]").not("option[name=gu]:selected").remove()
+          for (let local of localGu) {
+            $(`<option name="gu" value="${local.no}">${local.nameGu}</option>`).appendTo(".select-gu")
+          }
+        })
+      })
+      
+      fetch("/purpose/list")
+      .then(function(response){
+        return response.json()
+      })
+      .then(function(purpose){
+        for (let pups of purpose) {
+          $(`<option name="pups" value="${pups.no}">${pups.purposeName}</option>`).appendTo(".add-category")
+        }
+      })
+
+      // 이미지 미리보기
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+              $('.img-thumbnail').attr('src', e.target.result); 
+            }
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+      $(":input[name='file']").change(function() {
+        if( $(":input[name='file']").val() == '' ) {
+          $('.img-thumbnail').attr('src' , '');  
+        }
+        readURL(this);
+      });
+
+      // 기본 이미지로 변경
+      $(".default-thumbnail").click(function(){
+        $('.img-thumbnail').attr('src', 'photo?filename=150x200_default.jpg')
+        console.log($('.img-thumbnail').attr('src') == "photo?filename=150x200_default.jpg")
+      })
+
+      // 카테고리 추가
+      $(".add-local")
+      .on("change", function(e) {
+        if ($(".local").length == 3) {
+          swa.fire({
+            icon: 'error',
+            title: '활동지역이 너무 많습니다',
+            text: '활동지역은 최대 3개 까지입니다',
+          })
+        } else {
+          let str = "";
+          $(".add-local option:selected").each(function() {
+            str += $(this).text() + " "
+          });
+          if (str === "관심 구/군") {
+            return
+          }
+          let localstr = $(".local").text().split(" ")
+          for (let local of localstr) {
+            if (local + " " === str) {
+              return
+            }
+          }
+          localArr.push(parseInt($("option[name=gu]:selected").val()))
+          $(`<div class="local-wrap">
+              <span class="badge rounded-pill bg-primary local" data-no="${$("option[name=gu]:selected").val()}">${str}</span>
+              <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>`).appendTo(".edit-local")
+          }
+        })
+        
+        $(".add-category")
+        .on("change", function(e) {
+          if ($(".category").length == 10) {
+            swa.fire({
+              icon: 'error',
+              title: '관심분야가 너무 많습니다',
+              text: '관심분야는 최대 10개 까지입니다',
+            })
+          } else {
+            let str = "";
+            $(".add-category option:selected").each(function() {
+              str += $(this).text() + " "
+            });
+          if (str === "관심 분야") {
+            return
+          }
+          let catestr = $(".category").text().split(" ")
+          for (let cate of catestr) {
+              if (cate + " " === str) {
+                return
+              }
+            }
+            pupsArr.push(parseInt($("option[name=pups]:selected").val()))
+            $(`<div class="category-wrap">
+                <span class="badge rounded-pill bg-primary category" data-no="${$("option[name=pups]:selected").val()}">${str}</span>
+                <button type="button" class="btn-close" aria-label="Close"></button>
+              </div>`).appendTo(".edit-category")
+            }
+          })
+          // 카테고리 삭제
+        $(document).on("click",".btn-close",function(e){
+          $($(e.target).parent()).remove()
+          dataNo = parseInt($(e.target).prev().attr("data-no"))
+          if($(e.target).prev().hasClass("local") == true) {
+            localArr.splice(localArr.indexOf(dataNo),1)
+          } else {
+            pupsArr.splice(pupsArr.indexOf(dataNo),1)
+          }
+          console.log(localArr)
+          console.log(pupsArr)
+        })
+        
+        // 비밀번호 보기
+        $('.pwd-check').on("mousedown", function(){
+          $('input[name=pwd]').attr('type',"text");
+        }).on('mouseup mouseleave', function() {
+          $('input[name=pwd]').attr('type',"password");
+        })
+        $('.pwdCheck-check').on("mousedown", function(){
+          $('input[name=pwdCheck]').attr('type',"text");
+        }).on('mouseup mouseleave', function() {
+          $('input[name=pwdCheck]').attr('type',"password");
+        })
+        
+        // 수정버튼 이벤트
+        const swa = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-primary mx-2',
+            cancelButton: 'btn btn-secondary mx-2'
+          },
+          buttonsStyling: false
+        })
+        
+        // 비밀번호 조건
+        const strongRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+        
+        $("#edit-btn").click(function(e){   
+          if ($("input[name=tel]").val() == "" || $("input[name=postNo]").val() == "" || $("input[name=roadNameAddr]").val() == "" || 
+              $("input[name=baseAddr]").val() == "" || $("input[name=addr]").val() == "" ) {
+              swa.fire(
+                '필수 입력 항목이 비었습니다',
+                '항목을 다시 입력해주세요',
+                'error'
+                )} else if ($(".category").length == 0 || $(".local").length == 0) {
+                  swa.fire(
+                '활동지역과 관심분야가 없습니다',
+                '활동지역과 관심분야는 최소 1개이상 이여야 합니다',
+                'error'
+                )} else if ($("input[name=pwd]").val() != $("input[name=pwdCheck]").val()) {
+                  swa.fire(
+                  '비밀번호가 다릅니다',
+                  '비밀번호 서로 같은지 다시 확인해주세요',
+                  'error'
+                )} else if ($("input[name=pwdCheck]").val() !== "" && $("input[name=pwd]").val() !== "" && strongRegex.test($("input[name=pwdCheck]").val()) !== true){
+                swa.fire(
+                '비밀번호가 조건에 맞지않습니다',
+                '최소 하나의 문자,숫자,특수문자를 조합해주세요. 8자 이상 12자 이하의 비밀번호로 작성해주세요',
+                'error'
+                )} else {
+                  swa.fire({
+                    title: '정보를 수정하시겠습니까?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: '수정',
+                    cancelButtonText: '취소'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      $.ajax({
+                        url: '/member/getLoginUser',
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function(result) {
+                          // 기본정보
+                          var memberNo = result.data.no
+                          var formUpdate = new FormData()
+                          formUpdate.append('no', result.data.no)
+                          formUpdate.append('pwd', $("input[name=pwd]").val())
+                          formUpdate.append('tel', $("input[name=tel]").val())
+                          formUpdate.append('postNo', $("input[name=postNo]").val())
+                          formUpdate.append('baseAddr', $("input[name=roadNameAddr]").val())
+                          formUpdate.append('roadNameAddr', $("input[name=baseAddr]").val())
+                          formUpdate.append('addr', $("input[name=addr]").val())
+                          formUpdate.append('file', $("input[name=file]")[0].files[0])
+                          formUpdate.append('defaultImg', $('.img-thumbnail').attr('src') == "photo?filename=150x200_default.jpg")
+                          
+                          $.ajax({
+                            url: '/mypage/update',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: formUpdate,
+                            processData: false,
+                            contentType: false,
+                            success: function(resultData) {
+                              console.log(resultData)
+                              $.ajax({
+                                url: '/mypage/deleteCategory',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: {'no': memberNo},
+                                success: function() {
+                                  let updateParams = {
+                                    "number" : result.data.no,
+                                    "localArr" : localArr,
+                                    "purposeArr" : pupsArr
+                                  }
+                                  $.ajax({
+                                    url: '/mypage/insertCategory',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: updateParams,
+                                    success: function() {
+                                      console.log("업데이트 성공!")
+                                      },
+                                    error : function(){
+                                      console.log("업데이트 실패")
+                                    }
+                                  })
+                                }
+                              })
+                            }
+                          })
+                        }
+                      })
+                      swa.fire({
+                        title: '수정이 완료되었습니다',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                      }).then((result) => {
+                      if (result.isConfirmed) {
+                        location.href = "/mypage/index.html"
+                      }
+                    })
+                  }
+                })
+              }
+            })
+        
+        
+      function searchAddress() {
+        new daum.Postcode({
+          oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 참고 항목 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if (data.bnam !== '' && /[동|로|가]$/g.test(data.bname)) {
+              extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if (data.buildingName !== '' && data.apartment === 'Y') {
+              extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if (extraRoadAddr !== '') {
+              extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample4_postcode').value = data.zonecode;
+            document.getElementById("sample4_roadAddress").value = roadAddr;
+            document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+            if (roadAddr !== '') {
+              document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+            } else {
+              document.getElementById("sample4_extraAddress").value = '';
+            }
+
+            var guideTextBox = document.getElementById("guide");
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if (data.autoRoadAddress) {
+              var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+              guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+              guideTextBox.style.display = 'block';
+
+            } else if (data.autoJibunAddress) {
+              var expJibunAddr = data.autoJibunAddress;
+              guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+              guideTextBox.style.display = 'block';
+            } else {
+              guideTextBox.innerHTML = '';
+              guideTextBox.style.display = 'none';
+            }
+          }
+        }).open();
+      }
+  </script>
+</body>
+</html>

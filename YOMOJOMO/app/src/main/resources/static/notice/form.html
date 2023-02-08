@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>공지사항</title>
+</head>
+<body>
+
+<h1>새 공지</h1>
+
+<form>
+제목*: <input id="x-title" type="text"><br>
+목록*: <select id="x-cate">
+        <option value="1">자주하는질문</option>
+        <option value="2">공지사항</option>
+        <option value="3">서비스안내</option>
+        <option value="4">문의하기</option>
+       </select> 
+내용*:  <input id="x-content" type="text">
+</div>
+별표(*) 항목은 필수 입력입니다.<br>
+<button id="x-add-btn" type="button">등록</button>
+<button id="x-cancel-btn" type="button">취소</button>
+</form>
+
+<script type="text/javascript">
+  var xTitle = document.querySelector("#x-title");
+  var xCate = document.querySelector("#x-cate")
+  var xContent = document.querySelector("#x-content");
+  
+  document.querySelector("#x-add-btn").onclick = function() {
+	  
+    if (xTitle.value == "" || xContent.value == "" || xCate.value == "") {
+      window.alert("필수 입력 항목이 비어 있습니다.");
+      return;
+    }
+    
+    var qs = `title=${xTitle.value}&cate=${xCate.value}&content=${xContent.value}`;
+    
+    
+    fetch(`/notice/add?${qs}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text);
+        location.href = "index.html";
+      });
+  };
+
+  document.querySelector("#x-cancel-btn").onclick = function() {
+    window.location.href = "index.html";
+  };
+  
+  
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+</head>
+<body>
+  <h1>회원가입</h1>
+  <span>이메일(아이디)</span>
+  <input type="text" class="email"><br>
+  <span>비밀번호</span>
+  <input type="text" class="pwd"><br>
+  <span>이름</span>
+  <input type="text" class="name"><br>
+  <span>휴대전화번호</span>
+  <input type="text" class="tel"><br>
+  <span>주소</span>
+  <input type="text" placeholder="우편번호" class="postno"><br>
+  <input type="text" placeholder="기본주소" class="baseaddr"><br>
+  <input type="text" placeholder="상세주소" class="addr"><br>
+  <button type="button" class="add-btn">등록하기</button>
+  <button type="button" class="cancel-btn">취소하기</button>
+
+  <script>
+    var eMail = document.querySelector('.email')
+    var pwd =document.querySelector('.pwd')
+    var xname =document.querySelector('.name')
+    var tel =document.querySelector('.tel')
+    var postNo =document.querySelector('.postno')
+    var baseAddr =document.querySelector('.baseaddr')
+    var addr =document.querySelector('.addr')
+
+    document.querySelector('.add-btn').addEventListener("click", function() {
+      // console.log(eMail.value)
+      // console.log(pwd.value)
+      // console.log(xname.value)
+      // console.log(tel.value)
+      // console.log(postNo.value)
+      // console.log(baseAddr.value)
+      // console.log(addr.value)
+
+      
+      fetch(`/member/add?name=${xname.value}&pwd=${pwd.value}&email=${eMail.value}&tel=${tel.value}&postno=${postNo.value}&baseaddr=${baseAddr.value}&addr=${addr.value}&type=일반회원&unsubscribe=0`)
+        .then(function(response) {
+          return response.text();
+        })
+        .then(function(text) {
+          console.log(text);
+          location.href = "index.html"
+        })
+
+      
+    });
+
+    document.querySelector('.cancel-btn').addEventListener('click', function() {
+      window.location.href = 'index.html'
+    })
+
+    
+  </script>
+</body>
+</html>

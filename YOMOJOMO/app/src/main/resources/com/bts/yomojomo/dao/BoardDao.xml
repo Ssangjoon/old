@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.BoardDao">
+  
+  <!-- collection -> has many / association -> has one -->
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="Board" id="BoardMap" >
+  <id column="b_no" property="no"/>
+  <result column="g_no" property="groupNo"/>
+  <result column="memb_no" property="memberNo"/>
+  <result column="reg_dt" property="registDate"/>
+  <result column="content" property="content"/>
+  <result column="view_cnt" property="viewCount"/>
+  <result column="status" property="status"/>
+	<association property="writer" javaType="member">
+	<id column="writer_no" property="no"/>
+	<result column="writer_name" property="memberName"/>
+	<result column="writer_email" property="email"/>
+	</association>
+	 <collection property="comments" ofType="Comment">
+     <id column = "cmt_no" property="no"/>
+	 <result column="cmt_content" property="content"/>
+	 <result column="cmt_reg_dt" property="registDate"/>
+      <association property="writer" javaType="member">
+      <id column="cmt_writer_no" property="no"/>
+      <result column="cmt_writer_name" property="memberName"/>
+      <result column="cmt_writer_email" property="email"/>
+      </association>
+     </collection>
+    
+  </resultMap>
+  
+    <!-- 게시글 등록 -->
+  <insert id="insert" parameterType="Board" keyProperty="no" keyColumn="b_no" useGeneratedKeys="true">
+    insert into gms_board(g_no, memb_no, content) 
+    values(#{groupNo}, #{writer.no}, #{content})
+  </insert>
+  
+  <!--게시판 get-->
+  <select id="findByNo" resultMap="BoardMap" parameterType="int">
+	 SELECT 
+	    b.content, b.reg_dt, m.memb_no writer_no, m.membername writer_name
+	 FROM 
+	    gms_board b  
+	    LEFT OUTER JOIN gms_memb m ON b.memb_no = m.memb_no 
+	 WHERE 
+	    b.b_no = #{no};
+  </select>
+  <!--게시글 업데이트 -->
+  <update id ="update" parameterType="Board">
+    update gms_board set 
+      content = #{content}
+    where 
+      b_no=#{no} and memb_no = #{writer.no}
+  </update>
+  <!-- 모임별 게시판 전체 조회 -->
+  <select id="findByGroupNo" resultMap="BoardMap" parameterType="int">
+	SELECT 
+        b.g_no,
+        b.b_no,
+        b.content,
+        b.reg_dt,
+        m.memb_no writer_no,
+        m.membername writer_name,
+        m.email writer_email,
+       comment.*
+    FROM 
+        gms_board b 
+        LEFT OUTER JOIN 
+        (SELECT c.content cmt_content  , gm.membername cmt_writer_name, c.reg_dt cmt_reg_dt, c.b_no  
+        FROM gms_comment c , gms_memb gm 
+        WHERE c.memb_no =gm.memb_no 
+        ) comment
+        ON b.b_no = comment.b_no 
+        LEFT OUTER JOIN gms_memb m ON b.memb_no = m.memb_no 
+    WHERE 
+        b.g_no = #{no}
+    ORDER BY 
+        b.b_no DESC
+  </select>
+  
+  <!-- 모임별 게시판 전체 조회 (asc)-->
+  <select id="findByGroupNoAsc" resultMap="BoardMap" parameterType="int">
+	SELECT 
+        b.g_no,
+        b.b_no,
+        b.content,
+        b.reg_dt,
+        m.memb_no writer_no,
+        m.membername writer_name,
+        m.email writer_email,
+       comment.*
+    FROM 
+        gms_board b 
+        LEFT OUTER JOIN 
+        (SELECT c.content cmt_content  , gm.membername cmt_writer_name, c.reg_dt cmt_reg_dt, c.b_no  
+        FROM gms_comment c , gms_memb gm 
+        WHERE c.memb_no =gm.memb_no 
+        ) comment
+        ON b.b_no = comment.b_no 
+        LEFT OUTER JOIN gms_memb m ON b.memb_no = m.memb_no 
+    WHERE 
+        b.g_no = #{no}
+    ORDER BY 
+        b.b_no asc
+  </select>
+  <!-- 모임별 게시판을 번호로 조회 -->
+  <select id="findByBoardNo" resultMap="BoardMap">
+    SELECT 
+        b.g_no,
+        b.b_no,
+        b.content,
+        b.reg_dt,
+        m.memb_no writer_no,
+        m.membername writer_name,
+        m.email writer_email,
+        comment.*
+    FROM 
+        gms_board b 
+        LEFT OUTER JOIN 
+        (SELECT c.cmt_no,  c.content cmt_content, gm.memb_no cmt_writer_no,gm.membername cmt_writer_name, c.reg_dt cmt_reg_dt, c.b_no  
+        FROM gms_comment c , gms_memb gm 
+        WHERE c.memb_no =gm.memb_no 
+        ) comment
+        ON b.b_no = comment.b_no 
+        LEFT OUTER JOIN gms_memb m ON b.memb_no = m.memb_no 
+    WHERE 
+        b.b_no = #{no}
+    ORDER BY 
+        comment.cmt_no DESC;
+  </select>
+  <!-- 조회시 조회수 증가 -->
+  <update id="increaseViewCount" parameterType="int">
+    update gms_board set 
+      view_cnt=view_cnt + 1 
+    where b_no=#{no}
+  </update>
+  
+
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_board
+    where 
+      b_no = #{no}
+  </delete>
+  
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_board
+  </select>
+  
+  
+  <select id="findAll" resultMap="BoardMap"> 
+	select
+		b.b_no,
+		b.content,
+		b.reg_dt,
+		m.memb_no writer_no,
+		m.name writer_name,
+		c.cmt_no,
+		c.content cmt_content,
+		c.reg_dt cmt_reg_dt,
+		m2.memb_no cmt_writer_no,
+		m2.name cmt_writer_name
+	from 
+	   gms_board b
+		left outer join gms_comment c on b.b_no = c.b_no
+		left outer join gms_memb m on b.memb_no = m.memb_no
+		left outer join gms_memb m2 on c.memb_no = m2.memb_no
+    order by
+      b_no desc
+  </select>
+  
+ 
+  
+    
+  
+</mapper>

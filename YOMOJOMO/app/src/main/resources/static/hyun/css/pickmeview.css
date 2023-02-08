@@ -1,0 +1,39 @@
+#view-content{ 
+  padding-top: 150px;
+  padding-bottom: 150px;
+  position: relative;
+}
+ body{
+  margin-top: 100px;
+} 
+form {
+  margin: 10px auto;
+}
+table > tbody > tr > td:nth-child(odd) {
+text-align: center;
+}
+#localSelect{
+  width: 400px;
+  display: flex;
+}
+#localSelect{
+  width: 400px;
+  display: flex;
+}
+textarea { /*사이즈 고정*/
+  resize: none;
+  height: 300px;
+}
+#x-delete-btn, #x-update-btn, #x-cancel-btn {
+  float: right;
+  margin: 5px;
+}
+table > tbody > tr > td:first-child {
+  text-align: right;
+  column-span: 300px;
+}
+#x-invitation-btn{
+  float: left;
+  margin-top: 5px;
+  margin-left: 60px;
+}

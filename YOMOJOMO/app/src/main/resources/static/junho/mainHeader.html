@@ -1,0 +1,94 @@
+<!-- character set -->
+<meta charset="UTF-8">
+<!-- 파비콘생성 -->
+<link rel="icon" href="/junho/img/logo.png">
+<!-- css 초기화 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap"
+	rel="stylesheet">
+<!-- 아이콘 연결 코드 -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- JQUERY -->
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<!-- 부트스트랩 CSS-->
+<link rel="stylesheet"
+	href="/node_modules/bootstrap/dist/css/bootstrap.css">
+<!-- 부트스트랩 JS -->
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<!-- 내 css 연결하기 -->
+<link rel="stylesheet" href="/junho/css/mainheader.css">
+
+
+<!-- HEADER -->
+<header>
+	<div class="inner">
+		<a href="/junho/index.html" class="logo"> <img
+			src="/junho/img/logo.png" alt="logo">
+		</a>
+		<div class="cate">
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle"
+					data-bs-toggle="dropdown" aria-expanded="false">Category</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="/ssang/group/index.html">소모임</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="/junho/midpoint/index.html">MID POINT</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="/hyun/pickme/index.html">PICK ME</a></li>
+				</ul>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle"
+					data-bs-toggle="dropdown" aria-expanded="false">Category</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="/mypage/index.html">Mypage</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="/yoseob/notice/service_center_main.html">고객센터</a></li>
+					<li><hr class="dropdown-divider"></li>
+				</ul>
+			</div>
+			<div class="search">
+				<input type="text"> <span class="material-icons">search</span>
+			</div>
+		</div>
+		<div class="main-menu">
+			<ul class="menu">
+				<li id="login-btn" class="not-login hover-effect">
+					<a href="/jaewon/login/login/index.html">로그인</a>
+				</li>
+				<li id="logout-btn" class="login hover-effect"><a>로그아웃</a></li>
+				<li id="sign-up" class="hover-effect"><a href="/jaewon/signup/index.html">회원가입</a></li>
+				<li><a href="/mypage/index.html"> <span class="material-icons">account_circle </span></a></li>
+				<li id="alert-msg-li"> <!--알림-->
+					<div class="btn-group">
+						<button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							<span class="material-icons" id="msgicon">mail_outline </span>
+							<span class="position-absolute translate-middle badge rounded-pill bg-danger" id="totalMsgCnt"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item">받은 메세지 <span id="totalmsgCnt"></span></a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="/mypage/pickme.html">모임 초대 메세지 
+								<span class="badge bg-danger" id="invitemsgCnt"></span>							
+							</a></li>
+							<li><a class="dropdown-item" href="/mypage/group.html">모임 가입 신청 메세지
+								<span class="badge bg-danger" id="requestmsgCnt"></span>	
+							</a></li>
+						</ul>
+					</div>
+				</li><!--알림-->
+				<li id="createGroupli"><a href="javascript:void(0)">
+						<button type="button" class="btn btn-light btn-group-link">소모임 개설</button>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<script src="/junho/js/mainheader.js"></script>
+

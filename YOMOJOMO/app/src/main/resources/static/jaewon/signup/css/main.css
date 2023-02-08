@@ -1,0 +1,13 @@
+header {
+	height: 10vh;
+}
+
+body {
+	height: auto;
+	margin-top: 200px;
+	margin-bottom: 200px
+}
+
+footer {
+	height: 10vh;
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.InviteMemberDao">
+  
+  <resultMap type="InviteMember" id="InviteMemberMap">
+    <association property="group" javaType="Group"> <!-- gms_group -->
+      <id column = "gno" property="no"/>
+      <result column="gname" property="GroupName"/>
+    </association>
+    <association property="member" javaType="Member"> <!-- gms_member -->
+      <id column = "mno" property="no"/>
+      <result column="mname" property="memberName"/>
+      <result column="mtel" property="tel"/>
+    </association>
+  </resultMap>
+
+
+  <select id="findAll" resultMap="InviteMemberMap"> 
+    select 
+      jm.g_no gno, 
+      jm.memb_no mno,
+      m.membername mname,
+      jm.g_memb_grd_no mgno,
+      m.tel mtel
+    from gms_join_memb jm
+      inner join gms_group g on jm.g_no = g.g_no
+      inner join gms_memb m on jm.memb_no = m.memb_no
+    where
+      g.g_no = #{group.no}
+    order by
+      g.g_no asc
+    
+  </select>
+
+<!--  
+  <insert id="insert" parameterType="JoinMember">
+    insert into gms_join_memb(memb_no, g_no, g_memb_grd_no)
+    values(1, 2, 1)
+  </insert>
+  
+  <update id ="update" parameterType="JoinMember">
+    update gms_join_memb set 
+      g_memb_grd_no = #{gmembgrdno}
+    where 
+      memb_no = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_join_memb
+  </select>
+-->
+  
+
+</mapper>

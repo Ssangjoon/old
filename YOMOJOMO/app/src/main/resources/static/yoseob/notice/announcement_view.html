@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항</title>
+  <!-- JQUERY -->
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="/yoseob/css/style.css">
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- 아이콘 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+  
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+  <!-- 공통헤더 -->
+  <div id="header"></div>
+  <!-- 컨테이너시작 -->
+  <div class="container">
+    <h1>공지사항</h1>
+    <span style="font-weight: bold;">공지 번호</span><br>
+    <input style="border:none; background-color:thistle; width:80%" type="text" class="no"><br>
+    <span style="font-weight: bold;">분류</span><br>
+    <input  style="border:none; background-color:thistle; width:80%"type="text" class="cate"><br>
+    <span  style="font-weight: bold;">제목</span><br>
+    <input  style="border:none; background-color:thistle; width:80%"type="text" class ="title"><br>
+    <span style="font-weight: bold;">내용</span><br>
+    <textarea type="text" class ="content" cols="50" rows="10" style="width:80%"></textarea><br>
+    <button type = "button"  class="update-btn">수정하기</button>
+    <button type = "button"  class="delete-btn">삭제하기</button>
+    <button type = "button"  class="cancel-btn">취소하기</button>
+   
+  <script>
+    var arr = location.href.split("?")
+      console.log(arr)
+
+      if(arr.length == 1) {
+        alert("올바르지 않은 요청입니다")
+        throw "URL 오류!"
+      }
+      var qs = arr[1];
+      console.log(qs)
+
+      var params = new URLSearchParams(qs)
+      var no = params.get('no')
+      var xNo = document.querySelector('.no')
+      var xCate = document.querySelector('.cate')
+      var xTitle = document.querySelector('.title')
+      var xContent = document.querySelector('.content')
+     
+  
+  if (no == null) {
+    alert("해당 번호가 없습니다")
+    throw  "오류!"
+  }
+ 
+    fetch(`/notice/get?no=${no}`)
+    .then(function(response) {
+      return response.json()
+    })
+    .then(function(notice){
+      xNo.value = notice.no
+      xContent.value = notice.content
+      xTitle.value = notice.title
+      xCate.value = notice.cate
+  
+    }) 
+    document.querySelector('.update-btn').addEventListener('click', function() {
+    fetch(`/notice/update?no=${xNo.value}&cate=${xCate.value}&title=${xTitle.value}&content=${xContent.value}`)
+    .then(function(response){
+      return response.text()
+    })
+    .then(function(text){
+    console.log(text)
+    window.location.href="announcement.html"
+    
+    })
+  })
+  document.querySelector('.delete-btn').addEventListener('click', function() {
+    fetch(`/notice/delete?no=${xNo.value}`)
+    .then(function(response){
+      return response.text()
+    })
+    .then(function(text){
+    console.log(text)
+    window.location.href="announcement.html"
+    
+    })
+  })
+  document.querySelector('.cancel-btn').addEventListener('click', function() {
+    window.location.href = "announcement.html"
+  })
+  </script>
+
+   <!-- 컨테이너끝 -->
+  </div> 
+  
+
+</body>

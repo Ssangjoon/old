@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyPage</title>
+  <!-- 제이쿼리 -->
+  <script src="/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!--공용css-->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/sweetalert2/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/mypage/css/main.css">
+  <!--인클루드-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+      $('#footers').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+</head>
+<body>
+  <div id="header"></div>
+  <div class="main">
+    <div class="inner">
+      <div class="list-group sidebar">
+        <a href="edit.html" class="list-group-item list-group-item-action">개인 정보 수정</a>
+        <a href="mypost.html" class="list-group-item list-group-item-action">내가 쓴 글</a>
+        <a href="favor.html" class="list-group-item list-group-item-action">즐겨찾기한 글</a>
+        <a href="group.html" class="list-group-item list-group-item-action">가입 승인/대기</a>
+        <a href="pickme.html" class="list-group-item list-group-item-action">픽미 요청/게시글</a>
+        <a href="inquiry.html" class="list-group-item list-group-item-action active">문의 내역</a>
+      </div>
+      <div class="base">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">마이페이지</a></li>
+            <li class="breadcrumb-item active" aria-current="page">문의 내역</li>
+          </ol>
+        </nav>
+        <div class="content d-flex flex-column">
+          <h3>문의 내역</h3>
+          <br>
+          <table class="table table-hover">
+            <thead>
+                <tr>
+                  <!-- <th><input class="form-check-input all-check" type="checkbox" value="" id="flexCheckDefault"></th> -->
+                  <th>제목</th>
+                  <th>상태</th>
+                  <th>작성일</th>
+                </tr>
+              </thead>
+              <tbody>
+               
+              </tbody>
+          </table>
+          <div class="d-flex justify-content-center">
+            <div class="fs-2 table-on">문의 내역이 없습니다</div>
+          </div>
+          <br>
+          <!-- <div class="btn-wrap">
+            <button type="button" class="btn btn-primary btn-delete">삭제하기</button>
+          </div> -->
+          <nav aria-label="Page navigation">
+            <ul class="pagination" id="page-num">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title fs-5 fw-bold" id="exampleModalLabel">문의내역 답장</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">문의 종류</label>
+                    <input type="text" class="form-control category-notice" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">답변일</label>
+                    <input type="text" class="form-control answer-date" readonly>
+                  </div>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">제목:</label>
+                    <input type="text" class="form-control answer-title" readonly>
+                  </div>
+                  <div class="mb-3">
+                  <div class="mb-3">
+                    <label for="message-text" class="col-form-label">문의 주신 내용:</label>
+                    <textarea class="form-control h-25 content-notice" rows="10" id="message-text" readonly></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="message-text" class="col-form-label">문의 답장 내용:</label>
+                    <textarea class="form-control h-25 answer-notice" rows="10" id="message-text" readonly></textarea>
+                  </div>
+                  <!-- <img src="경로" alt=""> -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div id="footers"></div>
+  <script>
+    $.ajax({
+      url: '/member/getLoginUser',
+      type: 'POST',
+      dataType: 'json',
+      success: function(result) {
+        if (result.status == "fail") {
+          location.href = "/junho/index.html"
+        }
+        console.log(result)
+        $.ajax({
+          url: '/mypage/mynotice',
+          type: 'POST',
+          dataType: 'json',
+          data: {'no': result.data.no},
+          success: function(resultData) {
+            console.log(resultData)
+            for (let i=0; i < resultData.notice.length; i++) {
+              let notice = resultData.notice[i]
+              if (notice.answer == null) {  
+                $(`<tr>
+                  <td class="table-title" value="wait" data-no="${notice.no}">${notice.title}</td>
+                  <td>답변 대기중</td>
+                  <td>${notice.queryDate}</td>
+                </tr>`)
+                .appendTo(".table")
+              } else {
+                $(`<tr>
+                  <td class="table-title" value="complete" data-no="${notice.no}">${notice.title}</td>
+                  <td class="text-primary">답변 완료</td>
+                  <td>${notice.queryDate}</td>
+                </tr>`)
+                .appendTo(".table")
+              }
+            }
+          },
+          error: function() {
+            $(".table-on").addClass("table-off").removeClass("table-on")
+          }
+        })
+      }
+    })
+    const swa = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-primary mx-2',
+        cancelButton: 'btn btn-secondary mx-2'
+      },
+      buttonsStyling: false
+    })
+    // 문의내역 답장
+    $(document).on("click",".table-title",function(e){
+      if($(e.target).attr("value") == "complete") {
+        $.ajax({
+          url: '/member/getLoginUser',
+          type: 'POST',
+          dataType: 'json',
+          success: function(result) {
+            $.ajax({
+              url: '/mypage/mynotice',
+              type: 'POST',
+              dataType: 'json',
+              data: {'no': result.data.no},
+              success: function(resultData) {
+                console.log(resultData)
+                $(".category-notice").val(`${resultData.queryCate.name}`)
+                for (let answer of resultData.notice) {
+                  if (answer.no == $(e.target).attr("data-no")) {
+                    $(".answer-date").val(`${answer.answerDate}`)
+                    $(".answer-title").val(`${answer.title}`)
+                    $(".content-notice").val(`${answer.content}`)
+                    $(".answer-notice").val(`${answer.answer}`)
+                  }
+                }
+              }
+            })
+          }
+        })
+      $(".modal").modal("show")
+      } else {
+        swa.fire(
+        '아직 답변이 없는 문의입니다',
+        '죄송합니다. 조금만 더 기다려주세요',
+        'error'
+        )}
+    })
+    // $(".all-check").click(function(e){
+    //   if ($(".all-check").is(":checked")){
+    //     $("input").prop("checked", true)
+    //   } else {
+    //     $("input").prop("checked", false)
+    //   }
+    // })
+    // $(document).on("click",".check-box",function(){
+    //   $(".all-check").prop("checked", false);
+    // });
+    // $(document).on("click",".btn-delete",function(e){
+    //   if ($(".check-box").is(":checked") == false) {
+    //   swa.fire(
+    //     '글이 선택되지 않았습니다',
+    //     '삭제할 글을 선택해주세요',
+    //     'error'
+    //     )} else {
+    //     swa.fire({
+    //       title: '글을 삭제 하시겠습니까?',
+    //       icon: 'warning',
+    //       showCancelButton: true,
+    //       confirmButtonText: '삭제',
+    //       cancelButtonText: '취소',
+    //     }).then((result) => {
+    //       if (result.isConfirmed) {
+    //         // $.ajax({
+    //         //   url: '/noticeQuestion/delete',
+    //         //   type: 'POST',
+    //         //   dataType: 'json',
+    //         //   data: {'no': }
+    //         //   success: function() {
+    //         //     console.log("삭제 성공!")
+    //         //   }
+    //         // })
+    //         $(".all-check").prop("checked", false)
+    //         $("input:checkbox:checked").each(function(){
+    //           this.closest("tr").remove()
+    //         })
+    //         swa.fire(
+    //           '삭제가 완료되었습니다',
+    //           '',
+    //           'success'
+    //         )
+    //       }
+    //     })
+    //   }
+    // })
+  </script>
+</body>
+</html>

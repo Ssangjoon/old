@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.PurposeDao">
+  <resultMap type="Purpose" id="purposeMap">
+    <id column="pups_no" property="no"/>
+    <result column="name" property="purposeName"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="purposeMap"> 
+    select
+      pups_no,
+      name
+    from
+      gms_purpose
+    order by
+      pups_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="purposeMap" parameterType="int">
+    select 
+      pups_no,
+      name
+    from 
+      gms_purpose
+    where 
+      pups_no=#{no}
+  </select>
+
+<!--  
+  <insert id="insert" parameterType="Purpose">
+    insert into gms_purpose(name) 
+    values(#{name})
+  </insert>
+  
+  <update id ="update" parameterType="Purpose">
+    update gms_purpose set 
+      name = #{name}
+    where 
+      pups_no = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_purpose
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_purpose
+    where 
+      pups_no = #{no}
+  </delete>
+-->
+</mapper>

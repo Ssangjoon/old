@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모임개설</title>
+  <!-- 제이쿼리 -->
+  <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- 아이콘 연결 코드 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- Handlebars -->
+  <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!--공용css-->
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/ssang/group/css/form.css">
+  <!-- <link rel="stylesheet" href="../../junho/main.html"> -->
+  <!--인클루드-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#headers').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footers').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+  
+</head>
+<body>
+  <div id="headers"></div>
+  <div id="container">
+    <div id="width-fix-div">
+      <div class="sector">기본정보</div>
+      <div class="table-row-group">
+        <div class="table-row">
+          <div class="table-cell title">모임이름* :</div>
+          <div class="table-cell"><input name="GroupName" id="x-title" type="text" placeholder="모임이름을 적어주세요"></div></div>
+        <div class="table-row" >
+          <div class="table-cell title">이미지</div>
+          <div class="table-cell">
+            <!-- <label className="input-file-button" for="x-file">업로드</label>
+            <input type="file" id="x-file" name="file"> -->
+            <div class="filebox">
+              <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+              <label for="x-file">파일찾기</label> 
+              <input name="file" type="file" id="x-file">
+          </div>
+          </div>
+        </div>
+        <!-- <div class="table-row ">
+          <div class="table-cell title">회비????</div>
+        </div> -->
+        <div class="table-row">
+          <div class="table-cell title">모임 인사말*</div>
+          <div class="table-cell"><textarea name="intro" id="x-intro" cols="40" rows="3"></textarea></div>
+        </div>
+        <div class="table-row">
+          <div class="table-cell title">멤버목록</div>
+          <div class="table-cell">공개 <input type="radio" name="public" value="true" checked> 비공개 <input type="radio" name="public" value="false"></div>
+        </div>
+      </div>
+        <hr>
+        <div class="sector">상세정보</div>
+      <div class="table-row-group">
+        <div class="table-row">
+          <div class="table-cell">
+            인원설정*
+          </div>
+          <div class="table-cell">
+            <input type="number" id="x-maxcnt" name="maxcnt">
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-cell title"> 주제*</div>
+          <select name="purposeNo" id="x-purpose">
+            <optgroup>
+              <option selected >선택하세요</option>
+              <option value="1">문화/예술/음악</option>
+              <option value="2">교육/자기개발</option>
+              <option value="3">육아/가족/반려동물</option>
+              <option value="4">인문/과학</option>
+              <option value="5">스포츠/레져</option>
+              <option value="6">도서/독서</option>
+              <option value="7">정치/사회/역사</option>
+              <option value="8">건강/의료</option>
+              <option value="9">영화/애니메이션</option>
+              <option value="10">경제/금융/재테크</option>
+              <option value="11">인테리어/조경/DIY</option>
+              <option value="12">게임</option>
+              <option value="13">여행/취미/여가</option>
+              <option value="14">공연/전시</option>
+              <option value="15">디자인</option>
+              <option value="16">TV/미디어</option>
+              <option value="17">패션/뷰티</option>
+              <option value="18">외국어</option>
+              <option value="19">IT/컴퓨터</option>
+              <option value="20">쇼핑/생활/푸드</option>
+              <option value="21">기부/봉사</option>
+              <option value="22">창업/경영</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="table-row">
+          <div class="table-cell title">활동지역*</div>
+          <div class="table-cell">
+            <button id="local-btn">+추가</button>
+            <span class="correct-local"></span>
+            <button type="button" class="cancel-local-btn" ><span class="material-icons md-23">
+              highlight_off
+              </span></button>
+              <input class="a11y-hidden" type="text" name="activeLocalNo" id="myText" value="">
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-cell title">모임태그*</div>
+          <div class="table-cell"><input name="" id="x-tag" ><button  id="tag-post-btn" value="">등록</button></div>
+        </div>
+      </div>
+      <div id="posted-tags"></div>
+      
+      <hr>
+      <button id="create-btn">생성하기</button>
+    </div>
+    <!-- 모임정보 -->
+  </div>
+  <!-- 시 -->
+  <div class="background-si">
+    <div class="window">
+      <div class="popup">
+        <button type="button" class="btn-close" aria-label="Close"></button>
+        <div class="sigungu-title">시</div>
+        <div class="local-btn-div">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 군구 -->
+  <div class="background-gu">
+    <div class="gu-window">
+      <div class="gu-popup">
+        <button type="button" class="btn-close" aria-label="Close"></button>
+        <div class="sigungu-title">군 구</div>
+        <div class="local-btn-div2">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 시 버튼 -->
+  <script id="tr-template" type="text/x-handlebars-template">
+  {{#each this}}
+    <button class="gungu-btn" value="{{nameSi}}">{{nameSi}}</button>
+  {{/each}}
+  </script>
+  <!-- 군구버튼 -->
+  <script id="tr-template2" type="text/x-handlebars-template">
+  {{#each this}}
+    <button class="no-btn" value="{{no}}">{{nameGu}}</button>
+  {{/each}}
+  </script>
+  <!-- 태그 -->
+  <script id="tag-template" type="text/x-hanalerbars-template">
+    
+    <button class="btn btn-outline-success table-cell" id="tag-canel-btn" value="">{{tag}}</button>
+  </script>
+
+<div id="footers"></div>
+<script type="module" src="/ssang/group/js/form.js"></script>
+</body>
+</html>

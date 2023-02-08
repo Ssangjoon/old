@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.MainPageDao">
+
+	<!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+	<resultMap type="MainPage" id="MainPageMap">
+		<id column="g_no" property="no" />
+		<result column="act_local_no" property="activeLocalNo" />
+		<result column="pups_no" property="purposeNo" />
+		<result column="name" property="GroupName" />
+		<result column="reg_dt" property="registDate" />
+		<result column="logo" property="logo" />
+		<result column="intro" property="intro" />
+		<result column="memb_cnt" property="memberCount" />
+		<result column="max_cnt" property="maxCount" />
+		<result column="view_cnt" property="viewCount" />
+		
+		<association property="joinMember" javaType="JoinMember">
+      <association property="group" javaType="Group"> 
+        <id column = "groupno" property="no"/>
+        <result column="groupname" property="GroupName"/>
+      </association>
+      <association property="member" javaType="Member">
+        <id column = "memberno" property="no"/>
+        <result column="membername" property="memberName"/>
+      </association>
+    </association>
+	</resultMap>
+	
+
+<!-- 비회운 그룹 리스트 -->
+	<select id="nonMemberGroupList" resultMap="MainPageMap">
+		select
+        g_no,
+        act_local_no,       
+        pups_no,
+        name,
+        reg_dt,
+        logo,
+        intro,
+        max_cnt,
+        view_cnt
+    from
+        gms_group
+    order by
+        rand() limit 8;
+	</select>
+	
+<!-- 회원 그룹 리스트 -->
+<select id="memberGroupList" resultMap="MainPageMap" parameterType="int">
+       select
+        g.g_no,
+        g.act_local_no,       
+        g.pups_no,
+        g.name,
+        g.reg_dt,
+        g.logo,
+        g.intro,
+        g.max_cnt,
+        g.view_cnt,
+        g.g_delete_stat,
+        jm.g_memb_out_stat
+    from
+        gms_join_memb jm
+        inner join gms_group g on jm.g_no = g.g_no
+    where
+        jm.memb_no = #{no} and g.g_delete_stat = 1 and g_memb_out_stat=1
+    order by
+        g.g_no asc 
+        limit 8;
+  </select>
+	
+	<!--  
+	<select id="selectedSicate" resultMap="GroupMap">
+		select
+            g.g_no,
+            g.act_local_no,
+            g.pups_no,
+            g.name,
+            g.reg_dt,
+            g.logo,
+            g.intro,
+            g.max_cnt,
+            g.view_cnt,
+            p.pups_no pno,
+            p.name pname,
+            a.act_local_no,
+            a.name_si asi,
+            a.name_gu agu
+        from gms_group g
+            inner join gms_purpose p on g.pups_no=p.pups_no
+            inner join gms_activelocal a on g.act_local_no=a.act_local_no
+        where
+           a.name_si like #{activeLocal.nameSi}
+        order by
+            g.g_no desc;
+	</select>
+	
+	<select id="selectedGucate" resultMap="GroupMap">
+		select
+            g.g_no,
+            g.act_local_no,
+            g.pups_no,
+            g.name,
+            g.reg_dt,
+            g.logo,
+            g.intro,
+            g.max_cnt,
+            g.view_cnt,
+            p.pups_no pno,
+            p.name pname,
+            a.act_local_no ano,
+            a.name_si asi,
+            a.name_gu agu
+        from gms_group g
+            inner join gms_purpose p on g.pups_no=p.pups_no
+            inner join gms_activelocal a on g.act_local_no=a.act_local_no
+        where
+           a.act_local_no = #{activeLocal.no}
+        order by
+            g.g_no desc;
+	</select>
+	<select id="selectedPurpcate" resultMap="GroupMap">
+		select * from 
+			 (select
+	            g.g_no,
+	            g.act_local_no,
+	            g.pups_no,
+	            g.name,
+	            g.reg_dt,
+	            g.logo,
+	            g.intro,
+	            g.max_cnt,
+	            g.view_cnt,
+	            p.pups_no pno,
+	            p.name pname,
+	            a.act_local_no ano,
+	            a.name_si asi,
+	            a.name_gu agu
+	        from gms_group g
+	            inner join gms_purpose p on g.pups_no=p.pups_no
+	            inner join gms_activelocal a on g.act_local_no=a.act_local_no
+	        where
+	           a.act_local_no = #{activeLocal.no}
+	        order by
+	            g.g_no desc) g
+		                where g.pups_no = #{purpose.no}
+	</select>
+	
+	
+
+	<select id="findByNo" resultMap="GroupMap" parameterType="int">
+		select
+		g_no,
+		act_local_no,
+		pups_no,
+		name,
+		reg_dt,
+		logo,
+		intro,
+		max_cnt,
+		view_cnt
+		from
+		gms_group
+		where
+		g_no=#{no}
+	</select>
+
+	<insert id="insert" parameterType="Group" keyProperty="no"  keyColumn="g_no" useGeneratedKeys="true">
+		insert into gms_group (
+		act_local_no,
+		pups_no,
+		name,
+		logo,
+		memb_cnt,
+		max_cnt,
+		intro)
+		values(#{activeLocalNo}, #{purposeNo}, #{GroupName}, #{logo}, "1", #{maxCount}, #{intro});
+	</insert>
+	
+	<insert id="insertTags">
+      insert into gms_grouptag(g_no,tag_name)
+      values
+      <foreach collection="tags" item="tag" separator=",">
+        (#{groupNo}, #{tag.tagname}) 
+      </foreach>
+	</insert>
+
+	<update id="update" parameterType="Group">
+		update gms_group set
+		g_no = #{no},
+		act_local_no = #{actlocalno},
+		pups_no = #{pupsno},
+		name = #{name},
+		logo = #{logo},
+		intro = #{intro},
+		fee = #{fee}
+		where
+		g_no = #{no}
+	</update>
+
+	<select id="countAll" parameterType="int">
+		select count(*) from gms_group
+	</select>
+
+	<delete id="delete" parameterType="int">
+		delete from gms_group
+		where
+		g_no = #{no}
+	</delete>
+	
+-->
+</mapper>

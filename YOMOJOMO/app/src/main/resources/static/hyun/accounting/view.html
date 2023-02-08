@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회비 및 정산 상세보기</title>
+  <link rel="icon" href="/junho/img/logo.png">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/hyun/css/accountingview.css">
+</head>
+
+<body>
+<div id="header"></div>
+<div id="top"></div>
+<div id="view-content" class="table-responsive-lg">
+  <div class="inner">
+    <form>
+    <table id="formTable" class="table table-borderless">
+      <tbody>
+        <tr>
+          <td width="100px">번호</td>
+          <td><input id="x-no" type="number" class="form-control" disabled></td>
+          <td width="100px">작성일</td>
+          <td><input id="x-registDate" type="text" class="form-control" disabled></td>
+        </tr>
+        <tr>
+          <td>제목</td>
+          <td colspan="3"><input id="x-title" type="text" class="form-control"></td>
+        </tr>
+        <tr>
+          <td>유형</td>
+          <td>
+            <select id="x-selectCate" name="actCate.no" class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option id="selectOp" value="1">유형을 선택하세요</option>
+              <option id="selectOp" value="2">회비</option>
+              <option id="selectOp" value="3">모임비</option>
+              <option id="selectOp" value="4">기타</option>
+            </select>
+          </td>
+          <td>진행상태</td>
+          <td>
+            <select id="x-status" name="status" class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option id="statusOp" value="0">진행</option>
+              <option id="statusOp" value="1">완료</option>
+            </select>       
+          </td>
+        </tr>
+        <tr>
+          <td>금액</td>
+          <td><input id="x-amount" type="number" class="form-control"></td>
+          <td colspan="2">
+            <!-- <button type="button" class="btn btn-primary" id="addMemb">멤버 추가</button> -->
+            <button type="button" class="btn btn-primary" id="newMemb" data-bs-toggle="tooltip" data-bs-placement="bottom" title="멤버 리스트를 변경합니다">멤버 변경</button>
+            <button type="button" class="btn btn-primary" id="cleanMemb" data-bs-toggle="tooltip" data-bs-placement="bottom" title="멤버 리스트를 모두 삭제합니다">멤버 초기화</button>
+            <button type="button" class="btn btn-primary" id="recoverMemb" data-bs-toggle="tooltip" data-bs-placement="bottom" title="저장된 멤버 리스트를 불러옵니다">멤버 복구</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="List-Container">
+      <div id="x-membList-container">
+      </div>
+    </div>
+    <div class="modal fade" id="memberlist-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">추가할 멤버를 선택해 주세요</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="modal-member-list">
+            </div>
+          </div>
+          <div class="modal-footer" style=" text-align: center;">
+            <button type="button" class="btn btn-primary" id="allMemb">전체 적용</button>
+            <button type="button" class="btn btn-primary" id="selectedOK">변경</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button id="x-update-btn" type="button" class="btn btn-primary">수정</button>
+    <button id="x-delete-btn" type="button" class="btn btn-primary">삭제</button>
+    <button id="x-cancle-btn" type="button" class="btn btn-primary">확인</button> 
+  </form>
+  </div>
+</div>
+<div id="footer"></div>
+
+<!--모달 창 내 멤버 리스트-->
+<script id="modal-memberlist-template" type="text/x-handlebars-template">
+  {{#each this}}
+  <div class="form-check">
+  <input class="form-check-input" name="memberNo" type="checkbox" value="{{member.no}}" id="flexCheckDefault {{member.no}}" style="position:relative; top:16px">
+    <label class="form-check-label" for="flexCheckDefault {{member.no}}">
+      <span class="material-icons">account_circle </span>
+      {{member.memberName}}
+    </label>
+  </div>
+  {{/each}}
+</script>
+
+<!--멤버 뿌리기 Handlebars START-->
+<script id="div-template" type="text/x-handlebars-template">
+  {{#each this}}
+    <div class="x-membList">
+      <span class="material-icons">account_circle </span>
+      <input id="listmembName" type="text" value="{{membName}}">
+      <input id="membno" value="{{memberNo}}" type="hidden">
+
+    <span>납부 완료일 :</span> <input type="date" id="paydt" value="{{paydt}}">
+    <button id="x-deleteMemb-btn" type="button" class="btn btn-primary" onclick="deleteDiv(event)">삭제</button><br>
+    </div>
+  {{/each}}
+</script>
+
+<!--멤버 변경  Handlebars START-->
+<script id="new-div-template" type="text/x-handlebars-template">
+  {{#each this}}
+  <div class="new-x-membList">
+    <span class="material-icons">account_circle </span>
+    <input id="listmembName" type="text" value="{{memberName}}">
+    <input id="membno" value="{{no}}" type="hidden">
+
+  <span>납부 완료일 :</span> <input type="date" id="paydt">
+  <button id="x-deleteMemb-btn" type="button" class="btn btn-primary" onclick="newDeleteDiv(event)">삭제</button><br>
+  </div>
+  {{/each}}
+</script>
+
+<script src="/hyun/js/accountingview.js"></script>
+</body>
+</html>

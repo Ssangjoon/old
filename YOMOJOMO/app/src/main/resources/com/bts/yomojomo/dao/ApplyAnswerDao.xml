@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.ApplyAnswerDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="ApplyAnswer" id="ApplyAnswerMap">
+    <id column="appl_answer_no" property="no"/>
+    <result column="appl_question_no" property="groupNo"/>
+    <result column="answer" property="answer"/>
+  </resultMap>
+  <select id="findAll" resultMap="ApplyAnswerMap"> 
+    select
+      appl_answer_no,
+      appl_no,
+      answer
+    from
+      gms_applyform_answer
+    order by
+      appl_answer asc
+  </select>
+  
+  <insert id="insert" >
+    insert into gms_applyform_answer(appl_question_no, memb_no, answer)
+    values 
+    <foreach collection="answerList" item="answers" separator=",">
+    (#{answers.applyQuestionNo}, #{answers.writer.no} ,#{answers.answer}) 
+    </foreach>
+ </insert>
+ 
+  <select id="findByNo" resultMap="ApplyAnswerMap" parameterType="int">
+    select 
+      appl_answer_no,
+      appl_no,
+      answer
+    from 
+      gms_applyform_answer
+    where 
+      appl_answer_no=#{no}
+  </select>
+
+  
+  <update id ="update" parameterType="ApplyAnswer">
+    update gms_applyform_answer set 
+      content = #{content}
+    where 
+      appl_no=#{no}
+  </update>
+  
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_applyform_answer
+    where 
+      appl_no=#{no}
+  </delete>
+</mapper>

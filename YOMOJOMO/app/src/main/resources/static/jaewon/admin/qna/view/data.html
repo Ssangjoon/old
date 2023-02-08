@@ -1,0 +1,47 @@
+
+<div class="m-container inbox"></div>
+
+
+
+<script src="/node_modules/handlebars/dist/handlebars.js"></script>
+<script id="div-get" type="text/x-handlebars-template">
+		<form name="data" id="data">
+			<div class="shadow p-5">
+				<div class="row mb-5">
+					<h1>문의내역 상세</h1>
+				</div>
+				<div class="row mb-2 top">
+					<div class="row">
+						<div class="col text-start mt-3 mb-2 fs-4 fw-bold">제목 : {{title}} </div>
+						<div class="col"></div>
+					</div>
+					<div class="border-5 border-bottom border-dark"></div>
+					<div class="row">
+						<div class="col p-2 text-start">작성자 : {{member.memberName}} / {{answerDate}} </div>
+						<div class="col p-2 text-end">유형 : {{mcate.name}} / {{queryCate.name}}</div>
+					</div>
+					<div class="border-1 border-bottom border-dark"></div>
+					<div class="text-start mt-5 mb-5 fs-5 fw-bold">
+						<pre>{{content}}</pre> 
+					</div>
+					<div class="border-3 border-bottom border-dark""></div>
+					<div class="text-start mt-3 mb-3 fw-bold">운영자 답변</div>
+					<div class="text-start ms-4 p-3">{{answer}}</div>
+					<div class="border-1 border-bottom border-dark""></div>
+					<div class="row mt-3">
+					<div class="col"></div>
+					<div class="col-sm-6">
+						<div class="input-group mb-3">
+  							<input name = "reply" type="text" class="form-control" placeholder="답변 작성 시 기존 답변은 삭제됩니다." aria-label="Recipient's username" aria-describedby="basic-addon2">
+  							<button class="btn btn-primary input-group-text reply-btn" id="basic-addon2" value={{no}}>댓글 달기</button>
+  							<button class="btn btn-danger input-group-text reset-btn" id="basic-addon2" value={{no}}>댓글 삭제</button>
+						</div>
+          </div>
+          <div class="col"></div>
+					</div>
+        </div>
+			</div>
+		</form>
+</script>
+</body>
+</html>

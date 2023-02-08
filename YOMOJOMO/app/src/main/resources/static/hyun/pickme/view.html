@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/hyun/css/pickmeview.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+
+  <title>Pick me!</title>
+  
+</head>
+
+<body>
+<div id="header"></div>
+
+<!--입력 폼 -->
+<div id="view-content" class="table-responsive-lg">
+  <div class="inner">
+    <form id="pickme-update">
+      <table id="formTable" class="table table-borderless">
+        <tbody>
+          <tr>
+            <td>제목</td>
+            <td colspan="3"><input name="title" type="text" class="form-control"></td>
+          </tr>
+          <tr>
+            <td><span>번호</span></td>
+            <td><input name="no" type="text" class="form-control" readonly></td>
+            <td><span>작성일</span></td>
+            <td><input id="reg_dt" type="text" class="form-control" readonly></td>
+          </tr>
+          <tr>
+            <td><span>작성자</span></td>
+            <td><input id="x-name" type="text" class="form-control" readonly></td>
+            <td><span>조회수</span></td>
+            <td><input id="x-viewCnt" type="text" class="form-control" readonly></td>
+          </tr>
+          <tr>  
+            <td><span>활동지역</span></td>
+            <td style="display: flex;">
+              <select id="nameSi" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+              <select name="activeLocal.no" id="nameGu" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+            </td>
+            <td><span>관심활동</span></td>
+            <td><select name="purpose.no" id="purpose" class="form-select form-select-sm" aria-label=".form-select-sm example"></select></td>
+          </tr>
+          <tr>
+            <td><label for="comment">내용:</label></td>
+            <td colspan="3"><textarea class="form-control" rows="5" id="x-content" name="content"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+        <button id="x-invitation-btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">초대하기</button> 
+        <button id="x-update-btn" type="button" class="btn btn-primary">수정</button>
+        <button id="x-delete-btn" type="button" class="btn btn-primary">삭제</button>
+        <button id="x-cancel-btn" type="button" class="btn btn-primary">확인</button><br>
+    </form>    
+  </div>
+</div>
+
+<!--모달 시작-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">모임 초대하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="title" class="col-form-label">제목</label>
+            <input type="text" class="form-control" id="title">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">초대할사람:</label>
+            <input type="text" class="form-control" name="member.no" id="recipient-name" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="groupList" class="col-form-label">내 모임</label>
+            <select name="group.no" id="groupList" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">내용:</label>
+            <textarea id="content" class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" id="invitationbtn" class="btn btn-primary">전송</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--모달 끝-->
+
+<div id="footer"></div>
+
+<!--모임 리스트 불러오는 handlebars-->
+<script id="joinedGroupList-template" type="text/x-handlebars-template">
+  <option value="0">초대할 모임을 선택해주세요</option>
+  {{#each this}}
+  <option value="{{group.no}}">{{group.groupName}}</option>
+  {{/each}}
+</script>
+<!--모임 리스트 불러오는 handlebars END-->
+
+<!-- 시,도 카테고리 생성 핸들 바-->
+<script id="optionSi-template" type="text/x-handlebars-template">
+  <!-- <option id="allList" value="0">전체</option> -->
+  {{#each this}}
+  <option id="selectOp" value="{{nameSi}}">{{nameSi}}</option>
+  {{/each}}
+</script>
+<!--시,도 카테고리 생성 핸들 바 END -->
+
+<!--군,구 카테고리 생성 핸들 바-->
+<script id="optionGu-template" type="text/x-handlebars-template">
+  <option>군구 선택</option>
+  {{#each this}}
+  <option id="selectGuOp" value="{{no}}">{{nameGu}}</option>
+  {{/each}}
+</script>
+<!--군, 구 카테고리 생성 핸들 바 END-->
+
+<!--관심 활동 생성 핸들 바 START-->
+<script id="optionPurpose-template" type="text/x-handlebars-template">
+  {{#each this}}
+  <option id="selectPurposeOp" value="{{no}}">{{purposeName}}</option>
+  {{/each}}
+</script>
+<!--관심 활동 생성 핸들 바 END-->
+
+<script src="/hyun/js/pickmeview.js"> </script>
+</body>
+</html>

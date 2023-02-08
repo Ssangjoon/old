@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.PickmeDao">
+  
+  <resultMap type="Pickme" id="PickmeMap">
+    <id column="pm_b_no" property="no"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="reg_dt" property="date"/>
+    <result column="view_cnt" property="viewCnt"/>
+    <association property="member" javaType="Member">
+      <id column = "mno" property="no"/>
+      <result column="mname" property="memberName"/>
+    </association>
+    <association property="activeLocal" javaType="ActiveLocal">
+      <id column = "ano" property="no"/>
+      <result column="asi" property="nameSi"/>
+      <result column="agu" property="nameGu"/>
+    </association>
+    <association property="purpose" javaType="Purpose">
+      <id column = "pno" property="no"/>
+      <result column="pname" property="purposeName"/>
+    </association>
+  </resultMap>
+  
+  
+  <select id="findAll" resultMap="PickmeMap"> 
+     select
+      pm.pm_b_no,
+      pm.title,
+      pm.content,
+      pm.reg_dt,
+      pm.view_cnt,
+      m.memb_no mno,
+      m.membername mname,
+      p.pups_no pno,
+      p.name pname,
+      a.act_local_no ano,
+      a.name_si asi,
+      a.name_gu agu
+    from gms_pickme pm
+      inner join gms_memb m on pm.memb_no=m.memb_no
+      inner join gms_activelocal a on pm.act_local_no=a.act_local_no
+      inner join gms_purpose p on p.pups_no=pm.pups_no
+      <choose>
+        <when test="nameSi == null and nameGu == null and keyword != null">
+          where 
+            pm.content like CONCAT('%',#{keyword},'%') 
+            or pm.title like CONCAT('%',#{keyword},'%')
+            or m.membername like CONCAT('%',#{keyword},'%')
+          order by
+             pm.pm_b_no desc
+             limit #{offset}, #{rowCount}
+        </when>
+        <when test="nameSi != null and nameGu == null and keyword != null">
+          where 
+            a.name_si like #{nameSi}
+            and
+            (pm.content like CONCAT('%',#{keyword},'%') 
+            or pm.title like CONCAT('%',#{keyword},'%')
+            or m.membername like CONCAT('%',#{keyword},'%'))
+          order by
+             pm.pm_b_no desc
+             limit #{offset}, #{rowCount}
+        </when>
+        <when test="nameSi == null and nameGu != null and keyword != null">
+          where 
+            a.act_local_no = #{nameGu}
+            and
+            (pm.content like CONCAT('%',#{keyword},'%') 
+            or pm.title like CONCAT('%',#{keyword},'%')
+            or m.membername like CONCAT('%',#{keyword},'%'))
+          order by
+             pm.pm_b_no desc
+             limit #{offset}, #{rowCount}
+        </when>
+        <when test="nameSi == null and nameGu == null and keyword == null">
+          order by
+          pm.pm_b_no desc
+          limit #{offset}, #{rowCount}
+        </when>
+        <when test="nameSi != null and nameGu == null">
+            where
+            a.name_si like #{nameSi}
+            order by
+              pm.pm_b_no desc
+              limit #{offset}, #{rowCount}
+        </when>
+        <when test="nameSi != null and nameGu != null">
+            where
+            a.act_local_no = #{nameGu}
+            order by
+              pm.pm_b_no desc
+              limit #{offset}, #{rowCount}
+        </when>
+      </choose>
+  </select>
+  
+    <select id="findListBymembNo" resultMap="PickmeMap"> 
+     select
+      pm.pm_b_no,
+      pm.title,
+      pm.content,
+      pm.reg_dt,
+      pm.view_cnt,
+      m.memb_no mno,
+      m.membername mname,
+      p.pups_no pno,
+      p.name pname,
+      a.act_local_no ano,
+      a.name_si asi,
+      a.name_gu agu
+    from gms_pickme pm
+      inner join gms_memb m on pm.memb_no=m.memb_no
+      inner join gms_activelocal a on pm.act_local_no=a.act_local_no
+      inner join gms_purpose p on p.pups_no=pm.pups_no
+    where
+      m.memb_no = #{memberNo}
+    order by
+      pm.pm_b_no desc
+      limit #{offset}, #{rowCount}
+  </select>
+  
+  
+  <select id ="countMebAll" resultType="int">
+    select count(*) 
+    from gms_pickme pm
+      inner join gms_memb m on pm.memb_no=m.memb_no
+      inner join gms_activelocal a on pm.act_local_no=a.act_local_no
+      inner join gms_purpose p on p.pups_no=pm.pups_no
+    where
+      pm.memb_no = #{memberNo}
+  </select>
+  
+  <select id ="countAll" resultType="int">
+    select count(*) 
+    from gms_pickme pm
+      inner join gms_memb m on pm.memb_no=m.memb_no
+      inner join gms_activelocal a on pm.act_local_no=a.act_local_no
+      inner join gms_purpose p on p.pups_no=pm.pups_no
+    <choose>
+      <when test="nameSi == null and nameGu == null and keyword != null">
+          where 
+            pm.content like CONCAT('%',#{keyword},'%') 
+            or pm.title like CONCAT('%',#{keyword},'%')
+            or m.membername like CONCAT('%',#{keyword},'%')
+      </when>
+      <when test="nameSi != null and nameGu == null and keyword != null">
+         where
+         a.name_si like #{nameSi} 
+         and
+         (pm.content like CONCAT('%',#{keyword},'%') 
+         or pm.title like CONCAT('%',#{keyword},'%')
+         or m.membername like CONCAT('%',#{keyword},'%'))
+      </when>
+      <when test="nameSi == null and nameGu != null and keyword != null">
+         where
+         a.act_local_no = #{nameGu}
+         and
+         (pm.content like CONCAT('%',#{keyword},'%') 
+         or pm.title like CONCAT('%',#{keyword},'%')
+         or m.membername like CONCAT('%',#{keyword},'%'))
+      </when>
+      <when test="nameSi != null and nameGu == null and keyword == null">
+          where
+            a.name_si like #{nameSi}
+      </when>
+      <when test="nameSi != null and nameGu != null and keyword == null">
+          where
+            a.act_local_no = #{nameGu}
+      </when>
+    </choose>
+  </select>
+
+  <select id="findByNo" resultMap="PickmeMap" parameterType="int"> <!--게시글 번호로 조회-->
+     select
+      pm.pm_b_no,
+      pm.title,
+      pm.content,
+      pm.reg_dt,
+      pm.view_cnt,
+      m.memb_no mno,
+      m.membername mname,
+      p.pups_no pno,
+      p.name pname,
+      a.act_local_no ano,
+      a.name_si asi,
+      a.name_gu agu
+    from gms_pickme pm
+      inner join gms_memb m on pm.memb_no=m.memb_no
+      inner join gms_activelocal a on pm.act_local_no=a.act_local_no
+      inner join gms_purpose p on p.pups_no=pm.pups_no
+    where 
+      pm.pm_b_no=#{no}
+  </select>
+  
+  <select id="findByName" resultMap="PickmeMap" parameterType="int">
+    select
+      pm.pm_b_no,
+      pm.title,
+      pm.content,
+      pm.reg_dt,
+      pm.view_cnt,
+      pm.act_local_no,
+      pm.pups_no,
+      m.memb_no,
+      m.membername
+    from
+      gms_pickme pm
+      left outer join gms_memb m on r.memb_no = pm.memb_no
+    where 
+      m.membername=#{name}
+  </select>
+
+  <insert id="insert" parameterType="Pickme">
+    insert into gms_pickme(title, content, act_local_no, pups_no, memb_no)
+    values(#{title}, #{content}, #{activeLocal.no}, #{purpose.no}, #{member.no})
+  </insert>
+  
+  <update id ="update" parameterType="Pickme">
+    update gms_pickme set 
+      title = #{title},
+      content = #{content},
+      act_local_no = #{activeLocal.no},
+      pups_no = #{purpose.no},
+      memb_no = #{member.no}
+    where 
+      pm_b_no = #{no} and memb_no = #{member.no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_pickme
+    where 
+      pm_b_no = #{no} and memb_no = #{member.no}
+  </delete>
+  
+  <update id="increaseViewCount" parameterType="int">
+    update gms_pickme set
+      view_cnt = view_cnt + 1
+    where
+      pm_b_no = #{no}
+  </update>
+</mapper>

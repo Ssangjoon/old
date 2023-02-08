@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.FinalSnsDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="FinalSns" id="finalsnsMap">
+    <id column="membno" property="no"/>
+    <result column="SNSno" property="snsno"/>
+    <result column="SNSemail" property="snsemail"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="finalsnsMap"> 
+    select
+      membno,
+      SNSno,
+      SNSemail
+    from
+      gms_final_sns
+    order by
+      membno asc
+  </select>
+  
+  <select id="findByNo" resultMap="finalsnsMap" parameterType="int">
+    select 
+      membno,
+      SNSno,
+      SNSemail
+    from 
+      gms_final_sns
+    where 
+      membno=#{no}
+  </select>
+
+  <insert id="insert" parameterType="FinalSns">
+    insert into gms_final_sns(membno, SNSno, SNSemail) 
+    values(#{no}, #{snsno}, #{snsemail})
+  </insert>
+  
+  <update id ="update" parameterType="FinalSns">
+    update gms_final_sns set
+      SNSemail = #{snsemail}
+    where 
+      membno = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_final_sns
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_final_sns
+    where 
+      membno = #{no}
+  </delete>
+</mapper>

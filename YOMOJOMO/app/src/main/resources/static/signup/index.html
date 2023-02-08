@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+</head>
+<body>
+  <h1>회원가입</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>아이디(이메일)</th>
+        <th>이름</th>
+        <th>비밀번호</th>
+        <th>우편번호</th>
+        <th>기본주소</th>
+        <th>상세주소</th>
+      </tr>
+    </thead>
+    <tbody class="tbodyEl">
+
+    </tbody>
+  </table>
+  <button type="button"><a href="form.html">등록하기</a></button>
+  
+
+  <script>
+    var eMail = document.querySelector('.email')
+    var pwd =document.querySelector('.pwd')
+    var xname =document.querySelector('.name')
+    var tel =document.querySelector('.tel')
+    var postNo =document.querySelector('.postno')
+    var baseAddr =document.querySelector('.baseaddr')
+    var addr =document.querySelector('.addr')
+    var tbody = document.querySelector('.tbodyEl');
+
+    fetch("/member/list")
+      .then(function(response) {
+        return response.json()
+      })
+        .then(function(members) {
+          for(var i=0; i <members.length; i++) {
+            console.log(member.no)
+            console.log(member.email)
+            console.log(member.name)
+            console.log(member.pwd)
+            console.log(member.postno)
+            console.log(member.baseaddr)
+            console.log(member.addr)
+
+            var tr = document.createElement('tr')
+            tr.innerHTML = `<td>${member.no}</td>
+            <td><a href="view.html?no=${member.no}">${member.email}</a></td>
+            <td>${member.name}</td>
+            <td>${member.pwd}</td>
+            <td>${member.postno}</td>
+            <td>${member.baseaddr}</td>
+            <td>${member.addr}</td>`
+            tbody.appendChild(tr)
+          }
+        }) 
+
+        
+
+  </script>
+</body>
+</html>

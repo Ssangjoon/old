@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+img {
+	display: inline-block;
+}
+
+.lis {
+	background: url(/jaewon/logo-icon.png) left center no-repeat
+}
+
+.logo {
+	width: 30px;
+	height: 30px;
+	display: block;
+	margin: 0px auto
+}
+
+.main {
+	display: block;
+	text-align: center;
+	padding-top: 10vh;
+	width: 1500px;
+}
+
+.blank {
+	float: left;
+	width: 100px;
+}
+
+.sidebar {
+	float: left;
+	display: inline-block;
+	display: sticky;
+	top: 0; width : 300px;
+	margin: 0 auto;
+	height: 1100px;
+	width: 300px;
+}
+
+.content {
+	display: relative;
+	display: inline-block;
+	width: 1100px;
+}

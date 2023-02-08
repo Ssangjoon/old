@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.FileDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="File" id="FileMap">
+    <id column="file_no" property="no"/>
+    <result column="b_no" property="bno"/>
+    <result column="name" property="name"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="FileMap"> 
+    select
+      file_no,
+      b_no,
+      name
+    from
+      gms_file
+    order by
+      file_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="FileMap" parameterType="int">
+    select 
+      file_no,
+      b_no,
+      name
+    from 
+      gms_file
+    where 
+      file_no=#{no}
+  </select>
+
+  <insert id="insert" parameterType="File">
+    insert into gms_file(b_no, name) 
+    values(#{bno}, #{name})
+  </insert>
+  
+  <update id ="update" parameterType="File">
+    update gms_file set 
+      b_no = #{bno},
+      name = #{name}
+    where 
+      file_no = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_file
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_file
+    where 
+      file_no = #{no}
+  </delete>
+</mapper>

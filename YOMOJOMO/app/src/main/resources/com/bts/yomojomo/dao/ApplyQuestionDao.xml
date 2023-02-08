@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.ApplyQuestionDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="ApplyQuestion" id="ApplyQuestionMap">
+    <id column="appl_question_no" property="no"/>
+    <result column="g_no" property="groupNo"/>
+    <result column="question_name" property="questionName"/>
+  </resultMap>
+
+  <insert id="insert">
+    insert into gms_applyform_question(g_no, question_name) 
+    values
+    <foreach collection="questionList" item="questions" separator=",">
+    (#{questions.groupNo}, #{questions.questionName})
+    </foreach>
+  </insert>
+  
+  <select id="findByNo" resultMap="ApplyQuestionMap" parameterType="int">
+    select 
+      appl_no,
+      g_no,
+      memb_no,
+      content,
+      appl_dt
+    from 
+      gms_applyform_question
+    where 
+      g_no=#{no}
+  </select>
+
+  
+  <update id ="update" parameterType="ApplyQuestion">
+    <foreach collection="questionList" item="questions">
+    update gms_applyform_question
+     set question_name = #{questions.questionName}
+     where appl_question_no = #{questions.no};
+  </foreach>
+  </update>
+  
+  <select id="findAll" resultMap="ApplyQuestionMap"> 
+    select
+      appl_question_no,
+      g_no,
+      question_name
+    from
+      gms_applyform_question
+    order by
+      g_no asc
+  </select>
+  
+  <select id="count" resultType="int">
+    select 
+     count(*) 
+    from 
+     gms_applyform_question 
+    where 
+     g_no=#{no}
+  </select>
+  
+  <select id="findQuestion" resultMap="ApplyQuestionMap" parameterType="int"> 
+     select
+      * 
+     from 
+      gms_applyform_question 
+     where 
+      g_no=#{no};
+  </select>
+  
+  
+  <delete id="delete">
+    delete from gms_applyform_question
+  </delete>
+  
+  
+</mapper>

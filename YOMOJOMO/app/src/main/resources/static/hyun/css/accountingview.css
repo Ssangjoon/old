@@ -1,0 +1,76 @@
+#view-content{ 
+  padding-top: 5vh;
+  padding-bottom: 10vh;
+  position: relative;
+}
+  body{
+  margin-top: 100px;
+} 
+#x-delete-btn, #x-update-btn, #x-cancle-btn {
+  float: right;
+  margin: 5px;
+}
+table > tbody > tr > td:nth-child(odd) {
+  text-align: center;
+}
+#x-deleteMemb-btn { /*멤버 삭제버튼*/
+  margin: 10px auto;
+}
+.List-Container{
+  margin:auto; /*가운데 정렬*/
+  text-align:center;
+  padding: 50px;
+}
+#x-membList-container{
+  border: 1px solid rgb(17, 147, 218);
+  padding: 5px;
+  /* margin: 20px; */
+}
+.x-membList {
+  /* border: solid 1px red; */
+  /* margin: 60px;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: inline; */
+  padding: 10px, 0px;
+  display: inline;
+}
+.x-membList > .material-icons{
+  font-size: 60px;
+  color: rgb(17, 147, 218);
+  vertical-align: middle;
+}
+.x-membList > #listmembName, #paydt {
+  padding : 0px, 50px, 0px, 0px;
+  text-align: center;
+}
+.modal-content >.modal-header > .modal-title{
+  font-size: 25px;
+}
+.form-check {
+  vertical-align: middle;
+  font-size: 20px;
+}
+.form-check > .form-check-label > .material-icons {
+  font-size: 60px;
+  color: rgb(17, 147, 218);
+  vertical-align: middle;
+}
+.new-x-membList {
+  /* border: solid 1px red; */
+  margin: 60px;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: inline;
+}
+.new-x-membList > .material-icons{
+  font-size: 60px;
+  color: rgb(17, 147, 218);
+  vertical-align: middle;
+}
+.new-x-membList > #listmembName, #paydt {
+  padding : 0px, 50px, 0px, 0px;
+  text-align: center;
+}

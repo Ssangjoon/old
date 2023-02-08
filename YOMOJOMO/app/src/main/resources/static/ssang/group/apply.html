@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모임리스트</title>
+  <!-- 제이쿼리 -->
+  <script src="/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- 아이콘 연결 코드 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Handlebars -->
+  <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!--공용css-->
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/ssang/group/css/apply.css">
+  <!--인클루드-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#headers').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footers').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+</head>
+<body>  
+<div id="headers"></div>
+<div id="container">
+  <div id="width-fix-container">
+    <div class="form-container">
+      <div id="group-title"></div>
+      <div class="logo-div">
+        <img class="main-logo"></img>
+      </div>
+      <div class="group-info-div">
+        <div class="group-intro"></div>
+        <div class="group-memb-cnt"></div>
+      </div>
+      <!--======================= 가입신청서 ====================-->
+      <div class="report-form-div" >
+        <div class="report-form">
+         <form name="applyForm">
+            <table>
+              <tbody id="handlebars-container"></tbody>
+            </table>
+            <textarea name="answer" id="" cols="40" rows="6" class="report-comment" placeholder="하고싶은 말" ></textarea>
+         </form>
+        </div><!--report-form-->
+        <div class="apply-btn-div"><button id="apply" value="">가입하기</button></div>
+      </div><!--report-form-div-->
+    </div><!--form-container-->
+  </div><!-- width-fix-container -->
+</div><!--container-->
+<div id="footers"></div>
+
+
+<!-- =====================질문내용 ============================-->
+<script id="applyList-template" type="text/x-handlebars-template">
+  {{#each this}}
+    <tr>
+      <td><span class="report-item">{{questionName}}</span></td>
+      <td><input class="x-answer" type="text" name="answer" data-qno="{{no}}"></td>
+    </tr>
+    {{/each}}
+</script>
+<script type="module" src="/ssang/group/js/apply.js"></script>
+</body>
+</html>

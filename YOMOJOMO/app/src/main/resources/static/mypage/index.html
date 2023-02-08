@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyPage</title>
+  <!-- 제이쿼리 -->
+  <script src="/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!--공용css-->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/sweetalert2/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/mypage/css/main.css">
+  <link rel="stylesheet" href="/mypage/css/index.css">
+  <!--인클루드-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+      $('#footers').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+  <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+</head>
+<body>
+  <div id="header"></div>
+  <div class="main">
+    <div class="inner">
+      <div class="list-group sidebar">
+        <a href="edit.html" class="list-group-item list-group-item-action">개인 정보 수정</a>
+        <a href="mypost.html" class="list-group-item list-group-item-action">내가 쓴 글</a>
+        <a href="favor.html" class="list-group-item list-group-item-action">즐겨찾기한 글</a>
+        <a href="group.html" class="list-group-item list-group-item-action">가입 승인/대기</a>
+        <a href="pickme.html" class="list-group-item list-group-item-action">픽미 요청/게시글</a>
+        <a href="inquiry.html" class="list-group-item list-group-item-action">문의 내역</a>
+      </div>
+      <div class="base">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">마이페이지</li>
+          </ol>
+        </nav>
+        <div class="content d-flex flex-column">
+          <h3>마이페이지</h3>
+          <br>
+          <div class="info-table">
+            <div class="info-tag1">
+              <img id="info-img">
+
+            </div>
+            <div class="info-tag2">
+              <div class="info"><p class="fw-bold">주소</p></div>
+              <div class="local"><p class="fw-bold">지역</p></div>
+              <br>
+              <div class="purpose"><p class="fw-bold">관심목록</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+  <div id="footers"></div>
+  <script>
+    fetch("/member/getLoginUser")
+    .then(function(response){
+      return response.json()
+    })
+    .then(function(result){
+      if (result.status == "fail") {
+        location.href = "/junho/index.html"
+      }
+      fetch(`/mypage/get?no=${result.data.no}`)
+      .then(function(response){
+        return response.json()
+      })
+      .then(function(memberInfo){
+        console.log(memberInfo)
+        if (memberInfo.photo === null || memberInfo.defaultImg === true) {
+          memberInfo.photo = "default.jpg"
+        } 
+        $("#info-img").attr('src', `photo?filename=150x200_${memberInfo.photo}`)
+        $(`<p id="info-name">${memberInfo.name}</p>
+            <p>이메일 주소 : ${memberInfo.email}</p>
+            <p>핸드폰 번호 : ${memberInfo.tel}</p>`)
+          .appendTo(".info-tag1")
+        $(` <p>도로명 주소 : ${memberInfo.roadNameAddr}</p>
+            <p>지번 주소 : ${memberInfo.baseAddr}</p>
+            <p>상세 주소 : ${memberInfo.addr}</p>`)
+            .appendTo(".info")
+        for (let local of memberInfo.activeLocal) {
+          $(`<span class="badge rounded-pill bg-primary category">${local.nameGu}</span>`)
+          .appendTo(".local")
+        }
+        for (let pupr of memberInfo.purpose) {
+          $(`<span class="badge rounded-pill bg-primary category">${pupr.purposeName}</span>`)
+          .appendTo(".purpose")
+        }
+      })
+    })
+  // $(".card").children("img").click(function(e){
+  //   location.href = "/ssang/groupBoard/index.html"
+  // })
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.MemberMidpointSelectDao">
+  
+  <resultMap type="MemberMidpointSelect" id="MemberMidpointSelectMap">
+    <id column="memb_pt_no" property="no"/>
+    <result column="lat" property="lat"/>
+    <result column="lng" property="lng"/>
+    <result column="addr" property="addr"/>
+    
+
+    <association property="group" javaType="Group">
+      <id column="gno" property="no"/>
+      <result column="gname" property="GroupName"/>
+    </association>
+    
+    <association property="member" javaType="Member">
+       <id column = "mno" property="no"/>
+       <result column="mname" property="memberName"/>
+       <result column="maddr" property="roadNameAddress"/>
+    </association>
+    
+    <association property="calendar" javaType="Calendar">
+       <id column = "calno" property="no"/>
+       <result column="calname" property="name"/>
+       <result column="calcontent" property="content"/>
+    </association>
+  </resultMap>
+
+  
+  <select id="findAll" resultMap="MemberMidpointSelectMap">
+   select 
+	   jm.g_no gno, 
+	   jm.memb_no mno,
+	   m.membername mname,
+	   jm.g_memb_grd_no mgno,
+	   m.tel mtel,
+	   c.cal_no,
+	   c.name,
+	   sm.memb_pt_no,
+	   sm.lat,
+	   sm.lng,
+	   sm.addr
+   from 
+	   gms_join_memb jm
+	   inner join gms_memb m on jm.memb_no = m.memb_no
+	   inner join gms_calendar c on jm.g_no = c.g_no
+	   left outer join gms_select_midpoint sm on jm.memb_no = sm.memb_no and jm.g_no = sm.g_no
+
+   where
+     jm.g_no = #{group.no}
+     and c.cal_no = #{calendar.no}
+  </select>
+  
+  <insert id="insert" parameterType="MemberMidpointSelect">
+    insert into gms_select_midpoint(lat, lng, memb_no, g_no, addr, cal_no)
+    values(#{lat}, #{lng}, #{member.no}, #{group.no}, #{addr}, #{calendar.no})
+  </insert>
+  
+  <delete id="delete" parameterType="MemberMidpointSelect">
+    delete
+     from gms_select_midpoint
+    where
+      g_no = #{group.no} and cal_no = #{calendar.no}
+  </delete>
+  
+  
+  
+
+</mapper>

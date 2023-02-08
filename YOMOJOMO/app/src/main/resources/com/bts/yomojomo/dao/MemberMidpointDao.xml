@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.MemberMidpointDao">
+  
+  <resultMap type="MemberMidpoint" id="MemberMidpointMap">
+    <id column="memb_pt_no" property="no"/>
+    <result column="lat" property="lat"/>
+    <result column="lng" property="lng"/>
+    <association property="member" javaType="Member">  <!--카테고리-->
+      <id column="mno" property="no"/>
+      <result column="mname" property="memberName"/>
+    </association>
+    <association property="group" javaType="Group">
+      <id column="g_no" property="no"/>
+      <result column="gname" property="GroupName"/>
+    </association>
+</resultMap>
+
+  <select id="findListByGroup" resultMap="MemberMidpointMap"> 
+		select
+		  sm.memb_pt_no,
+		  m.memb_no mno,
+		  m.name mname,
+		  sm.lat,
+		  sm.lng,
+		  g.g_no gno,
+		  g.name gname
+		from 
+		  gms_select_midpoint sm
+		  inner join gms_memb m on (sm.memb_no = m.memb_no)
+		  left outer join gms_group g on (g.g_no = sm.g_no)
+		where 
+		  g.g_no = #{group.no}
+		order by 
+		  sm.memb_pt_no desc
+  </select>
+  
+  
+  <select id="findByNo" resultMap="MmeberMidpointMap" parameterType="int">
+    select
+      sm.memb_pt_no,
+      m.memb_no mno,
+      m.name mname,
+      sm.lat,
+      sm.lng,
+      g.g_no gno,
+      g.name gname
+    from 
+      gms_select_midpoint sm
+      inner join gms_memb m on (sm.memb_no = m.memb_no)
+      left outer join gms_group g on (g.g_no = sm.g_no)
+    where 
+      sm.memb_pt_no = #{no}
+  </select>
+  
+  <insert id="insert" parameterType="MemberMidpoint">
+    insert into gms_select_midpoint(lat, lng, memb_no, g_no) 
+    values(#{lat},#{lng},#{member.no},#{group.no})
+  </insert>
+  
+  <update id ="update" parameterType="MemberMidpoint">
+    update gms_select_midpoint set 
+      lat = #{lat},
+      lng = #{lng},
+    where 
+      memb_pt_no=#{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_select_midpoint
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_select_midpoint
+    where 
+      sm.memb_pt_no = #{no}
+  </delete>
+  
+
+</mapper>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- JQUERY -->
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- 아이콘 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+  <div id="header"></div>
+    <div class="container">
+      <div class = "all-notice-explanation">
+        <div class ="notice-explanation">
+         <img class = "exclamation-mark"src="../image/inquiry.png" >
+          <h1 class ="notice-head" style="margin-left: 60px">문의하기</h1>
+            <p class ="notice-explanation-text">
+              저희 요모조모를 이용하면서 불편했던<br> 
+                              부분과<br>
+                    궁금해 하시는 부분을 빠르고 친절하게<br>
+                        안내해 드리겠습니다.<br>
+            </p> 
+            
+        </div><!--notice-explanation끝 -->
+      </div><!-- all-notice-explanation끝 -->
+        <img class ="service_center" src="../image/service_center.png" >
+        <div class="inquiry_title">
+          <span class="my_inquiry" style="margin-left: 70px;">내 문의내역 ></span>
+         </div>
+         <div class="inquery_body" style="border: 1px solid gray;background-color: gainsboro;">
+          <div class="inquiry_body_title" style="margin-left: 200px;">
+            <!-- <div>
+              <span>메인카테번호</span>
+              <input class ="mainCateNo"type="text" >
+            </div>
+            
+            -->  
+            <!-- <div>
+              <span>작성자</span>
+              <input class="member" type="text" >
+            </div> -->
+           <div style="margin-bottom: 20px;">
+            <span>문의 유형</span>
+            <select name = "mainCateNo" id="mainCateNo" class="form-select" aria-label="Default select example" style="display: inline-block; width: auto; margin-left: 10px; height: 35px; margin-top: 25px;">
+              <option>------</option>
+              <option>로그인</option>
+              <option>비밀번호</option>
+              <option>회원가입</option>
+            </select>
+          </div>
+            <span class="title_text">제목</span>
+            <input class ="xtitle"type="text" style="width: 50%;"> 
+          </div><!-- inquery_body_title끝 -->
+          <div class="inquiry_body_content">
+            <span class="content_text" style="margin-left: 200px;">내용* 
+            </span>
+            <textarea class="xcontent" cols="70" rows="15" ></textarea>
+          </div> <!-- inquiry_body_content끝 -->
+          <div class="inquiry_body_upload" >
+            <div class="upload_all">
+              <span class="upload_text" style="margin-left: 200px;">파일첨부</span>
+              <button type="button" id= "btn_upload"class="btn btn-primary">파일선택</button>
+              <span><input type="text" class="upload_input"></span><br>
+              <span class="information_upload">*파일 용량은 최대 2MB, 5개까지 등록이 가능합니다.</span>
+            </div>
+          </div><!-- inquiry_body_upload끝 -->
+          <div class="inquiry_body_agree">
+            <div class="text_all" style="margin-left: 200px;">
+              <span class="agree_text">개인정보<span><br>
+              <span>수집 및</span><br>
+              <span>이용 동의*</span>
+            </div>
+          </div>
+          <div class="checkbox_all">
+            <input class="agree_checkbox" type="checkbox"><span class="checkbox_input">작성해주신 이메일, 전화번호는 문의내용 확인 및 답변처리 용도로 쓰이며 3년간 보관 후 파기됩니다.</span>
+          </div>
+          <div style="margin-top:100px; margin-left: 520px;">
+            <button type="button" id= "xbtn_cancle" class="btn btn-primary">등록</button>
+            <button type="button" id= "xbtn_regi" class="btn btn-primary">취소</button>
+          </div>
+      </div> <!-- inquery_body끝 -->
+      
+      
+    </div><!-- container끝 -->
+    
+  <div id="footer"></div>
+</body>
+</html>
+<script>
+  var xTitle = document.querySelector('.title_text')
+  var xContent = document.querySelector('.content_text')
+  var xMember = document.querySelector('.member')
+  var xCate = document.querySelector('#mainCateNo')
+  var xQno = document.querySelector('#mainCateNo')
+  var xName = null
+  
+  // var categoryNo = xCate.value
+  
+    
+  document.querySelector('#xbtn_regi').addEventListener("click", function() {
+      xTitle.value = title
+      xContent.value = content
+      xQno.value = qc.query_no
+      
+      // xCate.value = sortCategoryByNo(noticeQuestion2.queryNo)
+      // categoryNo = sortCategoryByNo(noticeQuestion2.queryNo)
+
+      // add?&queryNo=2&member.no=1&title=99999&content=999999&answer=999999
+    fetch(`/noticeQuestion2/add?queryNo=${xQno.value}&title=${xTitle.value}&content=${xContent.value}`)
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      console.log(text)
+     location.href = "inquiry.html"
+    });
+  })
+  document.querySelector('#xbtn_cancle').addEventListener('click', function() {
+    window.location.href = "inquiry.html"
+  })
+    
+// function sortCategoryByStr(category) {
+// var a = "로그인"
+// var b = "회원가입"
+// var c = "비밀번호"
+
+
+// if (category === a) {
+//   return 1
+// } else if (category === b) {
+//   return 2
+// } else if (category === c) {
+//   return 3
+// }
+// }
+
+// function sortCategoryByNo(category) {
+// var a = 1
+// var b = 2
+// var c = 3
+
+// if (category === a) {
+//   return "로그인"
+// } else if (category === b) {
+//   return "회원가입"
+// } else if (category === c) {
+//   return "비밀번호"
+// }
+// }
+</script>

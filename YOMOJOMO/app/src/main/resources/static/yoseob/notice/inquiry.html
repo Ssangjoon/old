@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문의사항</title>
+  <!-- JQUERY -->
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- 아이콘 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+</head>
+<body onload="allList()">
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+  <div id="header"></div>
+  <div class="container">
+    <div class = "all-notice-explanation">
+      <div class ="notice-explanation">
+       <img class = "exclamation-mark"src="../image/inquiry.png" >
+        <span class ="notice-head">문의사항</span>
+          <p class ="notice-explanation-text">
+            저희 요모조모를 이용하면서 불편했던 점이나<br>
+                  궁금한 점을 빠르고 친절하게<br>
+                      안내해 드리겠습니다.<br>
+                아래 카테고리를 선택해 주세요.</p>   
+        </div>
+        </div>
+      <div class ="image">
+        <img class ="service_center" src="../image/service_center.png" >
+      </div>
+      <div class ="notice-category">
+        <span class="material-icons">question_mark</span>
+        <span id ="faq-btn" class ="faq"><a>자주하는 질문</a></span>
+        <span class="material-icons">volume_up</span>
+        <span id ="announcement-btn"class ="announcement"><a>공지사항</a></span>
+        <span class="material-icons">search</span>
+        <span id ="information-btn" class ="announcement"><a>서비스 안내</a></span>
+        <span class="material-icons">call</span>
+        <span id="inquiry-btn" class ="announcement"><a>문의사항</a></span>
+      </div>
+      <div>
+      <button type="button" class="btn btn-primary" id="add-btn" style="margin-left:1000px;">문의하기</button><br>
+    </div>
+      <div class="inquiry_table" >
+        <table id ="inquiry_table"style="margin:auto">
+          <thead>
+            <!-- <th>메인카테고리번호</th> -->
+            <th>제목</th>
+            <th>문의 내용</th>
+            <th>문의 날짜</th>
+          <tbody class="accordion_tr">
+          </tbody>
+          </thead>
+        </table>
+      </div>
+     
+      
+  </div><!--container끝-->
+  <div id="footer"></div>
+</body>
+</html>
+<script>
+  var boardCardDiv = document.querySelector(".accordion_tr")
+  function allList() {
+  fetch("/noticeQuestion2/list")
+    .then(function(response) {
+      return response.json()
+    })
+    .then(function(boards) {
+      for (var i = 0; i < boards.length; i++) {
+        var tr = document.createElement("tr")
+        // div.classList.add("card-body")
+        tr.innerHTML = `
+        <td><a href ="inquiry_view.html?no=${boards[i].no}">
+        ${boards[i].title}</td></a>
+        <td>${boards[i].content}</td>
+        <td>${boards[i].queryDate}</td>
+        `
+        boardCardDiv.appendChild(tr)
+      }
+    })
+  }
+  document.querySelector("#add-btn").onclick =
+  function(){
+    location.href="inquiry_form.html";
+  };
+</script>
+<script src="../js/location.js"></script>

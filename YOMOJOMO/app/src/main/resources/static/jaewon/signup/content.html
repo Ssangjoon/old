@@ -1,0 +1,259 @@
+<div class="body-linner">
+	<div class="container fluid">
+		<div class="container-inner">
+			<div class="shadow-sm p-3 mb-5 bg-body rounded box">
+				<div class="frame">
+					<div class="row">
+						<div class="text-center">
+							<img src="../1.png" class="img-fluid logo">
+						</div>
+
+						<div class="btn" id="snsLoginButtons">
+							<button type="button" class="btn btn-outline-secondary button"
+								onclick="snsKakaoLogin()">
+								<img class="snsbtn" src="/jaewon/kakao_small-1.png"
+									style="vertical-align: middle;"> <span> 카카오톡으로 회원가입</span>
+							</button>
+							<button type="button" class="btn btn-outline-secondary button"
+								onclick="snsFacebookLogin()">
+								<img class="snsbtn" src="/jaewon/facebook-small-1.png"
+									style="vertical-align: middle;"><span>페이스북으로 회원가입</span>
+							</button>
+							<button type="button" class="btn btn-outline-secondary button"
+								onclick="snsGoogleLogin()" style="vertical-align: middle;">
+								<img class="snsbtn" src="/jaewon/google-small-1.png"
+									style="vertical-align: middle;"><span>구글로 회원가입</span>
+							</button>
+						</div>
+					</div>
+					<form name="signup" id="sign">
+						<div class="row border-top top top">
+							<div class="input-group mb-5"></div>
+
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">이메일(아이디)</div>
+								<div class="col input-group mb-3 ">
+									<input class="form-control form-control-sm input fs-6"
+										name="email" type="email" placeholder="이메일(아이디) 입력"
+										aria-label=".form-control-sm example">
+
+								</div>
+								<div class="col-3"></div>
+							</div>
+
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">비밀번호</div>
+								<div class="col input-group mb-3 ">
+									<input class="form-control form-control-sm input fs-6"
+										autocomplete="off" name="passWord" type="password"
+										placeholder="비밀번호 입력" aria-label=".form-control-sm example">
+
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">비밀번호 확인</div>
+								<div class="col input-group mb-3 ">
+									<input class="form-control form-control-sm input fs-6"
+										autocomplete="off" name="passWordCheck" type="password"
+										placeholder="비밀번호 확인" aria-label=".form-control-sm example">
+
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">이름</div>
+								<div class="col input-group mb-3 ">
+									<input class="form-control form-control-sm input fs-6"
+										name="memberName" type="text" placeholder="이름 입력"
+										aria-label=".form-control-sm example">
+
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">휴대전화 번호</div>
+								<div class="col input-group mb-3 ">
+									<input class="form-control form-control-sm input fs-6"
+										name="tel" type="text" placeholder="'-' 없이 입력해주세요"
+										aria-label=".form-control-sm example">
+
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">우편 번호</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="postNo" id="sample4_postcode"
+										class="form-control form-control-sm input fs-6"
+										placeholder="우편번호"> <input type="button"
+										class="btn btn-outline-primary" Style="margin-left: 10px;"
+										onclick="searchAddress()" value="우편번호 찾기">
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">도로명 주소</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="roadNameAddress"
+										id="sample4_roadAddress"
+										class="form-control form-control-sm input fs-6"
+										placeholder="도로명주소">
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">지번 주소</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="baseAddress" id="sample4_jibunAddress"
+										class="form-control form-control-sm input fs-6"
+										placeholder="지번주소">
+
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<span id="guide" style="color: #999; display: none"></span>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">상세 주소</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="address" id="sample4_detailAddress"
+										class="form-control form-control-sm input fs-6"
+										placeholder="상세주소">
+
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+							<div class="row">
+								<div class="col-3 p-2 text-center fw-bold">참고 항목</div>
+								<div class="col input-group mb-3 ">
+									<input type="text" name="references" id="sample4_extraAddress"
+										class="form-control form-control-sm input fs-6"
+										placeholder="참고항목">
+
+								</div>
+								<div class="col-3 p-2"></div>
+							</div>
+						</div>
+					</form>
+					<div class="row border-top top local">
+						<div class="row left">
+							<div class="p-2 text-left fw-bold fs-4 mt-3 mb-3">활동 지역</div>
+						</div>
+						<div class="dropdown col-4">
+							<div class="input-group mb-2">
+								<select class="form-select" aria-label="Default select example"
+									id="localboard">
+									<option selected></option>
+								</select>
+							</div>
+						</div>
+						<div class="dropdown col-4">
+							<div class="input-group mb-2">
+								<select class="form-select" aria-label="Default select example"
+									id="locallistgu">
+									<option selected></option>
+								</select>
+							</div>
+						</div>
+						<button class="btn btn-outline-primary btn-sm lo-btn col-2">선택</button>
+					</div>
+					<div class="col left" id="locallist"></div>
+					<div class="row top purpose">
+						<div class="row left">
+							<div class="p-2 text-left fw-bold fs-4 mt-3 mb-3">활동 목적</div>
+						</div>
+						<div class="dropdown col-8">
+							<div class="input-group mb-2">
+								<select class="form-select" aria-label="Default select example"
+									id="purpose">
+									<option selected></option>
+								</select>
+							</div>
+						</div>
+						<button
+							class="btn btn-outline-primary btn-sm pur-btn btn-sm col-2">선택</button>
+					</div>
+					<div class="col left" id="pupslist"></div>
+					<div class="row border-top top">
+						<div class="input-group mb-5"></div>
+
+						<div class="row left">
+							<div class="p-2 text-left fw-bold fs-4 mb-3">이용약관 / 개인정보 수집
+								및 이용 동의</div>
+						</div>
+
+						<div class="card border-light  left" style="margin-bottom: 50px;">
+							<!-- <h5 class="card-header">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value=""
+											id="flexCheckDefault"> <label
+											class="form-check-label" for="flexCheckDefault"> 전체
+											동의 </label>
+									</div>
+								</h5>
+								<div class="card-body">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value=""
+											id="flexCheckDefault"> <label
+											class="form-check-label" for="flexCheckDefault">
+											(필수)만 14세 이상입니다. </label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" value=""
+											id="flexCheckDefault"> <label
+											class="form-check-label" for="flexCheckDefault">
+											(필수)이용약관 동의 </label>
+									</div>
+									<div class="form-check">
+										<input class="col form-check-input" type="checkbox" value=""
+											id="flexCheckDefault"> <label
+											class="form-check-label" for="flexCheckDefault">
+											(필수)개인정보 수집 및 이용 동의 </label>
+									</div>
+									<div class="form-check ">
+										<input class="form-check-input" type="checkbox" value=""
+											id="flexCheckDefault"> <label
+											class="col form-check-label" for="flexCheckDefault">
+											(선택) 이메일 수신 </label>
+									</div>
+								</div>
+
+							</div> -->
+							<div class="btn center">
+								<form name="signup">
+									<button class="btn btn-primary button center">가입 완료</button>
+								</form>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<script id="select-si" type="text/x-hanalerbars-template">
+	{{#each this}}
+		<option value="{{nameSi}}">{{nameSi}}</option>
+	{{/each}}
+</script>
+
+	<script id="select-gu" type="text/x-hanalerbars-template">
+	{{#each this}}
+		<option value="{{no}}">{{nameGu}}</option>
+	{{/each}}
+</script>
+
+	<script id="selectlocal" type="text/x-hanalerbars-template">
+	<button class="btn btn-outline-success" id="locals" value="{{no}}">{{nameSi}}_{{nameGu}}</button>
+</script>
+
+	<script id="select-pups" type="text/x-hanalerbars-template">
+	{{#each this}}
+		<option value="{{no}}">{{purposeName}}</option>
+	{{/each}}
+</script>
+
+	<script id="selectpups" type="text/x-hanalerbars-template">
+	<button class="btn btn-outline-success" id="pups" value="{{no}}">{{purposeName}}</button>
+</script>

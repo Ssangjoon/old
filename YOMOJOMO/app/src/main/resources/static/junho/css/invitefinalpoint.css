@@ -1,0 +1,139 @@
+/* COMMON */
+body {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #333;
+  overflow-y: hidden;
+}
+
+img {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* INVITE */
+.invite {
+  background-color: #f6f5f0;
+  padding-top: 10vh;
+}
+
+.invite>.inner {
+  background-color: #f6f5f0;
+  height: 80vh;
+}
+
+.invite .invite-header {
+  padding-top: 5vh;
+  display: flex;
+}
+
+.invite .invite-header .material-icons {
+  font-size: 50px;
+}
+
+.invite .invite-header h2 {
+  font-size: 35px;
+  font-weight: 700;
+  margin-left: 10px;
+  padding: 5px 0;
+  box-sizing: border-box;
+}
+
+.invite .invite-content {
+  margin-top: 3vh;
+  position: relative;
+}
+
+.invite .invite-content .search {
+  background-color: red;
+  position: relative
+}
+
+
+.invite .invite-content .search input {
+  width: 100%;
+  height: 35px;
+}
+
+.invite .invite-content .search .material-icons {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 35px;
+  height: 35px;
+  margin: auto 0;
+  font-size: 35px;
+  background-color: rgb(17, 147, 218);
+}
+
+
+.invite .invite-content h3 {
+  padding-top: 3vh;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+
+
+.invite .invite-content .list-group {
+  padding-top: 2vh;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.invite .invite-content .list-group .list-group-item {
+  display: flex;
+  font-size: 25px;
+  position: relative;
+  height: 60px;
+}
+
+.invite .invite-content .list-group .list-group-item .form-check-input {
+  box-sizing: border-box;
+  width: 25px;
+  height: 25px;
+}
+
+.invite .invite-content .list-group .list-group-item .member-logo {
+  width: 50px;
+  height: 50px;
+  font-size: 50px;
+  box-sizing: border-box;
+}
+
+.invite .invite-content .list-group .list-group-item .member-name {
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.invite .invite-content .list-group .list-group-item .member-tel {
+  padding: 5px 0 5px 10px
+}
+
+
+.invite .invite-content .btn-invite {
+  height: 45px;
+  position: absolute;
+  right: 0;
+  bottom: -6vh;
+}
+
+.invite .invite-content .btn-gomidpoint {
+  height: 45px;
+  position: absolute;
+  right: 198px;
+  bottom: -6vh;
+}
+
+.list-search {
+  display: none;
+  background-color: red;
+}
+
+

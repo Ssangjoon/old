@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>그룹태그 검색</h1>
+  <span>그룹 태그 이름</span><br>
+  <input type="text" class ="tagname"><br>
+  <span>그룹 번호</span><br>
+  <input type="text" class ="gno"><br>
+  <button type="button" class ="add-btn">검색하기</button>
+  
+  <script>
+    var tagname = document.querySelector('.tagname')
+    var gno = document.querySelector('.gno')
+
+    document.querySelector('.add-btn').addEventListener("click", function() {
+     
+      fetch(`/grouptag/add?tagname=${tagname.value}&gno=${gno.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text)
+      })
+    });
+  </script>
+</body>
+</html>

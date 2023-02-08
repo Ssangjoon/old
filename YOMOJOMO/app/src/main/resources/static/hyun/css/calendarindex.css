@@ -1,0 +1,30 @@
+#calendar-container{
+  padding-top: 2vh;
+  height: 70vh;
+  position: relative;
+  margin-bottom: 30vh;
+}
+#calendar {
+  max-width: 1100px;
+  margin: 40px auto;
+}
+.fc-header-toolbar > .fc-toolbar-chunk > .fc-addEventButton-button {
+  border: 0px;
+  background-color: rgb(17, 147, 218);
+  margin-right: 13px;      
+}
+.fc-header-toolbar > .fc-toolbar-chunk > .fc-today-button {
+  border: 0px;
+  background-color: red;
+}
+.fc-header-toolbar > .fc-toolbar-chunk > .fc-button-group > .fc-prev-button{
+  border: 0px;
+  background-color: rgb(17, 147, 218);
+}
+.fc-header-toolbar > .fc-toolbar-chunk > .fc-button-group > .fc-next-button{
+  border: 0px;
+  background-color: rgb(17, 147, 218);
+}
+.fc-daygrid-event-harness, .fc-event-title-container {
+  cursor: pointer
+}

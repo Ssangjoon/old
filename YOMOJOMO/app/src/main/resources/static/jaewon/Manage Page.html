@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://localhost:8080/jaewon/admin/memb/view/index.html?no=1 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./Manage Page_files/sweetalert2.min.css">
+<link rel="stylesheet" href="./Manage Page_files/bootstrap.min.css">
+<link rel="stylesheet" href="./Manage Page_files/main.css">
+<link rel="stylesheet" href="./Manage Page_files/admin.css">
+<title>Manage Page</title>
+</head>
+<body>
+	<div class="header"><!-- character set -->
+
+<!-- 파비콘생성 -->
+<link rel="icon" href="./Manage Page_files/logo.png">
+<!-- css 초기화 -->
+<link rel="stylesheet" href="./Manage Page_files/reset.min.css">
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Manage Page_files/css2" rel="stylesheet">
+<!-- 아이콘 연결 코드 -->
+<link href="./Manage Page_files/icon" rel="stylesheet">
+<!-- JQUERY -->
+<script src="./Manage Page_files/jquery.min.js.다운로드"></script>
+<!-- 부트스트랩 CSS-->
+<link rel="stylesheet" href="./Manage Page_files/bootstrap.css">
+<!-- 부트스트랩 JS -->
+<script src="./Manage Page_files/bootstrap.bundle.js.다운로드"></script>
+<!-- 내 css 연결하기 -->
+<link rel="stylesheet" href="./Manage Page_files/mainheader.css">
+
+
+<!-- HEADER -->
+<header>
+	<div class="inner">
+		<a href="http://localhost:8080/junho/index.html" class="logo"> <img src="./Manage Page_files/logo.png" alt="logo">
+		</a>
+		<div class="cate">
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Category</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="http://localhost:8080/jaewon/admin/memb/view/index.html?no=1#">Excercise</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="http://localhost:8080/jaewon/admin/memb/view/index.html?no=1#">Music</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="http://localhost:8080/jaewon/admin/memb/view/index.html?no=1#">Study</a></li>
+				</ul>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Category</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="http://localhost:8080/minkyu/mypage/index.html">Mypage</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="http://localhost:8080/jaewon/admin/memb/view/index.html?no=1#">Music</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="http://localhost:8080/jaewon/admin/memb/view/index.html?no=1#">Study</a></li>
+				</ul>
+			</div>
+			<div class="search">
+				<input type="text"> <span class="material-icons">search</span>
+			</div>
+		</div>
+		<div class="main-menu">
+			<ul class="menu">
+				<li id="login-btn" class="not-login">
+					<a href="http://localhost:8080/jaewon/login/login/index.html">로그인</a>
+				</li>
+				<li id="logout-btn" class="login" style="display: none;"><a>로그아웃</a></li>
+				<li><a href="http://localhost:8080/jaewon/signup/index.html">회원가입</a></li>
+				<li><a href="javascript:void(0)"> <span class="material-icons">account_circle </span></a></li>
+				<li id="alert-msg-li" style="display: none;"> <!--알림-->
+					<div class="btn-group">
+						<button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							<span class="material-icons" id="msgicon">mail_outline </span>
+							<span class="position-absolute translate-middle badge rounded-pill bg-danger" id="totalMsgCnt"></span>
+						</button>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item">받은 메세지 <span id="totalmsgCnt"></span></a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="http://localhost:8080/minkyu/mypage/pickme.html">모임 초대 메세지 
+								<span class="badge bg-danger" id="invitemsgCnt"></span>							
+							</a></li>
+							<li><a class="dropdown-item" href="http://localhost:8080/minkyu/mypage/group.html">모임 가입 신청 메세지
+								<span class="badge bg-danger" id=""></span>	
+							</a></li>
+						</ul>
+					</div>
+				</li><!--알림-->
+				<li id="createGroupli" style="display: none;"><a href="javascript:void(0)">
+						<button type="button" class="btn btn-light btn-group-link">소모임 개설</button>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+
+<script src="./Manage Page_files/mainheader.js.다운로드"></script>
+
+</div>
+	<div class="main">
+		<div class="sidebar">
+	<div class="body-inner">
+		<div class="m-container container-inner">
+			<div class="shadow-sm p-3 mb-5 bg-body rounded box">
+				<ul class="list-group list-group-flush list">
+
+					<li class="list-group-item list-group-item-action lis"><a href="http://localhost:8080/jaewon/admin/index/index.html"> <span>관리자 페이지</span>
+					</a></li>
+
+					<li class="list-group-item list-group-item-action"><a href="http://localhost:8080/jaewon/admin/memb/index.html">회원 관리</a></li>
+					<li class="list-group-item list-group-item-action"><a href="http://localhost:8080/jaewon/admin/group/index.html">모임 관리</a></li>
+					<li class="list-group-item list-group-item-action"><a href="http://localhost:8080/jaewon/admin/report/index.html">신고 내역 관리</a></li>
+					<li class="list-group-item list-group-item-action"><a href="http://localhost:8080/jaewon/admin/qna/index.html">문의 내역 관리</a></li>
+					<li class="list-group-item list-group-item-action"><a href="http://localhost:8080/jaewon/admin/center/index.html">고객센터 관리</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+		<div class="content">
+<div class="m-container inbox">
+		<form name="signup" id="sign">
+			<div class="shadow p-5">
+				<div class="row mb-5">
+					<h1>회원정보 상세</h1>
+				</div>
+				<div class="row mb-2 top">
+
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">이메일(아이디)</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">12123@naver.com</div>
+						</div>
+						<div class="col-3"></div>
+					</div>
+
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">이름</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">김땡땡</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">휴대전화 번호</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">11112222</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">우편 번호</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">1234</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">도로명 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">도로명1길</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">지번 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">봉천동 어딘가</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<span id="guide" style="color: #999; display: none"></span>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">상세 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">1012호</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">회원 레벨</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">1</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">가입일</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">2022-04-15</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">제재 상태</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">없음</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row&gt;
+					&lt;div class=" col"=""></div>
+					<div class="col"></div>
+					<div class="col">
+						<button type="button" class="btn btn-primary update-btn">수정</button>
+						<button type="button" class="btn btn-danger delete-btn">삭제</button>
+						<button type="button" class="btn btn-secondary cancle-btn">취소</button>
+					</div>
+				</div>
+			</div>
+		</form>
+</div>
+
+
+
+<script src="./Manage Page_files/handlebars.js.다운로드"></script>
+<script id="div-get" type="text/x-handlebars-template">
+		<form name="signup" id="sign">
+			<div class="shadow p-5">
+				<div class="row mb-5">
+					<h1>회원정보 상세</h1>
+				</div>
+				<div class="row mb-2 top">
+
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">이메일(아이디)</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{email}}</div>
+						</div>
+						<div class="col-3"></div>
+					</div>
+
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">이름</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{memberName}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">휴대전화 번호</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{tel}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">우편 번호</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{postNo}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">도로명 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{roadNameAddress}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">지번 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{baseAddress}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<span id="guide" style="color: #999; display: none"></span>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">상세 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{address}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">회원 레벨</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{membLevel}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">가입일</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{cdate}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">제재 상태</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{status}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row>
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col">
+						<button type="button" class="btn btn-primary update-btn">수정</button>
+						<button type="button" class="btn btn-danger delete-btn">삭제</button>
+						<button type="button" class="btn btn-secondary cancle-btn">취소</button>
+					</div>
+				</div>
+			</div>
+		</form>
+</script>
+
+</div>
+	</div>
+	<div class="footer"></div>
+	<script src="./Manage Page_files/sweetalert2.min.js.다운로드"></script>
+	<script src="./Manage Page_files/jquery.min.js.다운로드"></script>
+	<script src="./Manage Page_files/bootstrap.bundle.min.js.다운로드"></script>
+	<script src="./Manage Page_files/view.js.다운로드"></script>
+	<script>
+		$(".header").load("/junho/mainheader.html");
+		$(".sidebar").load("/jaewon/admin/index/sidebar.html")
+		$(".content").load("/jaewon/admin/memb/view/data.html", function() {
+			list();
+		});
+		//$(".footer").load("/footer.html");
+	</script>
+
+</body></html>

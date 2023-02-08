@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="icon" href="/junho/img/logo.png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="/hyun/css/accountingindex.css">
+
+<title>회비 및 정산 관리</title>
+</head>
+
+<body class="menu6">  
+<div id="header"></div>
+<div id="top"></div>
+<div id="body-content">
+  <div class="inner">
+    <div id="cateDiv">
+      <select name="selectCate" id="selectCate" class="form-select form-select-sm" aria-label=".form-select-sm example">
+      </select>
+    </div>     
+    <div id="content" class="table-responsive-lg">
+      <table id="x-board-table" class="table table-hover">
+        <thead>
+          <tr>
+            <th width="50px">번호</th>
+            <th width="100px">유형</th>
+            <th width="100px">상태</th>
+            <th width="600px">제목</th>
+            <th width="100px">작성일</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="listnone">
+        <h1>작성된 글이 없습니다.<br></h1>
+      </div>
+      <button id="x-create-btn" type="button" style="float: right" class="btn btn-primary">등록</button>
+    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center" id="pagination-ul">        
+      </ul>
+    </nav>
+  </div>
+</div>
+<div id="footer"></div>
+
+<!--카테고리 생성 핸들 바-->
+<script id="option-template" type="text/x-handlebars-template">
+{{#each this}}
+<option id="selectOp" value="{{no}}">{{cateName}}</option>
+{{/each}}
+</script>
+
+<!--카테고리 불러오기-->
+<script>
+let selectList = document.querySelector("#selectCate");
+var selectOption = document.querySelector("#option-template");
+var opGernerator = Handlebars.compile(selectOption.innerHTML);
+
+$.ajax({
+  url : "/accounting/catelist",
+  type : "POST",
+  async : false,
+  success: function(result) {
+    if (result.status == "fail") {
+      window.alert("서버 요청 오류!");
+      console.log(result);
+      return;
+    } else {
+      // console.log(result.data);
+      selectList.innerHTML = opGernerator(result.data);
+    }
+  }
+});
+</script>
+
+<!--게시글 목록 생성 핸들바-->
+<script id="tr-template" type="text/x-handlebars-template">
+{{#each this}}
+<tr>
+  <td>{{no}}</td>
+  <td>{{actCate}}</td>
+  <td>
+    <select id="selectedStatus" disabled>
+      <option vlaue="{{statusno}}">{{status}}</option>
+    </select> 
+  </td>
+  <td><a href="view.html?gno={{gno}}&no={{no}}">{{title}}</a></td>
+  <td>{{registDate}}</td>
+</tr>
+{{/each}}
+</script>
+
+<!--페이지네이션 생성 핸들 바-->
+<script id="pageli-template" type="text/x-handlebars-template">
+<li class="page-item" value="1">
+  <a class="page-link" href="javascript:void(0)">&laquo;</a>
+</li>
+{{#each this}}
+<li class="page-item" value="{{no}}"><a class="page-link" href="javascript:void(0)">{{totalPageSize}}</a></li>
+{{/each}}
+<li class="page-item" value="">
+  <a class="page-link" href="javascript:void(0)" >&raquo;</a>
+</li>
+</script>
+
+<!--게시글 목록 생성 ajax-->
+<script src="/hyun/js/accountingindex.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="/node_modules/sweetalert2/dist/sweetalert2.min.css">
+<link rel="stylesheet"
+	href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/jaewon/css/main.css">
+<link rel="stylesheet" href="/jaewon/css/admin.css">
+<title>Manage Page</title>
+</head>
+<body>
+	<div class="header"></div>
+	<div class="main">
+		<div class="sidebar"></div>
+		<div class="content"></div>
+	</div>
+	<div class="footer"></div>
+	<script src="/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+	<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/jaewon/admin/faq/create/create.js"></script>
+	<script>
+    $(".header").load("/jaewon/mainheader.html");
+		$(".sidebar").load("/jaewon/admin/index/sidebar.html")
+		$(".content").load("/jaewon/admin/faq/create/data.html", function(){
+			queryCate();
+		})
+		//$(".footer").load("/footer.html");
+	</script>
+
+
+</body>
+</html>

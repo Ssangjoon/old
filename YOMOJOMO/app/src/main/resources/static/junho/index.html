@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yomojomo</title>
+    <!-- 파비콘생성 -->
+    <link rel="icon" href="/junho/img/logo.png">
+    <!-- css 초기화 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 아이콘 연결 코드 -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- 부트스트랩 CSS-->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js" defer></script>
+    <!-- 내 css 연결하기 -->
+    <link rel="stylesheet" href="/junho/css/main.css">
+    <!-- 내 JS 연결하기 -->
+    <script src="/junho/js/main.js" defer></script>
+    <!-- JQUERY -->
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- handlerbars -->
+    <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+  </head>
+<body>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+  <div id="header"></div>
+  <!-- MAIN FUNCTION -->
+  <section class="main-function">
+    <div class="inner">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="/ssang/group/index.html" style="text-decoration: none;">
+              <img src="/junho/img/somoimLog.png" />
+              <div class="category-text">SOMOIM</div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="/junho/midpoint/signincheck.html" style="text-decoration: none;">
+              <img src="/junho/img/centerpointLog.png" />
+              <div class="category-text">MID POINT</div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="/hyun/pickme/index.html" style="text-decoration: none;">
+              <img src="/junho/img/recruitLog.png" />
+              <div class="category-text">PICK ME</div>
+            </a>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-prev">
+          <div class="material-icons">arrow_back</div>
+        </div>
+        <div class="swiper-next">
+          <div class="material-icons">arrow_forward</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- MY GROUP -->
+  <section class="my-group">
+    <div class="inner">
+      <h3>내 모임 목록</h3>
+      <div class="row row-cols-1 row-cols-md-4 g-4 my-group-handlebars">
+        <!-- 내 모임 hadlebars -->
+      </div>
+    </div>
+  </section>
+
+  <!-- MY GROUP HANDLEBARS -->
+  <script id="div-member-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <div class="col">
+      <a href="../ssang/groupBoard/index.html?gno={{no}}" style="text-decoration: none;"> <!--소모임1의 메인으로 TEST-->
+        <div class="card h-100">
+          <img src="/group/photo?filename={{logo}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{groupName}}</h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </script>
+
+
+
+
+  <!-- SUGGESTION GROUP -->
+  <section class="suggestion-group">
+    <div class="inner">
+      <h3>이런 모임은 어떠세요?</h3>
+      <div class="row row-cols-1 row-cols-md-4 g-4 suggestion">
+        <!-- 모임 제안 handle bars -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SUGESTION HANDLEBARS -->
+
+  <script id="div-nonmember-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <div class="col btn-show" name="{{no}}">
+      <a href="javascript:void(0)" style="text-decoration: none;">
+        <div class="card h-100">
+          <img src="/group/photo?filename={{logo}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{groupName}}</h5>
+          </div>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </script>
+
+  <!--========================== 모임정보 ========================-->
+  <div class="background">
+    <div class="window">
+      <div class="popup">
+        <div class="popup-img-div"><img alt="이리오너라" class="main-logo" style="width: 100%;"></div>
+        <button type="button" class="btn-close" data-dialog="background" aria-label="Close"></button>
+        <div class="popup-group-name"></div>
+        <div class="popup-group-content"></div>
+        <div><button id="apply-form-btn" value="">가입하기</button></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- BEST GROUP -->
+  <section class="best-group">
+    <div class="inner">
+        <h3>실시간 베스트 장소</h3>
+        <div class="btn-group best-cate">
+          <button type="button" class="btn btn-primary dropdown-toggle best-point-cate" data-bs-toggle="dropdown" aria-expanded="false">
+            All
+          </button>
+          <ul class="dropdown-menu">
+            <li onclick="bestPointHtml(1)"><a class="dropdown-item dropdown-item1" href="javascript:void(0)">맛집</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li onclick="bestPointHtml(2)"><a class="dropdown-item dropdown-item2" href="javascript:void(0)">카페</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li onclick="bestPointHtml(3)"><a class="dropdown-item dropdown-item3" href="javascript:void(0)">싼주유소</a></li>
+          </ul>
+        </div>
+        <div class="best-point-content">
+          <ul class="best-point-list">
+            <!-- BEST POINT HANDLEBARS -->
+          </ul>
+        </div>
+    </div>
+  </section>
+
+  <!-- BEST POINT LIST HADLEBARS -->
+
+
+  <script id="li-best-point-template" type="text/x-handlebars-template">
+    {{#each this}}
+      <li><span>{{inc @index}}</span><a href="{{placeURL}}" target="_blank"  style="text-decoration: none;">{{storeName}}</a></li>
+    {{/each}}
+  </script>
+
+
+
+
+
+
+
+  <div id="footer"></div>
+
+</body>
+</html>

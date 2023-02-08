@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File index</title>
+</head>
+<body>
+  <h1>파일 목록</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>멤버</th>
+        <th>파일명</th>
+      </tr>
+    </thead>
+    <tbody class="tbodyEl">
+
+    </tbody>
+  </table>
+  <button type="button"><a href="form.html">등록하기</a></button>
+  
+
+  <script>
+    var tbody = document.querySelector('.tbodyEl');
+
+    fetch("/file/list")
+      .then(function(response) {
+        return response.json()
+      })
+        .then(function(fileList) {
+          for(var file of fileList) {
+            var tr = document.createElement('tr')
+            tr.innerHTML = `<td><a href="view.html?no=${file.no}">${file.no}</a></td>
+            <td>${file.bno}</td>
+            <td>${file.name}</td>`
+            tbody.appendChild(tr)
+          }
+        }) 
+
+        
+
+  </script>
+</body>
+</html>

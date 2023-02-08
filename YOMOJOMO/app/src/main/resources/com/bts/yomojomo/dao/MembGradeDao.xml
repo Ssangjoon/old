@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.MembGradeDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="MembGrade" id="membGradeMap">
+  <id column="g_memb_grd_no" property="no"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="membGradeMap"> 
+    select
+      g_memb_grd_no,
+      name
+    from
+      gms_memb_grade
+    order by
+      g_memb_grd_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="membGradeMap" parameterType="int">
+    select 
+      g_memb_grd_no,
+      name
+    from 
+      gms_memb_grade
+    where 
+      g_memb_grd_no=#{no}
+  </select>
+
+  <insert id="insert" parameterType="MembGrade">
+    insert into gms_memb_grade(name) 
+    values(#{name})
+  </insert>
+  
+  <update id ="update" parameterType="MembGrade">
+    update gms_memb_grade set 
+      name = #{name}
+    where 
+      g_memb_grd_no = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_memb_grade
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_memb_grade
+    where 
+      g_memb_grd_no = #{no}
+  </delete>
+</mapper>

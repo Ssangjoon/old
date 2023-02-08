@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>모임개설</title>
+  <!-- 제이쿼리 -->
+  <script src="../../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!--공용css-->
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/ssang/groupBoard/css/view-board-edit.css">
+  <script src="//code.jquery.com/jquery-1.11.0.min.js">
+  </script>
+  <!-- 인클루드 -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#headers').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#top').load('/ssang/groupBoard/none-search-top.html'); //모임 윗부분 인클루드
+        $('#footers').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+</head>
+<body>
+  <div id="headers"></div>
+  <div id="top"></div>
+  <div id="container">
+    <div id="width-fix-div">
+      <div class="write-board2">Edit Post</div>
+      <div class="written-width-fix2">
+        <div class="written-author-div">
+          <div class="written-author-img-div">
+            <span class="material-icons md-34" >face</span>   &nbsp;&nbsp;&nbsp;
+          </div>
+          <div class="written-column-div">
+            <div class="written-author-name">&nbsp;&nbsp;&nbsp;이름</div>
+            <div class="written-createdTime">몇분전</div>
+          </div>
+        </div>
+        <div class="written-content-div">
+          <textarea  id="xx-content" class="written-content"></textarea>
+        </div>
+        <div class="post-cancel-div">
+          <button id="s-cancel-btn" type="button">취소</button>
+          <button id="s-post-btn" type="button">확인</button>
+        </div>
+      </div>
+      <hr>
+    </div>  
+  </div>
+<div id="footers"></div>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script type="module" src="/ssang/groupBoard/js/view-board-edit.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관심직업</title>
+</head>
+<body>
+  <h1>관심직업 상세</h1>
+  <span>번호</span>
+  <input type="text" class="no"><br>
+  <span>관심 직업명</span>
+  <input type="text" class="name"><br>
+  <button type="button" class="update-btn">수정하기</button>  
+  <button type="button" class="update-btn">삭제하기</button>  
+  <button type="button" class="update-btn">취소하기</button>  
+
+  <script>
+    var arr = location.href.split("?")
+    // 콘솔창에 들어온 데이터를 스플릿으로 ?기준으로 나누기
+    console.log(arr)
+    if(arr.length == 1) {
+      alert("올바르지 않은 요청입니다")
+      throw "URL 오류!"
+    }
+    var qs = arr[1];  
+    //스플릿으로 나눈 2개의 데이터중 오른쪽 데이터를 1번인덱스에 저장
+    console.log(qs)
+
+    var params = new URLSearchParams(qs)
+    var no = params.get('no')
+    var xNo = document.querySelector(".no")
+    var xName = document.querySelector(".name")
+    console.log(no)
+
+    if (no == null) {
+      alert("해당 번호가 없습니다")
+      throw "오류!"
+    }
+
+    fetch(`/itrjobgroupdetail/get?no=${no}`)
+    .then(function(response){
+      return response.json()
+    })
+    .then(function(itrjobgroupdetail){
+      xNo.value = itrjobgroupdetail.no
+      xName.value = itrjobgroupdetail.name
+    })
+    document.querySelector('.update-btn').addEventListener('click', function() {
+    fetch(`/itrjobgroupdetail/update?name=${xName.value}&no=${xNo.value}`)
+    .then(function(response){
+      return response.text()
+    })
+    .then(function(text){
+    console.log(text)
+    window.location.href="index.html"
+    
+    })
+  })
+    
+  </script>
+
+</body>
+</html>

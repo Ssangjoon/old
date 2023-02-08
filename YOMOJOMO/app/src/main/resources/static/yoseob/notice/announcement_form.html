@@ -1,0 +1,81 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지사항 작성</title>
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- 아이콘 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/yoseob/css/style.css">
+</head>
+<body>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+<!-- 공통헤더 -->
+<div id="header"></div>
+<!-- 컨테이너시작 -->
+<div class ="container">
+  <table id="formTable" class="table table-borderless">
+    <tbody style="margin-top: 100px;">
+      <tr>
+        <td>유형</td>
+        <td><input name="title" type="text" class="cate" placeholder="유형을입력해주세요" style="width: 70vw; margin-right:100px"></td>
+      </tr>
+      <tr>
+        <td>제목:</td>
+        <td><input name="title" type="text" class="title" placeholder="제목을 입력해주세요" style="width: 70vw; margin-right:100px"></td>
+      </tr>
+      <tr>
+        <tr>
+          <td><label for="comment">내용:</label></td>
+          <td><textarea class="form-control" rows="10" id= "content" name="content"  style="width: 70vw; margin-left: 30px;"></textarea></td>
+        </tr>
+        <!-- <td style="vertical-align: top;">내용:</td>
+        <td><textarea type ="text" cols="50 "rows="20" id= "content" name="content"></textarea></td> -->
+      </tr>
+    </tbody>
+  </table>
+    <div class="x-btn" style="float:right">
+      <button id="x-add-btn" type="button" class="btn btn-primary">등록</button>
+      <button id="x-cancel-btn" type="button" class="btn btn-primary">취소</button><br>
+    </div>
+
+<!-- 컨테이너끝 -->
+</div>
+<!-- 공통푸터 -->
+  <div id="footer"></div>
+
+  <!-- 공지사항 등록,삭제,변경 스크립트 시작 -->
+  <script>
+    var xcate = document.querySelector('.cate')
+    var xtitle = document.querySelector('.title')
+    var xcontent = document.querySelector('#content')
+  
+    document.querySelector('#x-add-btn').addEventListener("click", function() {
+      fetch(`/notice/add?title=${xtitle.value}&cate=${xcate.value}&content=${xcontent.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text)
+        location.href = "announcement.html"
+      });
+    })
+    document.querySelector('#x-cancel-btn').addEventListener('click', function() {
+      window.location.href = "announcement.html"
+    })
+  </script>
+  <!-- 공지사항 등록,삭제,변경 스크립트 끝  -->
+</body>
+</html>

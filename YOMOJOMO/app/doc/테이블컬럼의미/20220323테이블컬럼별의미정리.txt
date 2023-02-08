@@ -1,0 +1,219 @@
+20220319 테이블 컬럼별 의미 정리
+- gms_report_cate(신고 유형)
+	rpt_cate_no(신고유형 번호)
+	name(신고유형 이름)
+
+- gms_report(신고하기)
+	rpt_no(신고번호)
+	title(신고제목)
+	content(신고내용)
+	valid(유효여부)
+	memb_no(신고한사람 번호)
+	rpt_cate_no(회원관련?,게시글관련?인지)
+	reported(신고당한 회원 또는 게시글 또는 모임)
+- gms_accounting (모임에서 모으는 회비 : 모금)
+	act_no (pk, auto_increment) : 모금번호
+	g_no (fk, pk, auto_increment) : 모임번호
+	act_cate_no fk, pk, auto_increment) : 모금유형번호
+	title : 모금 이름
+	amount : 금액
+	reg_dt : 모금 생성일 
+	status : 모금 납부 여부 
+- gms_accounting_cate ( 모금 카테고리 : 모금유형)
+   	act_cate_no(pk,auto_increment) : 모금유형번호
+   	name : 모금 유형 명
+
+- gms_accounting_status ( 회원별 회비 납부 여부 : 모금납부 내역) 
+  	 act_no (fk, pk, auto_increment) : 모금번호
+   	g_no(fk, pk, auto_increment) : 모임번호
+  	 memb_no(fk, pk, auto_increment) : 회원번호
+   	pay_dt : 납부한 날짜 
+
+- gms_activelocal ( 자신의 주요 활동 지역 : 활동지역)
+  	act_local_no(pk, auto_increment) ) : 활동지역번호
+   	name : 활동할 지역의 이름
+
+- gms_applyform(모임가입신청서)
+  	appl_no (pk, auto_increment) ) : 모임가입신청서 번호
+   	g_no (pk,auto_increment) : 모임번호
+  	memb_no (pk,auto_increment) : 회원번호
+   	content : 신청서 내용
+   	appl_dt : 신청한 날짜
+
+- gms_calendar(모임내부 일정 모음)
+	cal_no(pk, auto_increment) : 모임내부 일정 번호
+	g_no(fk) : 가입된 모임 번호
+	name : 모임내부 일정 이름
+	content: 모임내부 일정 내용
+	result_url: 최종 장소 url저장
+
+- gms_comment(모임내부 게시글 댓글)
+	cmt_no(pk,auto_increment): 모임내부 게시글 댓글 번호
+	b_no(fk) : 게시글 번호
+	memb_no(fk): 회원 번호
+	g_no(fk): 모임 번호
+	content : 댓글 내용
+	reg_dt : 댓글 저장일
+
+- gms_destination(최종모임 장소 저장)
+	dest_no(pk, auto_increment) : 최종모임 장소 저장 번호
+	flat : 최종모임장소 위도
+	flng : 최종모임장소 경도
+	store_name : 최종 장소 매장명
+	location_id : 최종장소 api에서 가져온 id
+	reg_dt : 최종장소 등록일
+	view_cnt : 최종장소 조회수
+
+- gms_faq(고객센터 자주하는 질문 저장)
+	faq_no(pk, auto_increment) : 고객센터 자주하는 질문 번호
+	main_cate_no(fk) : 고객센터 자주하는 질문 유형 에 따른 category 저장
+	query_no(fk) :  고객센터 질문 유형 번호
+	title : 질문 내용
+	content : 질문에 대한 답변 등록
+	path: 이미지 파일 필요시 이미지 파일 경로 저장
+	reg_dt: 자주하는 질문 등록일
+
+- gms_file(모임내부 첨부파일)
+	file_no(pk, auto_increment) : 첨부파일 별 번호
+	b_no(fk) : 게시글 번호
+	name : 첨부파일 이름
+
+- gms_final_activelocal(관심활동지역, 맴버가 어떤 지역에서활동하고 싶은지 최종)
+	memb_no(pk, fk, auto_increment) : 회원 번호
+	act_local_no(pk, fk, auto_increment) : 최종 지역 번호 저장
+
+- gms_final_job (관심 직군 = 직군 즐겨찾기)
+	memb_no 회원번호(fk) : 회원 번호
+	itr_j_no 직군번호(fk) : 회원이 즐겨찾기한 직군번호
+
+- gms_itr_jobgroup (직군 = 직군 카테고리 선택)
+	itr_j_no 직군번호(pk) : 직군 번호
+	name 이름 : 직군이름
+
+
+- gms_final_purpose (관심 모임목적 = 모임목적 즐겨찾기)
+	pups_no 관심모임번호(fk) : 회원이 즐겨찾기한 모임목적 번호
+	memb_no 회원번호(fk) : 회원 번호
+
+- gms_final_SNS (sns계정 = sns로 회원가입)
+	SNS_no SNS번호(fk) : SNS 종류
+	SNS_email 이메일 : SNS가입 이메일 
+
+- gms_group (소모임 = 사이트 내 소모임)
+	g_no 모임번호(pk) : 모임번호 
+	act_local_no 활동지역번호(fk) : 소모임 활동 지역
+	pups_no 모임목적번호(fk) : 모임 목적 카테고리 번호
+	name 모임이름(index) : 소모임 이름
+	reg_dt 모임생성일 : 소모임 개설일
+	logo 모임로고사진 : 소모임 로고 사진 경로
+	intro 모임안내문구 : 소모임 소개, 안내
+	max_cnt 모임인원수 : 소모임 최대 인원
+	fee 회비 : 소모임 회비
+	view_cnt 방문자수 : 소모임 방문자 수
+
+- gms_grouptag (모임태그 = 모임 검색했을때 나올 태그)
+	tag_no 태그번호(pk) : 태그 번호
+	g_no 모임번호(fk) : 소모임 번호
+	tag_name 태그이름(uk) : 태그이름
+
+
+DAO 없어도 될 것 같음
+- gms_itr_jobgroup_detail : gms_itr_jobgroup(직군)에서 선택된 세부 직군명 
+	itr_j_dta_no(pk, auto_increment) : 관심직군세부번호
+	name(unique) : 관심직군 세부 이름
+	itr_j_no(fk) : gms_itr_jobgroup의 직군번호
+
+- gms_join_memb : 회원별로 어떤 모임에 가입했는지를 알 수 있는 테이블
+	memb_no(pk, fk, auto_increment) : gms_memb의 회원번호
+	g_no(pk, fk, auto_increment) : gms_group의 모임번호
+	g_memb_grd_no(fk, auto_increment) : gms_memb_grade의 모임등급유형번호 
+
+- gms_keyword : 회원이 검색한 최근 검색어를 가지고 있는 테이블
+	k_no(pk, auto_increment) : 최근검색어 번호
+	search_name : 최근검색어명
+	memb_no(fk, auto_increment) : gms_memb의 회원번호
+
+DAO 없어도 될 것 같음
+- gms_main_cate : 고객센터의 메인 카테고리로 다대다관계 해소를 위해 만든 테이블
+	main_cate_no(pk, auto_increment) : 메인카테고리번호
+	name(unique)  : 카테고리목록명
+
+- gms_memb : 회원정보 테이블(회원가입폼, 개인정보수정에서 사용)
+	memb_no(pk, auto_increment) : 회원번호
+	name : 이름
+	pwd : 비밀번호
+	email(unique) : 이메일
+	tel(unique) : 전화번호
+	post_no : 우편번호
+	base_addr : 기본주소
+	addr : 상세주소
+	type : 일반회원인지 관리자인지
+	unsubscribe : 탈퇴여부(기본값 false-0)
+
+- gms_memb_grade(모임에 가입된 회원의 등급 - 모임장인지, 일반 모임원인지 구별하는 테이블)
+	g_memb_grd_no(pk) : 모임에 가입된 회원의 등급 번호
+	name : 모임에 가입된 회원의 등급 이름
+
+- gms_notice(고객센터 공지사항)
+	notice_no((pk, auto_increment) : 등록된 공지사항의 번호
+	main_cate_no(fk) : 분류된 카테고리들의 번호
+	cate : 분류된 카테고리들의 이름
+	title : 공지사항의 제목
+	content : 공지사항의 내용
+	reg_dt(current_timestamp()): 공지사항이 등록된 일시
+
+- gms_notice_question : 고객센터 문의하기
+	q_no(pk, auto_increment) : 고객센터에 등록된 문의사항 번호
+	main_cate_no(fk) : 분류된 카테고리들의 번호
+	query_no(fk) : 어떤 유형의 질문인지 구분하는 번호
+	memb_no(fk): 회원번호
+	title(index) : 문의 제목
+	content : 문의 내용
+	path : 문의에 첨부된 파일
+	query_dt(current_timestamp()) : 문의가 작성된 일시
+	answer : 문의에 대한 답변
+	answer_dt(current_timestamp()) : 답변 일시
+
+
+- gms_photo : 모임 게시글에 올려진 사진을 모아보는 기능
+	g_photo(pk, auto_increment) : 게시된 사진의 번호
+	b_no(fk) : 사진이 등록된 게시글의 번호
+	path : 사진이 저장된 경로
+
+
+- gms_purpose : 모임의 목적 (운동인지 여행인지 등)
+	pups_no(pk, auto_increment) : 무슨 목적의 모임인지 구분하는 번호
+	name(unique) : 무슨 목적의 모임인지 구분하는 이름
+
+
+- gms_query_cate(faq 질문 유형 설정 ≒ 검색 시 필요한 태그 설정)
+   	query_no(pk, auto_increment): faq 질문 유형 번호
+   	name: 유형 이름
+   
+- gms_recruit(리쿠르팅 게시판, 회원이 자신을 소개하고 모임장 혹은 모임 회원이 가입 요청을 할 수 있는 곳)
+   	rcu_b_no (pk, auto_increment) : 리쿠르팅 게시판 번호
+  	 title : 게시글 제목
+   	content : 게시글 내용
+   	reg_dt : 작성일
+   	view_cnt : 조회수
+   	act_local_no (fk) : 활동지역번호 => 원하는 지역 정보
+   	pups_no (fk) : 모임 목적 번호 => 원하는 모임 정보
+   	memb_no (fk) : 회원번호 => 작성자
+	
+- gms_scrap(게시글 가져오기 - 모임 내 회원 글 스크랩 해오기)
+   	g_no(pk, fk) : 모임 번호 - 작성된 모임 번호
+   	memb_no(pk, fk) : 회원 번호 - 해당 글 작성자 번호
+   	b_no(pk, fk) : 게시글 번호 - gms_board의 번호
+
+
+- gms_select_midpoint(맴버별 장소입력 저장)
+   	memb_point_no(pk,auto_increment) : 맴버별 장소입력 번호
+  	 lat : 맴버별 장소입력 위도
+   	lng: 맴버별 장소입력 경도
+   	memb_no(fk) : 회원 번호
+   	group_no(fk) : 모임 번호
+
+- gms_SNS (외부 로그인 서비스 유형 ex) 1. naver, 2. kakao ......)
+   	SNS_no (pk) :  유형 번호
+   	name : 유형 이름
+

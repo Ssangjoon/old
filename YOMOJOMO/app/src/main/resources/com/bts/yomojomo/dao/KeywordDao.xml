@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.KeywordDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="Keyword" id="KeywordMap">
+    <id column="k_no" property="kNo"/>
+    <result column="search_name" property="searchName"/>
+    <result column="memb_no" property="membNo"/>
+    
+  </resultMap>
+
+  <select id="findAll" resultMap="KeywordMap"> 
+    select
+      k_no,
+      search_name,
+      memb_no
+    from
+      gms_keyword
+    order by
+      k_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="KeywordMap" parameterType="int">
+    select 
+      k_no,
+      search_name,
+      memb_no
+    from 
+      gms_keyword
+    where 
+      k_no=#{kNo}
+  </select>
+
+  <insert id="insert" parameterType="Keyword">
+    insert into gms_keyword(search_name,memb_no) 
+    values(#{searchName}, #{membNo})
+  </insert>
+  
+  <update id ="update" parameterType="Keyword">
+    update gms_keyword set 
+      search_name = #{searchName},
+      memb_no = #{membNo}
+    where 
+      k_no = #{kNo}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_keyword
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_keyword
+    where 
+     k_no = #{kNo}
+  </delete>
+</mapper>

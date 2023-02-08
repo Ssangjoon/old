@@ -1,0 +1,53 @@
+
+<div class="m-container inbox"></div>
+
+
+
+<script src="/node_modules/handlebars/dist/handlebars.js"></script>
+<script id="div-get" type="text/x-handlebars-template">
+<form name="data" id="data">
+      <div class="shadow p-5">
+        <div class="row mb-5">
+          <h1>자주 묻는 질문</h1>
+        </div>
+        <div class="row mb-2 top">
+          <div class="row">
+            <input name="title" type="text" class="col form-control mb-2"
+              placeholder="제목 입력" aria-label="Username"
+              aria-describedby="addon-wrapping" value="{{title}}">
+            <div class="col"></div>
+            <input
+                name="mcate" type="text" class="col form-control mb-2" value="자주 묻는 질문"
+                aria-label="Username" aria-describedby="addon-wrapping" readonly>
+          </div>
+          <div class="border-5 border-bottom border-dark"></div>
+          <div class="row">
+            <div class="col p-2 text-start p-2">작성자 : 운영자 / {{regdt}} </div>
+            <div class="col"></div>
+            <input
+                name="mcate" type="text" class="col form-control mb-1 mt-1" value={{queryCate.name}}
+                aria-label="Username" aria-describedby="addon-wrapping" readonly>
+            
+          </div>
+          <div class="border-1 border-bottom border-dark"></div>
+          <div class="input-group">
+          <textarea name="content" class="form-control text-wrap contentInput mt-3 mb-3"
+            aria-label="With textarea">{{content}}</textarea>
+        </div>
+          <div class="border-3 border-bottom border-dark""></div>
+          <div class="row mt-3">
+          <div class="col"></div>
+          <div class="row>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col">
+            <button type="button" class="btn btn-primary update-finish-btn" value={{no}}>수정 완료</button>
+            <button type="button" class="btn btn-secondary cancel-finish-btn" value={{no}}>취소</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </form>
+</script>
+</body>
+</html>

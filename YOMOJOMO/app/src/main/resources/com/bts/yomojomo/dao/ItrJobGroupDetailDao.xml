@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.ItrJobGroupDetailDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="ItrJobGroupDetail" id="ItrJobGroupDetailMap">
+    <id column="itr_j_dta_no" property="no"/>
+    <result column="name" property="name"/>
+    <result column="itr_j_no" property="itrjno"/>
+    
+  </resultMap>
+
+  <select id="findAll" resultMap="ItrJobGroupDetailMap"> 
+    select
+      itr_j_dta_no,
+      name,
+      itr_j_no
+    from
+      gms_itr_jobgroup_detail
+    order by
+      itr_j_dta_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="ItrJobGroupDetailMap" parameterType="int">
+    select 
+      itr_j_dta_no,
+      name,
+      itr_j_no
+    from 
+      gms_itr_jobgroup_detail
+    where 
+      itr_j_dta_no=#{no}
+  </select>
+
+  <insert id="insert" parameterType="ItrJobGroupDetail">
+    insert into gms_itr_jobgroup_detail(name,itr_j_no) 
+    values(#{name}, #{itrjno})
+  </insert>
+  
+  <update id ="update" parameterType="ItrJobGroupDetail">
+    update gms_itr_jobgroup_detail set 
+      name = #{name},
+      itr_j_no = #{itrjno}
+    where 
+      itr_j_dta_no = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_itr_jobgroup_detail
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_itr_jobgroup_detail
+    where 
+     itr_j_dta_no = #{no}
+  </delete>
+</mapper>

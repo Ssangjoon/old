@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>모임개설</title>
+  <!-- 제이쿼리 -->
+  <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- 클래식 에디터 -->
+	<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+  <!--공용css-->
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/ssang/groupBoard/css/form.css">
+  </script>
+  <!-- 인클루드 -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#headers').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#top').load('/ssang/groupBoard/none-search-top.html'); //모임 윗부분 인클루드
+        $('#footers').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+</head>
+<body>
+  <div id="headers"></div>
+  <div id="top"></div>
+  <div id="container">
+    <div id="width-fix-div">
+      <div class="write-board">New Post</div>
+      <div class="written-width-fix" >
+        <div id="x-content">
+          <textarea id="xx-content" placeholder="입력하세요"></textarea>
+        </div><!--x-content-->
+        <div class="written-author-div">
+          <!-- <div class="written-author-img-div">
+            <span class="material-icons md-34" >face</span>   &nbsp;&nbsp;&nbsp;
+          </div> -->
+          <!-- <div class="written-column-div">
+            <div class="written-author-name">이름   &nbsp;&nbsp;&nbsp;</div>
+          </div> -->
+        </div><!--written-author-div-->
+        <div class="post-cancel-div">
+          <button id="s-cancel-btn" type="button">취소</button>
+          <button id="s-post-btn" type="button">확인</button>
+        </div><!--post-cancel-div-->
+      </div><!--written-width-fix-->
+    </div>  <!--width-fix-div-->
+  </div><!--container-->
+<div id="footers"></div>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script type="module" src="/ssang/groupBoard/js/form.js"></script>
+<!-- insert -->
+
+</body>
+</html>

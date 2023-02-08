@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=
+  , initial-scale=1.0">
+  <title>고객센터 메인</title>
+  <!-- JQUERY -->
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- 아이콘 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- 내 CSS -->
+  <link rel="stylesheet" href="/yoseob/css/style.css">
+</head>
+<body onload="allList()">
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+<div id="header"></div>
+  
+<div class = "container">
+  <div class = "all-notice-explanation">
+    <div class ="notice-explanation">
+     <img class = "exclamation-mark"src="../image/Exclamation_mark.png" >
+      <h1 class ="notice-head">고객센터</h1>
+        <p class ="notice-explanation-text">
+          저희 요모조모를 이용하면서 불편했던 점이나<br>
+                궁금한 점을 빠르고 친절하게<br>
+                    안내해 드리겠습니다.<br>
+              아래 카테고리를 선택해 주세요.</p>   
+      </div>
+    </div>
+    <div class ="image">
+      <img class ="service_center" src="../image/service_center.png" >
+    </div>
+    <div class ="notice-category">
+      <span class="material-icons">question_mark</span>
+      <span id ="faq-btn" class ="faq"><a>자주하는 질문</a></span>
+      <span class="material-icons">volume_up</span>
+      <span id ="announcement-btn"class ="announcement"><a>공지사항</a></span>
+      <span class="material-icons">search</span>
+      <span id ="information-btn" class ="announcement"><a>서비스 안내</a></span>
+      <span class="material-icons">call</span>
+      <span id="inquiry-btn" class ="announcement"><a>문의사항</a></span>
+    </div>
+    <div>
+    <div class="accordion" id="accordionExample" style="width: 30%; float: left;"> <!-- 아코디언시작 -->
+      <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+        <h2 class="accordion-header" id="headingOne"></h2>
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+            <span style="font-weight: bold;">로그인은 어떻게 하나요?</span>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <span style="font-family: sans-serif;">로그인은 회원이신 경우에는 우측 상단 로그인 버튼을 클릭하여 진행해 주세요<br>
+            비회원이신 경우는 우측 상단 회원가입 버튼을 클릭하여 회원가입 절차에 따라 회원
+            가입 후 로그인 해주세요.</span>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+            <span style="font-weight: bold;">회원가입은 어떻게 하나요?</span>
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            우측 상단 회원가입 버튼을 누르시면 구글, 페이스북, 카카오 계정을 통해 회원가입을 할 
+            수 있도록 안내되어 있습니다.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+            <span style="font-weight: bold;">비밀번호 변경은 어떻게 하나요?</span>
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            왼쪽 상단 카테고리를 클릭하시고 Mypage로 이동하신 후 개인정보 수정에서 변경하시면 됩니다.
+          </div>
+        </div>
+      </div>
+    </div> <!-- 아코디언끝 -->
+    <div>
+      <script>
+        document.querySelector("#x-create-btn").onclick = function(){
+        location.href="faq_form.html";
+          };
+      </script>
+      <div class = "faq_list_table" style="margin-left: 140px; float: left;" >
+        <table style="border-collapse: collapse;text-align: left;line-height: 1.5;">
+          <thead>
+            <tr>
+              <th style="display: none;">번호</th>
+              <th style="width:40px;">유형</th>
+              <th>제목</th>
+            </tr>
+            <tbody class="faq_tr">
+            </tbody>
+          </thead>
+        </table>
+    </div>
+  </div>  <!-- 고객센터 게시판 통합 끝-->
+  
+  
+    <!-- <div class="all-board">
+      <div style="position: relative; float: left;">
+      <span class ="faq_1">자주하는 질문</span>
+      <span class ="more_qna" style="margin-left: 40px;"><a href="faq.html">FaQ 더보기</a></span>
+      <div class ="faq_list" style="padding-left: 20px; width: 240px;">
+        <table>
+          <thead>
+          <tbody class="faq_tr">
+          </tbody>
+          </thead>
+        </table>
+      </div>
+    </div> -->
+    
+<!-- FAQ 고객센터 메인에 출력 -->
+    <!-- <div class="information_card">
+      <img class="information_more" src="../image/information_card.png" >
+      <span class ="information_text">서비스 안내</span>
+    </div>
+    <div class="question_card">
+      <img class="question_more" src="../image/inquiry_card.PNG" >
+      <span class="question_text">문의하기</span>
+    </div>    
+      </div> -->
+      <!-- <div style="position: relative; float: left;">
+        <span class ="announcement_1" style="margin-left: 26px;">공지사항</span>
+        <span class ="announcement_more"  style="margin-right: 50px;"><a href ="announcement.html">공지사항 더보기</a></span>
+        <div class ="announcement_list" style="padding-left:10px; position: relative;">
+          <table>
+            <thead>
+                <tbody class="notice_tr">
+                </tbody>
+            </thead>
+          </table>
+        </div>
+      </div> -->
+      
+
+      <!-- <div class="inquiry_table">
+        <table id ="inquiry_table"style="margin:auto">
+          <thead> -->
+            <!-- <th>메인카테고리번호</th> -->
+            <!-- <th>제목</th>
+            <th>문의 내용</th>
+            <th>문의 날짜</th>
+          <tbody class="accordion_tr">
+          </tbody>
+          </thead>
+        </table>
+      </div> -->
+    <!-- </div>모든 게시판 통합 끝 -->
+    
+  </div>
+  <div id="footer" style="margin-top: 500px;"></div>
+</body>
+</html>
+
+<!-- <script>
+  var faqDiv = document.querySelector(".faq_tr")
+  var boardCardDiv = document.querySelector(".notice_tr")
+  var inqueryDiv = document.querySelector(".accordion_tr")
+
+  window.onload = function allList() {
+    fetch("/notice/list")
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(boards) {
+        for (var i = 0; i < boards.length; i++) {
+          var tr = document.createElement("tr")
+          // div.classList.add("card-body")
+          tr.innerHTML = `
+          <li><a href="announcement_view.html?no=${boards[i].no}">
+          ${boards[i].title}</li></a><br>
+          `
+          boardCardDiv.appendChild(tr)
+        }
+      })
+      fetch("/faq/list")
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(boards) {
+        for (var i = 0; i < boards.length; i++) {
+          var tr = document.createElement("tr")
+          // div.classList.add("card-body")
+          tr.innerHTML = `
+          <li><a href="faq_view.html?no=${boards[i].no}">
+          ${boards[i].title}</li></a><br>
+          `
+          faqDiv.appendChild(tr)
+        }
+      })
+      fetch("/noticeQuestion/list")
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(boards) {
+        for (var i = 0; i < 8; i++) {
+          var tr = document.createElement("tr")
+          // div.classList.add("card-body")
+          tr.innerHTML = `
+          <td><a href ="inquiry_view.html?no=${boards[i].no}">
+          ${boards[i].title}</td></a>
+          <td>${boards[i].content}</td>
+          <td>${boards[i].queryDate}</td>
+          `
+          inqueryDiv.appendChild(tr)
+        }
+      })
+  }
+  </script> -->
+  <script src="../js/faq.js"></script>
+  <script src="../js/location.js"></script>

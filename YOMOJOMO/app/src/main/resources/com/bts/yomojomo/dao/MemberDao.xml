@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.MemberDao">
+
+	<!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+	<resultMap type="Member" id="memberMap">
+		<id column="memb_no" property="no" />
+		<result column="membername" property="memberName" />
+		<result column="pwd" property="passWord" />
+		<result column="email" property="email" />
+		<result column="tel" property="tel" />
+		<result column="post_no" property="postNo" />
+		<result column="roadname_addr" property="roadNameAddress" />
+		<result column="base_addr" property="baseAddress" />
+		<result column="addr" property="address" />
+		<result column="memb_level" property="membLevel" />
+		<result column="unsubscribe" property="unsubscribe" />
+		<result column="status" property="status" />
+		<result column="stop_dt" property="stopDate" />
+		<result column="cre_dt" property="cDate" />
+		
+		<collection property="locals" ofType="FinalActiveLocal">
+      		<id column="memb_no" property="no"/>
+      		<result column="act_local_no" property="itrlocalno"/>
+    	</collection>
+    	<collection property="pups" ofType="FinalPurpose">
+      		<id column="pups_no" property="no"/>
+      		<result column="memb_no" property="no"/>
+    	</collection>
+	</resultMap>
+	
+	<resultMap type="Member" id="memberMap2">
+		<id column="memb_no" property="no" />
+		<result column="membername" property="memberName" />
+		<result column="pwd" property="passWord" />
+		<result column="email" property="email" />
+		<result column="tel" property="tel" />
+		<result column="post_no" property="postNo" />
+		<result column="roadname_addr" property="roadNameAddress" />
+		<result column="base_addr" property="baseAddress" />
+		<result column="addr" property="address" />
+		<result column="memb_level" property="membLevel" />
+		<result column="unsubscribe" property="unsubscribe" />
+		<result column="status" property="status" />
+		<result column="stop_dt" property="stopDate" />
+		<result column="cre_dt" property="cDate" />
+	</resultMap>
+	
+	<!-- <select id="findAll" resultMap="MemberMap"> select memb_no, name, pwd, 
+		email, tel, post_no, base_addr, addr, type, unsubscribe from gms_memb order 
+		by memb_no desc </select> <select id="findByNo" resultMap="MemberMap" parameterType="int"> 
+		select memb_no, name, pwd, email, tel, post_no, base_addr, addr, type, unsubscribe 
+		from gms_memb where memb_no=#{no} </select> <insert id="insert" parameterType="Member"> 
+		insert into gms_memb(name, pwd, email, tel, post_no, base_addr, addr, type, 
+		unsubscribe) values(#{name}, #{pwd}, #{email}, #{tel}, #{postno}, #{baseaddr}, 
+		#{addr}, #{type}, #{unsubscribe}) </insert> <update id ="update" parameterType="Member"> 
+		update gms_memb set name = #{name}, pwd = #{pwd}, email = #{email}, tel = 
+		#{tel}, post_no = #{postno}, base_addr = #{baseaddr}, addr = #{addr}, type 
+		= #{type}, unsubscribe = #{unsubscribe} where memb_no = #{no} </update> <select 
+		id ="countAll" parameterType="int"> select count(*) from gms_memb </select> 
+		<delete id="delete" parameterType="int"> delete from gms_memb where memb_no 
+		= #{no} </delete> -->
+
+    <select id="findByNo" resultMap="memberMap" parameterType="int">
+    select
+      memb_no,
+      membername,
+      email,
+      tel,
+      post_no,
+      roadname_addr,
+      base_addr,
+      addr,
+      memb_level,
+      unsubscribe,
+      status,
+      stop_dt,
+      cre_dt
+    from
+      gms_memb
+    where
+      memb_no=#{no}
+  </select>
+
+	 <insert id="insert" parameterType="member" keyProperty="no" keyColumn="memb_no" useGeneratedKeys="true">
+  		insert into 
+  			gms_memb
+  			(membername, pwd, email, tel, post_no, roadname_addr, base_addr, addr, memb_level)
+		values
+			(#{memberName}, password(#{passWord}), #{email}, #{tel}, #{postNo}, #{roadNameAddress}, #{baseAddress}, #{address}, #{membLevel})
+	</insert>
+
+	<insert id="insertLocals">
+		insert into 
+			gms_final_activelocal
+			(act_local_no, memb_no)
+		values
+		<foreach collection="locals" item="FinalActiveLocal" separator=",">
+			(#{FinalActiveLocal.itrlocalno}, #{no})
+		</foreach>
+	</insert>
+	
+	<insert id="insertPups">
+		insert into 
+			gms_final_purpose
+			(memb_no, pups_no)
+		values
+		<foreach collection="pups" item="FinalPurpose" separator=",">
+			(#{no}, #{FinalPurpose.no})
+		</foreach>
+	</insert>
+	
+	<select id="findByEmailAndPassword" resultMap="memberMap">
+		select 
+			memb_no, membername, email, unsubscribe, memb_level
+		from gms_memb
+		where 
+			email=#{email} 
+			and pwd=password(#{password})
+			and memb_level=#{level}
+	</select>
+
+	<select id="findidByNameandTel" resultMap="memberMap2">
+		select 
+			email, unsubscribe
+		from
+			gms_memb
+		where
+			membername=#{name} and tel=#{tel}
+	</select>
+
+	<select id="findpwdByEmail" resultMap="memberMap2">
+		select 
+			email, unsubscribe
+		from
+			gms_memb
+		where 
+			email=#{email}
+	</select>
+
+	<select id="findpwdByEmailandTel" resultMap="memberMap2">
+		select 
+			email	, unsubscribe	
+		from
+			gms_memb
+		where 
+			email=#{email} and tel=#{tel}
+	</select>
+	
+	<select id="checkEmail" resultMap="memberMap2">
+		select 
+			email
+		from 
+			gms_memb 
+		where 
+			email=#{email};
+	
+	</select>
+	
+	<select id="findByEmail" resultMap="memberMap2">
+		select 
+			email
+		from 
+			gms_memb 
+		where 
+			email=#{email};
+	
+	</select>
+
+	<update id="updatepwd" parameterType="Member">
+		update 
+			gms_memb
+		set
+			pwd=password(#{password})
+		where
+			email=#{email}
+	</update>
+	
+	<update id="penalty" parameterType="Member">
+    update
+      gms_memb
+    set
+      status=#{status},
+      stop_dt= NOW()
+    where
+      memb_no=#{no}
+  </update>
+  
+  <update id="membDelete" parameterType="Member">
+    update
+      gms_memb
+    set
+      unsubscribe=1
+    where
+      memb_no=#{no}
+  </update>
+  
+  <select id="getBoardListSelect" resultMap="memberMap2">
+    SELECT
+      memb_no,
+      membername,
+      email,
+      tel,
+      post_no,
+      roadname_addr,
+      base_addr,
+      addr,
+      memb_level,
+      unsubscribe,
+      status,
+      stop_dt,
+      cre_dt
+    FROM
+      gms_memb
+      
+    WHERE
+      unsubscribe = 0
+      <if test='!searchKeyword.equals("")'>
+        AND membername LIKE "%"#{searchKeyword}"%"  
+      </if>
+    order by
+      memb_no DESC
+    LIMIT
+      #{no}, #{cutno}
+  </select>
+  
+  <select id="getBoardListSelectCount" parameterType="Member" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM
+      gms_memb
+    WHERE
+        unsubscribe = 0
+      <if test='!searchKeyword.equals("")'>
+        AND membername LIKE "%"#{searchKeyword}"%"  
+      </if>
+  </select>
+	
+	<select id="findAll" resultMap="memberMap">
+	select
+	 memb_no,
+	 membername
+	from gms_memb;
+	</select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.ActiveLocalDao">
+
+  <resultMap type="ActiveLocal" id="ActiveLocalMap">
+    <id column="act_local_no" property="no"/>
+    <result column="name_si" property="nameSi"/>
+    <result column="name_gu" property="nameGu"/>
+  </resultMap>
+
+  <select id="findSi" resultMap="ActiveLocalMap"> 
+    select distinct name_si from gms_activelocal;
+   </select>
+   
+   <select id="findGungu" resultMap="ActiveLocalMap" parameterType="String"> 
+    SELECT act_local_no,name_gu FROM gms_activelocal WHERE name_si LIKE concat('%',#{value},'%')
+  </select>
+  
+  <select id="findByNo" resultMap="ActiveLocalMap" parameterType="int">
+    select 
+      act_local_no,
+      name_si,
+      name_gu
+    from 
+      gms_activelocal
+    where 
+      act_local_no=#{no}
+  </select>
+  
+  <!-- 새로작성 -->
+  <!--시,도 list 출력-->
+  <select id="selectSiList" resultMap="ActiveLocalMap">
+    select distinct name_si from gms_activelocal;
+  </select>
+
+  <!--시 값 받으면 군구 list 출력 -->
+  <select id="selectGuList" resultMap="ActiveLocalMap">
+		select 
+		  act_local_no,
+		  name_gu 
+	  from gms_activelocal 
+		where 
+		  name_si like #{nameSi}
+		order by act_local_no 
+		  
+  </select>
+
+</mapper>

@@ -1,0 +1,36 @@
+#top-container{
+    padding-top: 10vh;
+}
+.menu-container{
+    text-align: center;
+    /* width: 100%; */
+}
+.menu-container{
+    text-align: center;
+    /* width: 100%; */
+}
+#group-title{
+    margin: 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0,auto;
+}
+.group-cate-btn{
+    background-color: #fff;
+    border-radius: 3px;
+    display: inline-block;
+    width: 138px;
+    height: 40px;
+    margin: 5px 5px;
+    font-size: 12px;
+    overflow: hidden;
+    box-shadow: inset 0.5px 0.5px 2px 0px;
+    border: 0;
+}
+.group-cate-btn:hover{
+    color: white;
+    background-color: rgb(17, 147, 218);
+}
+.menu1 .group-board,.menu2 .group-photo,.menu3 .group-calendar,.menu4 .group-file,.menu5 .group-member,.menu6 .group-accounting,.menu7 .group-view
+    {color: white;
+    background-color: rgb(17, 147, 218);};

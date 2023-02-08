@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.bts.yomojomo.dao.InviteBoxDao">
+  
+  <resultMap type="InviteBox" id="InviteBoxMap">
+    <id column="invite_no" property="inviteNo"></id>
+    <result column="title" property="title"></result>
+    <result column="content" property="content"></result>
+    <result column="confirm" property="confirm"></result>
+    <result column="reg_dt" property="regDt"></result>
+    <association property="member" javaType="Member"> <!--초대 받은 사람 join-->
+      <id column = "recipientNo" property="no"/>
+      <result column="recipientName" property="memberName"/>
+    </association>
+    <association property="joinMember" javaType="JoinMember">
+      <association property="group" javaType="Group"> <!-- gms_group -->
+	      <id column = "groupno" property="no"/>
+	      <result column="groupname" property="GroupName"/>
+	    </association>
+	    <association property="member" javaType="Member"> <!-- gms_member 초대 보내는 사람 -->
+	      <id column = "senderNo" property="no"/>
+	      <result column="senderName" property="memberName"/>
+	    </association>
+    </association>
+  </resultMap>
+  
+  <select id="findInviteListByRecipient" resultMap="InviteBoxMap"> <!--받은 사람 번호로 초대장 리스트 검색-->
+		select distinct
+		  ib.invite_no,
+		  ib.title,
+		  ib.content,
+		  ib.confirm,
+		  ib.reg_dt,
+		  (select memb_no from gms_memb where memb_no=ib.memb_no) as recipientNo,
+		  (select membername from gms_memb where memb_no=ib.memb_no) as recipientName,
+		  (select memb_no from gms_memb where memb_no=ib.memb_no2) as senderNo,
+		  (select membername from gms_memb where memb_no=ib.memb_no2) as senderName,
+		  g.g_no groupno,
+		  g.groupName groupname
+		from gms_invite_box ib
+		  join (
+		    select 
+		      jm.g_no,
+		      (select g_no from gms_group g where jm.g_no = g.g_no) as groupno,
+		      (select name from gms_group g where jm.g_no = g.g_no) as groupName
+		    from gms_join_memb jm
+		  ) as g on ib.g_no=g.g_no
+		where 
+		  ib.memb_no = #{member.no}
+		order by 
+		  ib.invite_no desc;
+  </select>
+  
+    <select id="findInviteListByRecipientPaging" resultMap="InviteBoxMap"> <!--받은 사람 번호로 초대장 리스트 검색-->
+    select distinct
+      ib.invite_no,
+      ib.title,
+      ib.content,
+      ib.confirm,
+      ib.reg_dt,
+      (select memb_no from gms_memb where memb_no=ib.memb_no) as recipientNo,
+      (select membername from gms_memb where memb_no=ib.memb_no) as recipientName,
+      (select memb_no from gms_memb where memb_no=ib.memb_no2) as senderNo,
+      (select membername from gms_memb where memb_no=ib.memb_no2) as senderName,
+      g.g_no groupno,
+      g.groupName groupname
+    from gms_invite_box ib
+      join (
+        select 
+          jm.g_no,
+          (select g_no from gms_group g where jm.g_no = g.g_no) as groupno,
+          (select name from gms_group g where jm.g_no = g.g_no) as groupName
+        from gms_join_memb jm
+      ) as g on ib.g_no=g.g_no
+    where 
+      ib.memb_no = #{memberNo}
+    order by 
+      ib.invite_no desc
+      limit #{offset}, #{rowCount}
+  </select>
+  
+    <select id="findinvitelistBySender" resultMap="InviteBoxMap"> <!--보낸 사람 번호로 초대장 리스트 검색-->
+    select distinct
+      ib.invite_no,
+      ib.title,
+      ib.content,
+      ib.confirm,
+      ib.reg_dt,
+      (select memb_no from gms_memb where memb_no=ib.memb_no) as recipientNo,
+      (select membername from gms_memb where memb_no=ib.memb_no) as recipientName,
+      (select memb_no from gms_memb where memb_no=ib.memb_no2) as senderNo,
+      (select membername from gms_memb where memb_no=ib.memb_no2) as senderName,
+      g.g_no groupno,
+      g.groupName groupname
+    from gms_invite_box ib
+      join (
+        select 
+          jm.g_no,
+          (select g_no from gms_group g where jm.g_no = g.g_no) as groupno,
+          (select name from gms_group g where jm.g_no = g.g_no) as groupName
+        from gms_join_memb jm
+      ) as g on ib.g_no=g.g_no
+    where 
+      (select memb_no from gms_memb where memb_no=ib.memb_no2) = #{memberNo}
+    order by 
+      ib.invite_no desc
+      limit #{offset}, #{rowCount}
+  </select>
+  
+  <insert id="createInvitation" parameterType="InviteBox"> <!-- 초대장보내기 -->
+    insert into gms_invite_box(title, content, memb_no, memb_no2, g_no)
+    values(#{title}, #{content}, #{member.no}, #{joinMember.member.no}, #{joinMember.group.no})
+  </insert>
+  
+  <select id ="countSender" resultType="int">
+    select count(*)
+    from gms_invite_box 
+    where 
+      memb_no2 = #{memberNo}
+  </select>
+  
+  <select id ="countRecipient" resultType="int">
+    select count(*)
+    from gms_invite_box 
+    where 
+      memb_no = #{memberNo}
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_invite_box
+    where
+      invite_no = #{inviteNo}
+  </delete>
+  
+  <select id="findByNo" resultMap="InviteBoxMap" parameterType="int">
+    select distinct
+      ib.invite_no,
+      ib.title,
+      ib.content,
+      ib.confirm,
+      ib.reg_dt,
+      (select memb_no from gms_memb where memb_no=ib.memb_no) as recipientNo,
+      (select membername from gms_memb where memb_no=ib.memb_no) as recipientName,
+      (select memb_no from gms_memb where memb_no=ib.memb_no2) as senderNo,
+      (select membername from gms_memb where memb_no=ib.memb_no2) as senderName,
+      g.g_no groupno,
+      g.groupName groupname
+    from gms_invite_box ib
+      join (
+        select 
+          jm.g_no,
+          (select g_no from gms_group g where jm.g_no = g.g_no) as groupno,
+          (select name from gms_group g where jm.g_no = g.g_no) as groupName
+        from gms_join_memb jm
+      ) as g on ib.g_no=g.g_no
+    where 
+      (select memb_no from gms_memb where memb_no=ib.memb_no2) = #{senderNo}
+      and
+      ib.invite_no = #{inviteNo}
+  </select>
+  
+    <select id="findInviteByRecivedNo" resultMap="InviteBoxMap" parameterType="int">
+    select distinct
+      ib.invite_no,
+      ib.title,
+      ib.content,
+      ib.confirm,
+      ib.reg_dt,
+      (select memb_no from gms_memb where memb_no=ib.memb_no) as recipientNo,
+      (select membername from gms_memb where memb_no=ib.memb_no) as recipientName,
+      (select memb_no from gms_memb where memb_no=ib.memb_no2) as senderNo,
+      (select membername from gms_memb where memb_no=ib.memb_no2) as senderName,
+      g.g_no groupno,
+      g.groupName groupname
+    from gms_invite_box ib
+      join (
+        select 
+          jm.g_no,
+          (select g_no from gms_group g where jm.g_no = g.g_no) as groupno,
+          (select name from gms_group g where jm.g_no = g.g_no) as groupName
+        from gms_join_memb jm
+      ) as g on ib.g_no=g.g_no
+    where 
+      ib.memb_no = #{recivedNo}
+      and
+      ib.invite_no = #{inviteNo}
+  </select>
+  
+  
+  <update id ="update" parameterType="InviteBox">
+    update gms_invite_box set
+      title = #{title},  
+      content = #{content}, 
+      memb_no = #{member.no}, 
+      g_no = #{joinMember.group.no}
+    where
+      invite_no = #{inviteNo}
+      and
+      memb_no2 = #{joinMember.member.no}
+  </update>
+  
+  <update id ="confirmUpdate" parameterType="InviteBox">
+    update gms_invite_box set
+      title = #{title},  
+      content = #{content}, 
+      memb_no = #{member.no}, 
+      g_no = #{joinMember.group.no},
+      confirm = #{confirm}
+    where
+      invite_no = #{inviteNo}
+      and
+      memb_no = #{member.no}
+  </update>
+
+  
+  
+  </mapper>

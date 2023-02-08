@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pick me 글 작성</title>
+  
+  <link rel="icon" href="/junho/img/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <link rel="stylesheet" href="/hyun/css/pickmeform.css">
+</head>
+
+<body>
+
+<!--공통 헤더-->
+<div id="header"></div>
+
+<!--입력 폼 -->
+<div id="body-content">
+  <div class="inner">
+    <div id="form-content" class="table-responsive-lg">
+      <div id="outline">
+        <form name="pickme-form">
+          <table id="formTable" class="table table-borderless">
+            <tbody>
+              <tr>
+                <td width="200px">제목</td>
+                <td><input name="title" type="text" class="form-control" placeholder="제목을 입력해주세요"></td>
+              </tr>
+              <tr>
+                <td>활동지역</td>
+                <td>
+                  <div id="localSelect">
+                    <select name="nameSi" id="nameSi" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+                    <select name="activeLocal.no" id="nameGu" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>관심활동</td>
+                <td>            
+                  <select name="purpose.no" id="purpose" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="comment">내용:</label></td>
+                <td><textarea class="form-control" rows="5" id= "content" name="content"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+            <button id="x-add-btn" type="button" class="btn btn-primary">등록</button>
+            <button id="x-cancel-btn" type="button" class="btn btn-primary">취소</button><br>
+        </form>
+      </div> 
+    </div>
+  </div>
+</div>
+
+<div id="footer"></div>
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+      $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+      $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+  });
+</script>
+
+<!--시,도 카테고리 생성 핸들 바-->
+<script id="optionSi-template" type="text/x-handlebars-template">
+  <option id="allList" value="0">전체</option>
+  {{#each this}}
+  <option id="selectOp">{{nameSi}}</option>
+  {{/each}}
+</script>
+<!--시,도 카테고리 생성 핸들 바 END-->
+
+<!--군,구 카테고리 생성 핸들 바-->
+<script id="optionGu-template" type="text/x-handlebars-template">
+  <option value="0">군구 선택</option>
+  {{#each this}}
+  <option id="selectGuOp" value="{{no}}">{{nameGu}}</option>
+  {{/each}}
+</script>
+<!--군, 구 카테고리 생성 핸들 바 END-->
+
+<!--관심 활동 생성 핸들 바 START-->
+<script id="optionPurpose-template" type="text/x-handlebars-template">
+  <option id="selectPurposeOp" value="0">관심 분야를 선택해 주세요</option>
+  {{#each this}}
+  <option id="selectPurposeOp" value="{{no}}">{{purposeName}}</option>
+  {{/each}}
+</script>
+<!--관심 활동 생성 핸들 바 END-->
+
+<script src="/hyun/js/pickmeform.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+
+<div class="m-container inbox"></div>
+
+
+
+<script src="/node_modules/handlebars/dist/handlebars.js"></script>
+<script id="div-get" type="text/x-handlebars-template">
+		<form name="data" id="data">
+			<div class="shadow p-5">
+				<div class="row mb-5">
+					<h1>회원정보 상세</h1>
+				</div>
+				<div class="row mb-2 top">
+
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">이메일(아이디)</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{email}}</div>
+						</div>
+						<div class="col-3"></div>
+					</div>
+
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">이름</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{memberName}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">휴대전화 번호</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{tel}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">우편 번호</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{postNo}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">도로명 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{roadNameAddress}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">지번 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{baseAddress}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<span id="guide" style="color: #999; display: none"></span>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">상세 주소</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{address}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">회원 레벨</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{membLevel}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">가입일</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{cdate}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">제재 상태</div>
+						<div class="col input-group mb-3 p-2">
+							<div class="form-check">
+  								<input class="form-check-input" type="radio" name="penalty" value="0" id="radio" checked>
+									<label class="form-check-label" for="flexRadioDefault1">
+    									없음
+  									</label>
+							</div>
+							<div class="form-check">
+  								<input class="form-check-input" type="radio" name="penalty" value="3" id="radio">
+  								<label class="form-check-label" for="flexRadioDefault2">
+    								3일 정지
+  								</label>
+							</div>
+							<div class="form-check">
+  								<input class="form-check-input" type="radio" name="penalty" value="7" id="radio">
+  								<label class="form-check-label" for="flexRadioDefault2">
+    								7일 정지
+  								</label>
+							</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row>
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col">
+						<button type="button" class="btn btn-primary update-finish-btn" value={{no}}>수정 완료</button>
+						<button type="button" class="btn btn-secondary cancel-finish-btn" value={{no}}>취소</button>
+					</div>
+				</div>
+			</div>
+		</form>
+</script>
+</body>
+</html>

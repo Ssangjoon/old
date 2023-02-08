@@ -1,0 +1,122 @@
+
+/* common*/
+* { 
+    padding : 0; 
+    margin : 0;
+    /*border: 0;*/
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+#container{
+    min-height: 80vh;
+}
+
+hr{
+    z-index: 99999;
+}
+a, p, span, button {
+    text-decoration: none;
+    color: #616161;
+}
+ol, ul, li {
+    list-style: none;
+}
+div{
+    border: 1px solid #616161;
+}
+
+button {
+    /* color: white;
+    background-color: rgb(17, 147, 218);
+    border-radius: 3px;
+    cursor: pointer;
+    border: 0;
+    width: 60px;
+    height: 27px;
+    font-size: 14px; */
+}
+.btn {
+    color: white;
+    background-color: rgb(17, 147, 218);
+    border-radius: 3px;
+    cursor: pointer;
+    border: 0;
+}
+
+#width-fix-div{
+    min-height: 500px;
+    width: 800px;
+    margin: 0px auto;
+    /* border: 1px solid #616161;
+    border-radius: 9px; */
+}
+.written-width-fix2{
+    position: relative;
+    width: 766px;
+    height: 357px;
+    margin: 25px auto;
+    /* border: 1px solid #616161; */
+}
+.write-board2 {
+    font-size: 24px;
+    text-align: center;
+    margin: 30px auto 0 auto;
+    padding: 13px 0 10px 0;
+    border: 2px solid rgb(17, 147, 218);
+    border-radius: 7px;
+    background-color: rgb(17, 147, 218);
+    color: white;
+    font-weight: bold;
+}
+.written-container{
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    padding: 10px 0 0 10px;
+    border: 1px solid #616161;
+}
+.written-author-div{
+    display: flex;
+    /* flex-direction: row-reverse; */
+    margin: 0 0 10px 0;
+}
+.written-column-div{
+    margin: 0 0 0 13px;
+}
+.written-author-name {
+    margin: 0 0 13px 0;
+}
+.written-content-div{
+    width: 86%;
+    height: 78%;
+}
+.post-cancel-div{
+    position: absolute;
+    display: flex;
+    flex-direction: column-reverse;
+    right: 0px;
+    bottom: 0px;
+}
+#s-cancel-btn,#s-post-btn{
+    color: white;
+    background-color: rgb(17, 147, 218);
+    border-radius: 3px;
+    cursor: pointer;
+    border: 0;
+    width: 100px;
+    height: 37px;
+    margin:11px 0 0 0;
+}
+textarea{
+    width: 100%;
+    height: 100%;
+}
+.material-icons{
+    color: rgb(17, 147, 218);
+    margin-left: 3px;
+    font-size: 34px;
+}
+.material-icons.md-34 { font-size: 32px; }

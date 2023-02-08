@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>noitce</title>
+  <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+    <h1>공지사항</h1>
+    <a href="form.html">새 연락처</a>
+<table id="x-notice-table" border="1">
+<thead>
+  <tr>
+    <th>번호</th>
+    <th>목록</th>
+    <th>제목</th>
+    <th>내용</th>
+    <th>생성일</th>
+  </tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+
+<script type="text/javascript">
+  var tbody = document.querySelector("#x-notice-table tbody")
+
+  fetch("/notice/list")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(notices) {
+      for (var notice of notices) {
+        var tr = document.createElement("tr");
+        console.log(notice);
+        tr.innerHTML = `<td>${notice.no}</td>
+        <td>${notice.cate}</td>
+        <td><a href="view.html?no=${notice.no}">${notice.title}</a></td>
+        <td>${notice.content}</td>
+        <td>${notice.regDt}</td>`;
+        tbody.append(tr);
+      }
+    });
+</script>
+</body>
+
+
+
+
+</html>

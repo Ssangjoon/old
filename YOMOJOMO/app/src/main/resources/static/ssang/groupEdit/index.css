@@ -1,0 +1,51 @@
+/* common*/
+* { 
+    padding : 0; 
+    margin : 0;
+    /*border: 0;*/
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+#container{
+    width: 900px;
+    margin: 0 auto;
+    height: 65vh;
+}
+hr{
+    z-index: 99999;
+}
+a, p, span, button {
+    text-decoration: none;
+    color: #616161;
+}
+ol, ul, li {
+    list-style: none;
+}
+div{
+    /* border: 1px solid #616161; */
+}
+.group-edit-btn-div{
+    margin: 100px 0;
+}
+.List-Container button{
+    width: 60px;
+    height: 24px;
+    margin: 0 0 2px 0;
+    padding: 0 0 5px 0;
+}
+.x-membList{
+    margin: 0 0 10px 0;
+}
+.accordion-button {
+    font-weight: bold;
+}
+.material-icons{
+    vertical-align: middle;
+}
+input.apply-content{
+    margin-bottom: 5px;
+    border-radius: 3px;
+}
+

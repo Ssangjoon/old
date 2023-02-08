@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.MyPageDao">
+  
+  <resultMap type="MyPage" id="MyPageMap">
+    <id column="memb_no" property="no"/>
+    <result column="membername" property="name"/>
+    <result column="pwd" property="pwd"/>
+    <result column="email" property="email"/>
+    <result column="tel" property="tel"/>
+    <result column="post_no" property="postNo"/>
+    <result column="roadname_addr" property="roadNameAddr"/>
+    <result column="base_addr" property="baseAddr"/>
+    <result column="addr" property="addr"/>
+    <result column="path" property="photo"/>
+    <result column="de_img" property="defaultImg"/>
+    
+    <collection property="finalActiveLocal" ofType="FinalActiveLocal">
+      <id column="memb_no" property="no"/>
+      <result column="act_local_no" property="itrlocalno"/>
+    </collection>
+    
+    <collection property="finalPurpose" ofType="FinalPurpose">
+       <id column="pups_no" property="no"/>
+       <result column="memb_no" property="membno"/>
+    </collection>
+    
+    <collection property="activeLocal" ofType="ActiveLocal">
+      <id column="act_local_no" property="no"/>
+      <result column="name_si" property="nameSi"/>
+      <result column="name_gu" property="nameGu"/>
+    </collection>
+    
+    <collection property="purpose" ofType="Purpose">
+       <id column="pups_no" property="no"/>
+       <result column="name" property="purposeName"/>
+    </collection>
+  </resultMap>
+  
+  <resultMap type="MyPage" id="MyPostMap">
+    <id column="memb_no" property="no"/>
+    
+    <association property="scrap" javaType="Scrap">
+       <id column="g_no" property="no"/>
+       <result column="memb_no" property="memberNo"/>
+       <result column="b_no" property="boardNo"/>
+    </association>
+    
+    <collection property="board" ofType="Board">
+       <id column="b_no" property="no"/>
+       <result column="g_no" property="groupNo"/>
+       <result column="memb_no" property="memberNo"/>
+       <result column="reg_dt" property="registDate"/>
+       <result column="content" property="content"/>
+       <result column="view_cnt" property="viewCount"/>
+    </collection>
+    
+    <collection property="group" ofType="Group">
+       <id column="g_no" property="no"/>
+       <result column="name" property="GroupName"/>
+       <result column="logo" property="logo"/>
+    </collection>
+    
+  </resultMap>
+  
+  <resultMap type="MyPage" id="MyNoticeMap">
+    <id column="memb_no" property="no"/>
+    <result column="membername" property="name"/>
+   
+   <association property="queryCate" javaType="QueryCate">
+    <id column="query_no" property ="no"/>
+     <result column="name" property="name"/>
+   </association>
+   
+	  <association property="mcate2" javaType="Mcate2">
+    <id column="main_cate_no" property ="no"/>
+     <result column="main_cate_no" property ="no"/>
+     <result column="mcn" property="name"/>
+   </association>
+   
+    <collection property="notice" ofType="NoticeQuestion">
+      <id column="q_no" property="no"/>
+		  <result column="main_cate_no" property="mainCategoryNo" />
+		  <result column="query_no" property="queryNo" />
+		  <result column="memb_no" property="memberNo" />
+		  <result column="title" property="title" />
+		  <result column="content" property="content" />
+	    <result column="path" property="path" />
+		  <result column="query_dt" property="queryDate" />
+		  <result column="answer" property="answer" />
+		  <result column="answer_dt" property="answerDate" />
+	  </collection>
+  </resultMap>
+  
+  <select id="findAll" resultMap="MyPageMap">
+   <!-- select * from gms_memb;  -->      
+  </select>
+
+  <select id="findByMemberNo" resultMap="MyPageMap">      
+    select
+      m.memb_no,
+      m.membername,
+      m.email,
+      m.tel,
+      m.post_no,
+      m.roadname_addr,
+      m.base_addr,
+      m.addr,
+      m.path,
+      a.act_local_no,
+      a.name_si,
+      a.name_gu,
+      p.pups_no,
+      p.name,
+      m.de_img
+    from
+      gms_memb m
+      inner join gms_final_activelocal fa on m.memb_no = fa.memb_no
+      inner join gms_activelocal a on fa.act_local_no = a.act_local_no
+      inner join gms_final_purpose fp on m.memb_no = fp.memb_no
+      inner join gms_purpose p on fp.pups_no = p.pups_no
+    where
+      m.memb_no=#{no}
+  </select>
+  
+  <update id="update" parameterType="MyPage">
+	  update gms_memb set
+		  tel=#{tel},
+		  post_no=#{postNo},
+		  roadname_addr=#{roadNameAddr},
+		  base_addr=#{baseAddr},
+		  addr=#{addr},
+		  de_img=#{defaultImg}
+	 <if test="pwd != ''">
+     ,pwd=password(#{pwd})
+   </if>
+   <if test="photo != null">
+     ,path=#{photo}
+   </if>
+		where
+		  memb_no=#{no}
+  </update>
+
+	<delete id="deleteLocal" parameterType="MyPage">
+    delete fa from
+      gms_memb m
+      inner join gms_final_activelocal fa on m.memb_no=fa.memb_no
+    where
+      m.memb_no=#{no}
+  </delete>
+  
+  <delete id="deletePurpose" parameterType="MyPage">
+  delete fp from
+      gms_memb m
+      inner join gms_final_purpose fp on m.memb_no=fp.memb_no
+    where
+      m.memb_no=#{no}
+  </delete>
+  
+  <insert id="insertLocal" parameterType="MyPage">
+  insert into gms_final_activelocal(memb_no, act_local_no) 
+	  values
+	  <foreach collection="locals" item="FinalActiveLocal" separator=",">
+	     (#{no}, #{FinalActiveLocal.itrlocalno})
+	  </foreach>
+  </insert>
+  
+  <insert id="insertPurpose" parameterType="MyPage">
+  insert into gms_final_purpose(memb_no, pups_no) 
+	  values
+	  <foreach collection="pups" item="FinalPurpose" separator=",">
+	     (#{no}, #{FinalPurpose.no})
+    </foreach>
+  </insert>
+  
+  <select id="findByMyPost" resultMap="MyPostMap">      
+    select
+      g.g_no,
+      b.b_no,
+      m.memb_no,
+		  b.content,
+		  b.reg_dt,
+		  b.view_cnt,
+		  g.name
+		from
+		  gms_board b
+		  inner join gms_memb m on m.memb_no=b.memb_no
+		  inner join gms_join_memb jm on jm.memb_no=m.memb_no
+		  inner join gms_group g on jm.g_no=b.g_no=g.g_no
+		where
+		  m.memb_no=#{no}
+  </select>
+  
+  <select id="findByMyScrap" resultMap="MyPostMap">      
+    select
+      g.g_no,
+      b.b_no,
+      m.memb_no,
+      b.content,
+      b.reg_dt,
+      b.view_cnt,
+      g.name
+    from
+      gms_board b
+          inner join gms_scrap s on  b.b_no=s.b_no
+      inner join gms_memb m on m.memb_no=b.memb_no=s.memb_no
+      inner join gms_join_memb jm on m.memb_no=jm.memb_no
+      inner join gms_group g on jm.g_no=b.g_no=g.g_no=s.g_no
+    where
+      m.memb_no=#{no}
+  </select>
+        
+  <select id="findByMyNotice" resultMap="MyNoticeMap">      
+    SELECT
+      nq.q_no,
+      nq.main_cate_no,
+      nq.query_no,
+      nq.memb_no,
+      nq.title,
+      nq.content,
+      nq.path,
+      nq.query_dt,
+      nq.answer,
+      nq.answer_dt,
+	    m.membername,
+	    qc.name,
+	    mc.name mcn
+	  FROM
+	    gms_notice_question nq,
+	    gms_memb m,
+	    gms_query_cate qc,
+	    gms_main_cate mc
+	  WHERE
+	    nq.memb_no = m.memb_no
+	    AND nq.query_no = qc.query_no
+	    AND nq.main_cate_no = mc.main_cate_no
+      AND m.memb_no=#{no}
+  </select>
+  
+</mapper>

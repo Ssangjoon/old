@@ -1,0 +1,117 @@
+header {
+	height: 10vh;
+}
+
+body {
+	background-color: rgb(192, 192, 192);
+	height: auto;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+
+.m-container {
+	
+}
+
+.m-container .main {
+}
+
+.m-container .main .left {
+	width: 25vw;
+	float: left;
+}
+
+.m-container .main .right {
+	width: 35vw;
+	float: right;
+}
+
+.m-container>.main>.left>.box {
+	height: 1200px;
+	width: 15vw;
+	text-align: center
+}
+
+.m-container>.main>.left>.box>.sidemenu {
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 12vw;
+	text-align: center
+}
+
+.m-container>.main>.left>.box>.sidemenu>a {
+	display: inline-block;
+}
+
+.logo {
+	height: 60px;
+	width: 60px;
+}
+
+.m-container .main .content {
+	margin-top: 150px;
+	float: left;
+	width: 30vw;
+	display: inline-block;
+	text-align: center;
+}
+
+.m-container .main .content .status {
+	display: flex;
+	height: 35vh;
+}
+
+.m-container .main .content .statusbox {
+	display: flex;
+	height: 35vh;
+}
+
+.box {
+	display: flex;
+	height: 30vh;
+	width: 40vw;
+	
+}
+
+.inbox {
+	height: 30vh;
+	width: 1200px;
+}
+
+.profile {
+	flex: 1;
+	display: flex;
+	margin: 10px;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.box-bottom {
+	flex: 1;
+	margin: 10px;
+	height: 150px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.box-card {
+	flex: 1;
+	margin: 10px;
+	height: 400px;
+	width: 400px;
+	text-align: center;
+}
+
+.card-img {
+	display: block;
+	margin:0 auto;
+	height: 300px;
+	width: 300px;
+}

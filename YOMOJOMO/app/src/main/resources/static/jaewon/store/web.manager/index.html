@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="/node_modules/sweetalert2/dist/sweetalert2.css">
+<link rel="stylesheet"
+	href="/node_modules/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="/jaewon/web.manager/css/main.css">
+<script src="/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<title>Manage Page</title>
+
+</head>
+<body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+			// $('#footers').load('../html'); //푸터부분 인클루드
+		});
+	</script>
+	<div id="header"></div>
+	<div class="m-container">
+		<div class="main ">
+			<div class="left">
+				<div class="shadow-sm p-3 mb-5 bg-body rounded box">
+					<div class="sidemenu">
+						<ul class="list-group list-group-flush list">
+
+							<li class="list-group-item list-group-item-action"><img
+								src="../1.png" class="img-fluid logo"><a href="index.html"><br>관리자
+									메인 페이지 </a></li>
+
+							<li class="list-group-item list-group-item-action"><a
+								href="membindex.html">회원 관리</a></li>
+							<li class="list-group-item list-group-item-action"><a
+								href="groupindex.html">모임 관리</a></li>
+							<li class="list-group-item list-group-item-action"><a
+								href="reportindex.html">신고 내역 관리</a></li>
+							<li class="list-group-item list-group-item-action"><a
+								href="qnaindex.html">문의 내역 관리</a></li>
+							<li class="list-group-item list-group-item-action"><a
+								href="center.html">고객센터 관리</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="status">
+					<div class="shadow-sm p-3 mb-5 bg-body rounded box">
+						<div class="profile">
+							<img src="../1.png" class="img-fluid"
+								style="height: 100px; width: 100px;">
+						</div>
+						<div class="profile">
+							<img src="../1.png" class="img-fluid"
+								style="height: 100px; width: 100px;">
+						</div>
+					</div>
+				</div>
+				<div class="statusbox">
+					<div class="statusbox">
+						<div class="card box-bottom">
+							<div class="card-body">
+								<h6 class="card-title">99건 이상의 신고내역이 있습니다.</h6>
+								<p class="card-text"></p>
+								<button type="button" class="btn btn-primary position-relative">
+									확인하러 가기 <span
+										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+										99+ <span class="visually-hidden">unread messages</span>
+									</span>
+								</button>
+							</div>
+						</div>
+						<div class="card box-bottom">
+							<div class="card-body">
+								<h6 class="card-title">99건 이상의 문의내역이 있습니다.</h6>
+								<p class="card-text"></p>
+								<button type="button" class="btn btn-primary position-relative">
+									확인하러 가기 <span
+										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+										99+ <span class="visually-hidden">unread messages</span>
+									</span>
+								</button>
+							</div>
+						</div>
+						<div class="card box-bottom">
+							<div class="card-body">
+								<h6 class="card-title">99건 이상의 알림 메세지가 있습니다</h6>
+								<p class="card-text"></p>
+								<button type="button" class="btn btn-primary position-relative">
+									확인하러 가기 <span
+										class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+										99+ <span class="visually-hidden">unread messages</span>
+									</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+</body>
+</html>

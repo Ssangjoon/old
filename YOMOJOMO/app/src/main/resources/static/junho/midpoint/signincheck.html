@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 파비콘생성 -->
+  <link rel="icon" href="/junho/img/logo.png">
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <!-- 아이콘 연결 코드 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- 부트스트랩 CSS-->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- 내 css 연결하기 -->
+  <link rel="stylesheet" href="/junho/css/midpointsubmain1.css">
+  <!-- JQUERY -->
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- 내 JS 연결하기 -->
+  <script src="/junho/js/midpointsubmain1.js" defer></script>
+  <!-- Kakao Map Api -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b7fdb2b98c4e61592bd51f09cac1ca8&libraries=services"></script>
+  <title>Yomojomo</title>
+</head>
+<body>
+  <script>
+    $(document).ready(function () {
+      $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+      $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+
+  </script>
+   <!-- HEADER -->
+  <div id="header"></div>
+
+  <section class="signin-check">
+    <div class="inner">
+      <div class="content">
+        <div class="signin-check-box">
+          <h1>중간지점찾기</h1>
+          <div class="btn-grouping">
+            <button type="button" class="btn btn-primary">
+              <a href="/junho/midpoint/index.html">비회원으로 시작</a>
+            </button>
+            <button type="button" class="btn btn-primary">
+              <a href="/jaewon/login/login/index.html">회원으로 시작</a>
+            </button>
+          </div>
+        </div>
+        <div class="signup">
+          <button type="button" class="btn btn-secondary">
+            <a href="/jaewon/signup/index.html">회원가입하기</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <style>
+    /* COMMON */
+    body {
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #333;
+      overflow-y: hidden;
+    }
+
+    img {
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+    }
+    /* signin-check */
+    .signin-check {
+      background-color: #f6f5f0;
+      padding-top: 10vh;
+    }
+
+    .signin-check>.inner {
+      background-color: #f6f5f0;
+      height: 75vh;
+    }
+
+    .signin-check .content {
+      position: absolute;
+      width: 600px;
+      height: 250px;
+      margin: auto auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border: 1px solid #333;
+      padding-top: 50px;
+    }
+
+    .signin-check .content .signin-check-box {
+      padding: 0 0 60px 0;
+      position: relative;
+    }
+
+    .signin-check .content .signin-check-box h1 {
+      text-align: center;
+      font-size: 30px;
+      padding-bottom: 20px;
+    }
+
+    .signin-check .content .signin-check-box .btn-grouping {
+      width: 450px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+
+    .signin-check .content .signin-check-box .btn-grouping .btn {
+      width: 220px;
+      height: 40px;
+    }
+
+    .signin-check .content .signin-check-box .btn-grouping .btn a{
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+
+    .signin-check .content .signup {
+      width: 450px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+    }
+
+    .signin-check .content .signup .btn {
+      width: 450px;
+      height: 40px;
+    }
+
+    .signin-check .content .signup .btn a {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  </style>
+</body>
+</html>

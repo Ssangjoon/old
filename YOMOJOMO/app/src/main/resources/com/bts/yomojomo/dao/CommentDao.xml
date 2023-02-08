@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.CommentDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="Comment" id="CommentMap">
+    <id column="cmt_no" property="no"/>
+    <result column="b_no" property="boardNo"/>
+    <result column="content" property="content"/>
+    <result column="g_no" property="groupNo"/>
+    <result column="reg_dt" property="registDate"/>
+    <result column="status" property="status"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="Comment">
+    insert into gms_comment(b_no, content, memb_no, g_no) 
+    values(#{boardNo}, #{content}, #{writer.no}, #{groupNo})
+  </insert>
+
+  <select id="findAll" resultMap="CommentMap"> 
+    select
+      cmt_no,
+      b_no,
+      content,
+      memb_no,
+      g_no,
+      reg_dt,
+      status
+    from
+      gms_comment
+    order by
+      cmt_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="CommentMap" parameterType="int">
+    select 
+      cmt_no,
+      b_no,
+      content,
+      memb_no,
+      g_no,
+      reg_dt,
+      status
+    from 
+      gms_comment
+    where 
+      cmt_no=#{no}
+  </select>
+  
+  <update id ="update" parameterType="Calendar">
+    update gms_comment set 
+      content = #{content}
+    where 
+      cmt_no = #{no} and memb_no =#{writer.no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_comment
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_comment
+    where 
+      cmt_no = #{no}
+  </delete>
+</mapper>

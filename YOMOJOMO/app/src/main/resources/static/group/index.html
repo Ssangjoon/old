@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+	<h1>소모임 정보</h1>
+<body>
+	<h1>소모임 태그명</h1>
+	<table border="1" id="gms-group-table">
+		<thead>
+			<tr>
+				<th>소모임 ID</th>
+				<th>활동 지역 번호</th>
+				<th>모임 목적 번호</th>
+				<th>소모임 이름</th>
+				<th>생성일</th>
+				<th>사진 로고 경로</th>
+				<th>소개글</th>
+				<th>모임 최대 인원</th>
+				<th>회비</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody class="group">
+		</tbody>
+	</table>
+	<button type="button">
+		<a href="form.html">등록하기</a>
+	</button>
+	<script type="text/javascript">
+		var tbody = document.querySelector("#gms-group-table");
+			
+		fetch("/group/list")
+		.then(function(response){
+			return response.json();
+		})
+		.then(function(groups){
+			for (var i =0; i < groups.length; i++){
+				console.log(group.name)
+			var tr = document.createElement("tr");
+			tr.innerHTML = `<td>${group.no}</td>
+			<td>${group.actlocalno}</td>
+			<td>${group.pupsno}</td>
+			<td><a href="view.html?no=${group.no}">${group.name}</a></td>
+			<td>${group.regdt}</td>
+			<td>${group.logo}</td>
+			<td>${group.intro}</td>
+			<td>${group.maxcnt}</td>
+			<td>${group.fee}</td>
+			<td>${group.viewcnt}</td>
+			`
+			tbody.appendChild(tr)
+			}
+		})
+	</script>
+</body>
+</html>

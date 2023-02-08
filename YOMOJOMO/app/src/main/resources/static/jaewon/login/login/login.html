@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/jaewon/css/basic.css">
+<div class="body-inner">
+	<div class="container fluid">
+		<div class="container-inner">
+			<div class="shadow-sm p-3 mb-5 bg-body rounded box">
+				<img src="/jaewon/1.png" class="img-fluid logo">
+
+				<div class="col-md-8" style="float: none; margin: 0 auto;">
+					<div class="input-group mb-5"></div>
+					<form name="formyo">
+						<div class="input-group mb-3">
+							<input name="level" type="hidden" value="1"> 
+							<input
+								name="email" class="form-control form-control-sm input fs-5"
+								type="email" placeholder="아이디(이메일)를 입력해주세요"
+								aria-label=".form-control-sm example">
+						</div>
+						<div class="input-group mb-1">
+							<input name="password"
+								class="form-control form-control-sm input fs-5" type="password"
+								placeholder="비밀번호를 입력해주세요" aria-label=".form-control-sm example">
+
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value=""
+										id="flexCheckDefault"> <label class="form-check-label"
+										for="flexCheckDefault"> 아이디 기억</label>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="d-flex mb-5 flex-row-reverse bd-highlight">
+
+									<a href="/jaewon/signup/index.html" class="link-primary">회원
+										가입</a>
+									<div class="p-1 bd-highlight"></div>
+									<a href="/jaewon/login/find/id/idindex.html"
+										class="link-secondary">아이디/비밀번호 찾기</a>
+									<div class="p-1 bd-highlight"></div>
+								</div>
+							</div>
+
+						</div>
+						<button type="submit" class="btn btn-primary button add-btn">
+							로그인</button>
+					</form>
+				</div>
+				<div class="btn center">
+					<div class="btn" id="snsLoginButtons">
+						<button type="button" class="btn btn-outline-secondary button"
+							onclick="snsKakaoLogin()">
+							<img class="snsbtn" src="/jaewon/kakao_small-1.png"
+								style="vertical-align: middle;"> <span> 카카오톡으로 로그인</span>
+						</button>
+						<button type="button" class="btn btn-outline-secondary button"
+							onclick="snsFacebookLogin()">
+							<img class="snsbtn" src="/jaewon/facebook-small-1.png"
+								style="vertical-align: middle;"><span>페이스북으로 로그인</span>
+						</button>
+						<button type="button" class="btn btn-outline-secondary button"
+							onclick="snsGoogleLogin()" style="vertical-align: middle;">
+							<img class="snsbtn" src="/jaewon/google-small-1.png"
+								style="vertical-align: middle;"><span>구글로 로그인</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+

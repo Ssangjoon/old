@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자주하는 질문 상세보기</title>
+  <!-- 내 css-->
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- 제이쿼리 -->
+   <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+   <!-- 파비콘생성 -->
+   <link rel="icon" href="/junho/img/favicon.png">
+   <!-- css 초기화 -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+   <!-- 폰트 -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+   <!-- 아이콘 연결 코드 -->
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <!-- Handlebars -->
+   <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+   <!-- 부트스트랩 -->
+   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+ 
+  
+</head>
+<body onload="allList()">
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+  <div id="header"></div>
+  
+<div class = "container">
+  <div class = "all-notice-explanation">
+    <div class ="notice-explanation">
+     <img class = "exclamation-mark"src="../image/question_mark.png" >
+      <span class ="notice-head">FaQ</span>
+        <p class ="notice-explanation-text">
+          저희 요모조모를 이용하면서 불편했던 점이나<br>
+                궁금한 점을 빠르고 친절하게<br>
+                    안내해 드리겠습니다.<br>
+              아래 카테고리를 선택해 주세요.</p>   
+      </div>
+      </div>
+    <div class ="image">
+      <img class ="service_center" src="../image/service_center.png" >
+    </div>
+    <div class ="notice-category">
+      <span class="material-icons">question_mark</span>
+      <span id ="faq-btn" class ="faq"><a>자주하는 질문</a></span>
+      <span class="material-icons">volume_up</span>
+      <span id ="announcement-btn"class ="announcement"><a>공지사항</a></span>
+      <span class="material-icons">search</span>
+      <span id ="information-btn" class ="announcement"><a>서비스 안내</a></span>
+      <span class="material-icons">call</span>
+      <span id="inquiry-btn" class ="announcement"><a>문의사항</a></span>
+    </div>
+        <div class = "faq_search">
+          <span>자주하는 질문</span>
+          <div class = "search_window">
+          </div>
+            <input type="text" style="width: 90%; float: left;">
+            <div class = "keword_btn">
+              <span class="material-icons" style="float: left;">search</span>
+              <button>전체</button>
+              <button>회원</button>
+              <button>모임찾기</button>
+              <button>모임관리</button>
+              <button>모임약속</button> 
+              <button>기타</button> 
+            </div>
+        </div>
+        <div class="accordion" id="accordionExample" style="margin-top: 100px;"> <!-- 아코디언시작 -->
+          <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+            <h2 class="accordion-header" id="headingOne"></h2>
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+                <span style="font-weight: bold;">로그인은 어떻게 하나요?</span>
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <span style="font-family: sans-serif;">로그인은 회원이신 경우에는 우측 상단 로그인 버튼을 클릭하여 진행해 주세요<br>
+                비회원이신 경우는 우측 상단 회원가입 버튼을 클릭하여 회원가입 절차에 따라 회원
+                가입 후 로그인 해주세요.</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+                <span style="font-weight: bold;">회원가입은 어떻게 하나요?</span>
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                우측 상단 회원가입 버튼을 누르시면 구글, 페이스북, 카카오 계정을 통해 회원가입을 할 
+                수 있도록 안내되어 있습니다.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+                <span style="font-weight: bold;">비밀번호 변경은 어떻게 하나요?</span>
+              </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                왼쪽 상단 카테고리를 클릭하시고 Mypage로 이동하신 후 개인정보 수정에서 변경하시면 됩니다.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+            <h2 class="accordion-header" id="heading4"></h2>
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+                <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+                <span style="font-weight: bold;">중간지점 찾기는 어떻게 이용하나요??</span>
+              </button>
+            </h2>
+            <div id="collapse4" class="accordion-collapse collapse show" aria-labelledby="heading4" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <span style="font-family: sans-serif;">요모조모 메인페이지 상단에 중간지점 찾기 이미지를 클릭하신 후에 
+                위치를 설정해주시고 중간지점 찾기 버튼을 클릭하시면 됩니다.</span>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+            <h2 class="accordion-header" id="heading5"></h2>
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
+                <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+                <span style="font-weight: bold;">소모임 가입은 어떻게하나요?</span>
+              </button>
+            </h2>
+            <div id="collapse5" class="accordion-collapse collapse show" aria-labelledby="heading5" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <span style="font-family: sans-serif;">메인 페이지 상단에 소모임 이미지를 클릭하시고 소모임 가입하기를 클릭하신 후 
+                모임장이 수락하면 소모임을 이용하실 수 있습니다.</span>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+            <h2 class="accordion-header" id="heading6"></h2>
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
+                <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+                <span style="font-weight: bold;">소모임 탈퇴는 어떻게 하나요?</span>
+              </button>
+            </h2>
+            <div id="collapse6" class="accordion-collapse collapse show" aria-labelledby="heading6" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <span style="font-family: sans-serif;">탈퇴하고 싶은 소모임 페이지에 들어가셔서 모임 탈퇴하기 버튼을 클릭하시면 됩니다.</span>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" style="border: groove 3px blueviolet; border-radius: 10px;">
+            <h2 class="accordion-header" id="heading7"></h2>
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
+                <img src="../image/question22.PNG" style=" border-radius: 20px; width: 40px;height:40; margin-right: 10px;">
+                <span style="font-weight: bold;">소모임에 나를 추천하기 기능은 어떻게 이용하나요?</span>
+              </button>
+            </h2>
+            <div id="collapse7" class="accordion-collapse collapse show" aria-labelledby="heading7" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <span style="font-family: sans-serif;">해당 모임에서 나를 추천하기 버튼을 클릭하시고 자신의 프로필을 작성하셔서 추천하기 버튼을 클릭하시면 됩니다.</span>
+              </div>
+            </div>
+          </div>
+        </div> <!-- 아코디언끝 -->
+        
+       </div>
+    </div>
+   <div id="footer"></div>
+</body>
+</html>
+<script src="../js/faq.js"></script>
+<script src="../js/location.js"></script>

@@ -1,0 +1,18 @@
+.card {
+  margin: 10px;
+}
+.card > img {
+  width: auto;
+  height: 180px;
+}
+.card-body {
+  width: 180px;
+  height: auto;
+  text-align: center;
+  justify-content: center;
+}
+.card-title {
+ overflow: hidden;
+ white-space: nowrap;
+ text-overflow: ellipsis;
+}

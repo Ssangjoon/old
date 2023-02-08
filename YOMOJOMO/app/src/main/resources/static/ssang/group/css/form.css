@@ -1,0 +1,287 @@
+
+/* common*/
+* { 
+    padding : 0; 
+    margin : 0;
+    /*border: 0;*/
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+#container{
+    padding-top: 120px;
+    min-height: 85vh;
+    width: 57vw;
+    margin: 0px auto;
+}
+#width-fix-div{
+    border: 0;
+    width: 580px;
+    margin: 80px auto;
+}
+hr{
+    z-index: 99999;
+}
+a, p, span, button {
+    text-decoration: none;
+    color: #616161;
+}
+ol, ul, li {
+    list-style: none;
+}
+table{
+    border-collapse: separate; border-spacing:30px 10px;
+
+}
+
+div{
+    /* margin: 5px; */
+    /* border-width: 1px;
+    border-style: solid;
+    border-color: #616161; */
+}
+button{
+    position: relative;
+    right: 0;
+    /* border-radius: 0.5em; */
+}
+#tag-post-btn { /* 태그 등록버튼 */
+    width: 64px;
+    height: 34px;
+    color: white;
+    background-color: rgb(17, 147, 218);
+    border-radius: 3px;
+    cursor: pointer;
+    border: 0;
+    margin: 0 0 0 4px;
+}
+#tag-canel-btn{
+    margin: 0 0 0 1px;
+    overflow: visible;
+}
+input#x-title, input#x-tag, input#x-maxcnt {
+    position: relative;
+    border: 1px solid #aaa;
+    border-radius: 0.2em;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    height: 35px;
+    margin: -2px 0 0 0;
+    width: 180px;
+    border-radius: 0.5em;
+}
+.table-cell label{
+    padding: 9px 13px;
+    background-color:rgb(17, 147, 218);
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    line-height: 150%;
+    font-size: .85em;
+  }
+  #x-file{
+      display: none;
+  }
+  .filebox .upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 78%;
+    color: #999999;
+}
+textarea#x-tag{
+    position: relative;
+    border: 1px solid #aaa;
+    border-radius: 0.2em;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    height: 70px;
+    width: 230px;
+    margin: 0 0 23px 0;
+}
+
+.tag-btn, #local-btn, #create-btn, .file-btn {
+    color: white;
+    background-color: rgb(17, 147, 218);
+    border-radius: 3px;
+    cursor: pointer;
+    border: 0;
+    width: 60px;
+    height: 27px;
+    font-size: 14px;
+}
+#local-btn{
+    position: absolute;
+    left: 0;
+}
+.sector{
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.table-row-group{
+    display: table-row-group;
+}
+.table-row{
+    display: table-row;
+    height: 60px;
+}
+.table-cell{
+    white-space:nowrap;
+    display: table-cell;
+    position: relative;
+}
+.title{
+    width: 100px;
+    vertical-align: top;
+}
+select { 
+    /*디폴트 스타일 제거*/
+    -moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+
+    font-family: "Noto Sansf KR", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: #444;
+    background-color: #fff;
+
+    padding: 0.6em 1.4em 0.5em 0.8em;
+    margin: 0;
+
+    border: 1px solid #aaa;
+    border-radius: 0.5em;
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+select:hover {
+    border-color: #888;
+  }
+  
+select:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+  }
+  
+select:disabled {
+    opacity: 0.5;
+  }     
+
+.correct-local,.cancel-local-btn{
+    float: left;
+    margin: 0 5px 0 0;
+}
+
+#create-btn { /*button은 inline -> block을 줘서 줄 차지 하게 하고 margin auto줘야 가운데 정렬됨 */
+    display: block;
+    width: 360px;
+    height: 3vh;
+    margin: 0px auto;
+}
+.material-icons.md-23{
+    font-size: 23px;
+    margin: -4px 0 0 0;
+}
+/* 모달 */
+.background-si , .background-gu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* background-color: rgba(197, 187, 187, 0); */
+    
+    /* 숨기기 */
+    z-index: -1;
+    opacity: 0;
+}
+
+
+.window, .gu-window {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-close{
+    position: absolute;
+    right: 0;
+}
+
+.popup, .gu-popup{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #ffffff;
+    box-shadow: 9px 12px 6px rgba(0, 0, 0, 0.3);
+    
+    width: 600px;
+    min-height: 500px;
+    
+    
+    /* 초기에 약간 아래에 배치 */
+    transform: translate(-50%, -40%);
+    border: 3px solid rgb(17, 147, 218);
+}
+
+.show .popup, .show .gu-popup { 
+    transform: translate(-50%, -50%);
+    transition: all 0.5s;
+}
+
+.sigungu-title{
+    background-color: rgb(17, 147, 218);
+    color: white;
+    border-radius: 20px;
+    width: 500px;
+    height: 40px;
+    margin: 53px auto;
+    padding: 10px 0 0 0;
+    text-align: center;
+    font-size: 24px;
+}
+.popup .local-btn-div, .gu-popup .local-btn-div2{
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    position: relative;
+    width: 500px;
+    min-height: 300px;
+    border: 2px solid rgb(17, 147, 218);
+    margin: 0 auto 50px auto;
+}
+.popup .local-btn-div button, .local-btn-div2 button{
+    width: 160px;
+    height: 50px;
+    background-color: white;
+    border: none;
+}
+.cancel-local-btn{
+    background-color: white;
+    text-decoration: none;
+    border: none;
+}
+.selected, .cancel-local-btn{
+    z-index: -1;
+    opacity: 0;
+}
+.a11y-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: polygon(0 0, 0 0, 0 0);
+    z-index: -1;
+    opacity: 0;
+  }
+.show {
+    opacity: 1;
+    z-index: 1000;
+    transition: all 0.5s;
+}

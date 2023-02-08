@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.AccountingStatusDao">
+  
+  <resultMap type="AccountingStatus" id="AccountingStatusMap">
+    <id column="act_no" property="actno"/>
+    <result column="g_no" property="gno"/>
+    <result column="memb_no" property="membno"/>
+    <result column="pay_dt" property="paydt"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="AccountingStatusMap"> 
+    select
+      act_no,
+      g_no,
+      memb_no,
+      pay_dt
+    from
+      gms_accounting_status
+    order by
+      act_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="AccountingStatusMap" parameterType="int">
+    select 
+      act_no,
+      g_no,
+      memb_no,
+      pay_dt
+    from 
+      gms_accounting_status
+    where 
+      act_no=#{actno}
+  </select>
+
+  <insert id="insert" parameterType="AccountingStatus">
+    insert into gms_accounting_status(act_no,g_no,memb_no,pay_dt) 
+    values(#{actno},#{gno},#{membno},#{paydt})
+  </insert>
+  
+  <update id ="update" parameterType="AccountingStatus">
+    update gms_accounting_status set 
+      pay_dt = #{paydt}
+    where 
+      act_no=#{actno}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_accounting_status
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_accounting_status
+    where 
+      act_no=#{actno}
+  </delete>
+</mapper>

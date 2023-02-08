@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=
+  , initial-scale=1.0">
+  <title>서비스 안내</title>
+  <!-- JQUERY -->
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- 아이콘 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- 내 css -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+  <div id="header"></div>
+  
+<div class = "container">
+  <div class = "all-notice-explanation">
+    <div class ="notice-explanation">
+     <img class = "exclamation-mark"src="../image/information.png" >
+      <h1 class ="notice-head">서비스안내</h1>
+        <p class ="notice-explanation-text">
+          저희 요모조모를 이용하면서 불편했던 점이나<br>
+                궁금한 점을 빠르고 친절하게<br>
+                    안내해 드리겠습니다.<br>
+              아래 카테고리를 선택해 주세요.</p>   
+      </div>
+      </div>
+    <div class ="image">
+      <img class ="service_center" src="../image/service_center.png" >
+    </div>
+    <div class ="notice-category">
+      <span class="material-icons">question_mark</span>
+      <span id ="faq-btn" class ="faq"><a>자주하는 질문</a></span>
+      <span class="material-icons">volume_up</span>
+      <span id ="announcement-btn"class ="announcement"><a>공지사항</a></span>
+      <span class="material-icons">search</span>
+      <span id ="information-btn" class ="announcement"><a>서비스 안내</a></span>
+      <span class="material-icons">call</span>
+      <span id="inquiry-btn" class ="announcement"><a>문의사항</a></span>
+    </div>
+    <div class="sidebar">
+      <div style="font-size: 20px;">회원</div>
+      <div>회원가입</div>
+      <div>로그인</div>
+      <div>회원 전환</div>
+      <div>마이페이지</div>
+      <div style="font-size: 20px;">개설자</div>
+      <div>개설자 Tip</div>
+      <div>모임개설</div>
+      <div>모임관리</div>
+      <div>모임 홍보·운영</div>
+      </div>
+       <div class="body-text" style="margin-bottom: 50px;">
+        회원가입<br><br>
+        요모조모 회원이 되어 다양한 기능을 이용해 보세요.<br>
+        무료로 이름(성명/회사명 등)과 이메일, 전화번호로 간단한 회원가입이 가능합니다
+       </div>
+       <div class="body-img">
+         <img class="join" src="../image/join.PNG" >
+       </div>
+    </div>
+  </div>
+
+  <div id="footer" style="margin-top: 700px;"></div>
+</body>
+</html>
+<script src="../js/location.js"></script>

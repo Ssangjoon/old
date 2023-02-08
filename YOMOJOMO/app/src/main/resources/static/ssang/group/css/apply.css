@@ -1,0 +1,130 @@
+
+/* common*/
+* { 
+    padding : 0; 
+    margin : 0;
+    /*border: 0;*/
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+#container{
+    min-height: 85vh;
+    padding-top: 10vh;
+    margin-bottom: 40px;
+}
+#width-fix-container{
+  position: relative;
+  width: 1130px;
+  height: 70vh;
+  margin: 0 auto;
+}
+.form-container{
+  position: relative;
+  width: 760px;
+  height: 700px;
+  margin: 33px auto;
+  padding: 40px 20px 0 20px;
+  /* border: 2px solid rgb(17, 147, 218); */
+  border-radius: 5px;
+}
+hr{
+    z-index: 99999;
+}
+a, p, span, button {
+    text-decoration: none;
+    color: #616161;
+}
+ol, ul, li {
+    list-style: none;
+}
+div{
+    /* margin: 5px; */
+    /* border: 1px solid #616161; */
+}
+span{
+  /* color: #ffffff; */
+  font-weight: bold;
+}
+input, button, textarea{
+    position: relative;
+    right: 0;
+}
+table{
+  border-collapse: separate; 
+  border-spacing:10px 17px;
+}
+.group-info-div{
+  padding-right: 5px;
+  margin-top: 20px;
+  border: 2px solid rgb(17, 147, 218);
+  border-radius: 5px;
+  width: 230px;
+  height: 162px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+}
+.group-info-div::-webkit-scrollbar{ display:none; }
+#group-title{
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  width: 100%;
+  height: 50px;
+}
+.logo-div{
+  display: inline-block;
+  width: 230px;
+  height: 230px;
+}
+.main-logo{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.group-intro{
+  margin-top: 20px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  width: 215px;
+  overflow: auto;
+}
+.group-memb-cnt{
+  margin-top: 20px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 24px;
+}
+.report-form-div{
+  display: inline-block;
+}
+.report-form-div{
+  position: absolute;
+  right: 20px;
+  top: 90px;
+  width: 390px;
+}
+input.x-answer{
+  margin: 0 0 40px 40px;
+  width: 180px;
+  height: 30px;
+  border-radius: 5px;
+}
+textarea{
+  width: 100%;
+  height: 150px;
+}
+.apply-btn-div{
+  float: right;
+}
+button#apply{
+  margin-top: 10px;
+  width: 100px;
+  height: 39px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(17, 147, 218);
+  border: none;
+}

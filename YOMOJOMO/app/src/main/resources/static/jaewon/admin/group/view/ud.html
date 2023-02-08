@@ -1,0 +1,87 @@
+
+<div class="m-container inbox"></div>
+
+
+
+<script src="/node_modules/handlebars/dist/handlebars.js"></script>
+<script id="div-get" type="text/x-handlebars-template">
+		<form name="data" id="data">
+			<div class="shadow p-5">
+				<div class="row mb-5">
+					<h1>모임 정보 상세</h1>
+				</div>
+				<div class="row mb-2 top">
+
+										<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">모임 이름</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{groupName}}</div>
+						</div>
+						<div class="col-3"></div>
+					</div>
+
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">생성일</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{registDate}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">소개글</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{intro}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">최대 인원 수</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{maxCount}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">조회 수</div>
+						<div class="col input-group mb-3 ">
+							<div class="p-2">{{viewCount}}</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row">
+						<div class="col-3 p-2 text-center fw-bold">상태</div>
+						<div class="col input-group mb-3 p-2">
+							<div class="form-check">
+  								<input class="form-check-input" type="radio" name="penalty" value="0" id="radio" checked>
+									<label class="form-check-label" for="flexRadioDefault1">
+    									대기중
+  									</label>
+							</div>
+							<div class="form-check">
+  								<input class="form-check-input" type="radio" name="penalty" value="3" id="radio">
+  								<label class="form-check-label" for="flexRadioDefault2">
+    								3일 정지
+  								</label>
+							</div>
+							<div class="form-check">
+  								<input class="form-check-input" type="radio" name="penalty" value="7" id="radio">
+  								<label class="form-check-label" for="flexRadioDefault2">
+    								7일 정지
+  								</label>
+							</div>
+						</div>
+						<div class="col-3 p-2"></div>
+					</div>
+					<div class="row>
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col">
+						<button type="button" class="btn btn-primary update-finish-btn" value={{no}}>수정 완료</button>
+						<button type="button" class="btn btn-secondary cancel-finish-btn" value={{no}}>취소</button>
+					</div>
+				</div>
+			</div>
+		</form>
+</script>
+</body>
+</html>

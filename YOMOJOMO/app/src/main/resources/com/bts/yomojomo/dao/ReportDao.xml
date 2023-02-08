@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.ReportDao">
+
+	<resultMap type="Report" id="reportMap">
+		<id column="rpt_no" property="rptNo" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="valid" property="valid" />
+		<result column="memb_no" property="membNo" />
+		<result column="rpt_cate_no" property="rptCateNo" />
+		<result column="reported" property="reported" />
+		<association property="reportCate" javaType="ReportCate"> <!--초대 받은 사람 join -->
+			<id column="rpt_cate_no" property="rptCateNo" />
+			<result column="name" property="name" />
+		</association>
+		<association property="member" javaType="Member"> <!--초대 받은 사람 join -->
+			<id column="memb_no" property="no" />
+			<result column="membername" property="memberName" />
+		</association>
+		<association property="reportedMember" javaType="Member"> <!--초대 받은 사람 join -->
+			<id column="memb_no" property="no" />
+			<result column="membname" property="memberName" />
+		</association>
+	</resultMap>
+		
+
+
+	
+	<select id="findByNo" resultMap="reportMap" parameterType="int">
+		select
+			gr.rpt_no,
+			gr.title,
+			gr.content,
+			gr.valid,
+			gr.memb_no,
+			gr.rpt_cate_no,
+			gr.reported,
+			grc.name,
+			gm.membername,
+			gs.membername as membname
+		from
+			gms_report gr,
+			gms_report_cate grc,
+			gms_memb gm,
+			gms_memb gs
+		where
+			gr.rpt_cate_no = grc.rpt_cate_no
+			AND gr.memb_no = gm.memb_no
+			AND gr.reported = gs.memb_no
+			AND	rpt_no=#{no}
+	</select>
+
+	<update id="valid" parameterType="Report">
+		update
+			gms_report
+		set
+			valid=#{valid}
+		where
+			rpt_no=#{no}
+	</update>
+	
+	<update id="insert" parameterType="Report">
+		INSERT INTO gms_report(title,content,memb_no,rpt_cate_no,reported)
+        values(#{title},#{content},#{membNo},#{rptCateNo},#{reported})
+	</update>
+
+	<update id="reportDelete" parameterType="Report">
+		update
+			gms_report
+		set
+			valid=1
+		where
+			rpt_no=#{no}
+	</update>
+
+	<select id="getBoardListSelect" resultMap="reportMap">
+		select
+			gr.rpt_no,
+			gr.title,
+			gr.content,
+			gr.valid,
+			gr.memb_no,
+			gr.rpt_cate_no,
+			gr.reported,
+			grc.name,
+			gm.membername,
+			gs.membername as membname
+		from
+			gms_report gr,
+			gms_report_cate grc,
+			gms_memb gm,
+			gms_memb gs
+		where
+			gr.rpt_cate_no = grc.rpt_cate_no
+			AND gr.memb_no = gm.memb_no
+			AND gr.reported = gs.memb_no
+		<if test='!searchKeyword.equals("")'>
+		AND gm.name LIKE "%"#{searchKeyword}"%"
+		</if>
+		order by
+			rpt_no DESC
+		LIMIT
+			#{no}, #{cutno}
+	</select>
+
+
+	<select id="getBoardListSelectCount" parameterType="Report"
+		resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			gms_report
+		
+		<if test='!searchKeyword.equals("")'>
+		WHERE
+			name LIKE "%"#{searchKeyword}"%"
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,499 @@
+.container{
+  
+  font-family: 'Nanum Gothic', sans-serif;
+  line-height: 1.4;
+  max-width: 1130px;
+  padding-top: 10vh;
+}
+
+ .image{
+   
+   height: 350px;
+ }
+ .exclamation-mark{
+   
+   width: 50px;
+   height: 50px;
+   margin-left: 105px;
+ }
+ .notice-head{
+   margin-top: 0px;
+   margin-left : 85px;
+   font-size: 30px;
+ }
+ .notice-explanation-text{
+   text-align: center;
+ }
+ p {
+   width: 275px;
+ }
+ .all-notice-explanation{
+   margin-left: 200px;
+   margin-top: 50px;
+ }
+ .service_center {
+   width: 450px;
+   height: 400px;
+   
+ }
+ .notice-explanation {
+   float: left;
+   margin-top: 100px;
+   
+ 
+ }
+
+ .service_center{
+   margin-left: 150px;
+   
+
+ }
+
+ .notice-category{
+   background-color: rgb(17, 147, 218);
+   border: 1px;
+   height: 60px;
+   padding-top: 20px;
+   margin-bottom: 20px;
+   width: 100%;
+   margin-top: 30px;
+   
+ }
+ .notice-category .material-icons {
+   
+   vertical-align: middle;
+   float: left;
+   margin-left: 170px;
+ 
+  }
+
+  .notice-category span {
+    color: white;
+    float: left;
+    
+    
+  }
+
+ .question_mark {
+   margin-left: 100px;
+ }
+ .faq_1 {
+   font-weight: bold;
+ }
+ .more_qna{
+   text-align: right;
+   margin-left: 50px;
+ }
+   
+/* .all-board{
+ 
+} */
+ .faq_list {
+   border: black double 5px;
+   border-radius: 10px;
+   /* margin-top: 20px; */
+   background-color:azure;
+   position: relative;
+ }
+ .faq_list > li {
+   margin-left: 10px;
+   
+ }
+ .announcement_1{
+   font-weight: bold;
+
+ }
+ /* .announcement_all{
+   margin-top: 20px;
+   /* float: left; */
+
+ /* } */ 
+ .announcement_more{
+   margin-left: 90px;
+   
+ }
+ .announcement_list{
+   border: #036 double 5px;
+   border-radius: 10px;
+   /* margin-top: 10px; */
+   width: 240px;
+   background-color: azure;
+   /* position: relative; */
+   margin-left: 30px;
+
+   
+ }
+ .announcement_list > li {
+   margin-left: 10px;
+ }
+
+
+.information_card{
+ border: black solid 1px;
+ border-radius: 10px;
+ /* float: left; */
+ margin-top: -200px;
+ margin-left : 400px;
+ width: 300px;
+ height: 300px;
+ font-weight: bold;
+ text-align: center;
+}
+.information_more{
+ object-fit: cover;
+ display: inline-block;
+ width: 100%;
+ height: 100%;
+
+}
+.question_card{
+ border: black solid 1px;
+ border-radius: 10px;
+ /* float: left; */
+ margin-top: -300px;
+ margin-left : 50px;
+ width: 300px;
+ height: 300px;
+ font-weight: bold;
+ text-align: center;
+ margin-left : 800px;
+}
+.question_more{
+ object-fit: cover;
+ display: inline-block;
+ width: 100%;  
+ height: 100%;
+ border-radius: 10px;
+
+}
+
+.faq_search > span {
+  float: left;
+  font-weight: bold;
+  font-size: larger;
+  margin-right: 30px;
+}
+.search_window{
+  position: relative;
+  vertical-align: middle;
+}
+
+  
+.search_window > input {
+  width: 45vw;
+  height: 25px;
+}
+
+.search_window > img {
+  margin-top: 7px;
+  position : absolute;
+  
+  width: 15px;
+  height: 15px;
+}
+
+.keword_btn {
+  margin-left: 150px;
+  margin-top: 15px;
+
+}
+
+.keword_btn > button {
+  margin-left: 30px;
+  border: 1px ;
+  border-radius: 5px; 
+}
+
+.faq_list_title{
+  margin-top: 30px;
+}
+
+/* .faq_list_table > table {
+  border : solid 1px black;
+  width: 100%;
+} */
+
+.faq_list_table thead th{
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #369;
+  border-bottom: 3px solid #036;
+}
+.faq_list_table tbody th{
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+  background: #f3f6f7;
+}
+.faq_list_table td{
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+
+
+/* .faq_list_table > th, td {
+  border: 1px solid black;
+  text-align: center;
+
+}
+.faq_list_table th{
+  border: solid 1px black;
+  text-align: center;
+}
+
+.faq_list_table td{
+  border: solid 1px black;
+  
+} */
+
+.announcement_table thead th{
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #369;
+  border-bottom: 3px solid #036;
+}
+.announcement_table tbody th{
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+  background: #f3f6f7;
+}
+.announcement_table td{
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+
+.page {
+  text-align: center;
+  width: 50%;
+}
+
+.modal-body  {
+  
+  text-align: center;
+  background-color: gray;
+}
+/* 
+.announcement_head {
+
+  font-weight: bold;
+  font-size: larger;
+  margin-right: 750px;
+
+}
+
+.announcement_table {
+  border: solid 1px black;
+  width: 100%;
+}
+
+.announcement_table th{
+  border: solid 1px black;
+  text-align: center;
+}
+
+.announcement_table td{
+  border: solid 1px black;
+  
+} */
+
+
+/* .announcement_detail {
+  width: 100%;
+  height: 400px;
+
+}
+
+.announcement_date {
+  margin-left: 400px;
+} */
+
+.title_th {
+  background-color: gray;
+  height: 20px;
+  border: 1px solid black;
+}
+
+.sidebar {
+  height: auto;
+  width: 150px;
+
+  margin-top: 70px;
+  left: 0;
+  padding-top: 40px;
+  background-color: white;
+  border-right: 1px solid black;
+  float: left;
+  }
+  
+  .sidebar div {
+  padding: 8px;
+  font-size: 16px;
+  
+  
+  }
+  
+  .body-text {
+  font-size: 16px;
+  margin-left: 40px;
+  margin-top: 70px;
+  float: left;
+  }
+
+  .body-img img {
+    width: auto;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .my_inquiry {
+    
+    margin-left: 730px;
+  }
+
+  .inquiry_title {
+    border-bottom: solid 2px black;
+    
+  }
+
+  .faq_1 {
+    margin-top: 20px;
+  }
+
+  .inquiry_body {
+    margin-top: 40px;
+  }
+  .inquiry_body .name {
+    margin-left: 80px;
+    
+  }
+  .inquiry_body .tel {
+    margin-left: 250px;
+  }
+
+  .inquiry_body input {
+    margin-left: 50px;
+  }
+ .inquiry_body .inquiry_body_email {
+   margin-top: 10px;
+   border-top: solid 2px gray;
+ }
+  .inquiry_body .email_text {
+    margin-left: 62px;
+    margin-top: 15px;
+  }
+
+  .inquiry_body .title_text {
+    margin-left: 80px;
+  }
+
+  .inquiry_body .inquiry_body_title {
+    margin-top: 10px;
+    border-top: solid 2px gray;
+  }
+
+
+  .content_text {
+    float:left;
+    margin-left: 80px;
+    margin-top: 15px;
+  }
+
+  .textarea {
+       margin-left: 50px;
+       margin-top: 20px;
+  }
+
+  .inquiry_body_content {
+    margin-top: 15px;
+  
+    border-top: solid 2px gray;
+  }
+
+  .inquiry_body_upload {
+   
+    margin-top: 20px;
+    border-top: solid 2px gray;
+  }
+  
+  .upload_text {
+    margin-left: 55px;
+  }
+
+  .upload_all {
+    margin-top: 20px;
+  }
+
+  .upload_input {
+    width: 450px;
+    margin-left: 50px;
+  }
+
+  .information_upload {
+    font-size: 8px;
+    margin-left: 300px;
+  }
+
+  .inquiry_body_agree {
+    margin-top: 20px;
+    border-top: solid 2px gray;
+    padding-top:  20px;
+    position: relative;
+  }
+
+  .inquiry_body_agree span {
+    margin-left: 55px;
+    margin-top : 30px;
+  }
+  
+  .text_all {
+    float: left;
+  }
+  .checkbox_all {
+    float: left;
+    margin-left: 40px;
+    margin-top: 30px;
+  }
+
+  
+#inquiry_table thead th{
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #369;
+  border-bottom: 3px solid #036;
+}
+#inquiry_table tbody th{
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+  background: #f3f6f7;
+}
+#inquiry_table td{
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid #ccc;
+}
+
+  footer .inner{
+    width: 100%;
+    margin-top: 250px;
+    height: 70px;
+    
+    
+  }

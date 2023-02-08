@@ -1,0 +1,113 @@
+/* common*/
+* { 
+    padding : 0; 
+    margin : 0;
+    /*border: 0;*/
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+#container{
+    min-height: 65vh;
+}
+.width-fix-container{
+    min-height: 600px;
+    width: 700px;
+    margin: 20px auto;
+    border-radius: 9px;
+    border: 1px solid rgb(227, 227, 227);
+    padding: 15px;
+}
+hr{
+    z-index: 99999;
+}
+a, p, span, button {
+    text-decoration: none;
+    color: #616161;
+}
+ol, ul, li {
+    list-style: none;
+}
+/* 아이콘 설정 */
+.material-icons{
+    color: rgb(17, 147, 218);
+    margin-left: 3px;
+}
+.memb-report .material-icons{
+    color: rgba(231, 76, 60, 0.6);
+    margin-left: 3px;
+}
+.material-icons.md-32 { font-size: 32px; }
+.material-icons.md-32 { font-size: 32px; }
+.memb-report, .settings-btn{
+    background-color: #fff;
+    border: none;
+    display: block;
+}
+/* 인원수 */
+.memb-count {
+    display: inline-block;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+/* 초대버튼 */
+.invite-btn{
+    border-radius: 3px;
+    float: right;
+}
+#invite-btn .btn{
+    color: white;
+    background-color: rgb(17, 147, 218);
+    border-radius: 3px;
+    cursor: pointer;
+    border: 0;
+    width: 60px;
+    height: 27px;
+    font-size: 14px;
+}
+.memb-content-container{
+    height: 600px;
+    margin: 10px 0 0 0;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+}
+.memb-content-container::-webkit-scrollbar{ display:none; }
+.memb-select{
+    float: right;
+}
+.memb-list-container{
+    width: 350px;
+}
+.memb-list{
+    min-height: 300px;
+    padding: 20px;
+}
+.memb-item-column{
+ display: inline-block;
+}
+.memb-item{
+    margin: 0 0 50px 0;
+    position: relative;
+    height: 100%;
+    text-align: center;
+    display:table;
+    vertical-align:middle;
+}
+.x-memb-name{
+    margin: 0 30px 0 0;
+}
+.modify-btn-div{
+    float: right;
+}
+.grade{
+    display: inline-block;
+}
+button.memb-report{
+    display: inline;
+    margin: 0 0 0 5px;
+}
+.memb-item .material-icons{
+    vertical-align: middle;
+}

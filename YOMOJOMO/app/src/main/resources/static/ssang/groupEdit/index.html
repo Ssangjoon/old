@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<!-- 제이쿼리 -->
+<script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<!-- css 초기화 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+<!-- 아이콘 연결 코드 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- Handlebars -->
+<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<!--공용css-->
+<link rel="stylesheet" href="/css/common.css">
+<!--내css-->
+<link rel="stylesheet" href="/ssang/groupEdit/index.css">
+<script src="//code.jquery.com/jquery-1.11.0.min.js">
+</script>
+<!-- 인클루드 -->
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#headers').load('../../junho/mainHeader.html'); //헤더 인클루드
+    $('#top').load('../groupBoard/none-search-top.html'); //모임 윗부분 인클루드
+    $('#footers').load('../../junho/mainfooter.html'); //푸터부분 인클루드
+});
+</script>
+</head>
+<body class="menu7">
+<div id="headers"></div>
+<div id="top"></div>
+<div id="container">
+    <div class="group-edit-btn-div">
+        <table>
+            <tr>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="탈퇴하기" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">탈퇴</button>
+                </div>
+            </tr>
+            <tr>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="신고하기" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2" class="group-report icon" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" >신고</button>
+                </div>
+            </tr>
+            <tr>
+              <!-- 신청서 생성하기 -->
+              <!-- <div class="input-group mb-3" id="create-applyForm-div">
+                <input type="text" class="form-control" placeholder="가입신청서 생성" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary " type="button" id="create-applyForom">생성</button>
+              </div> -->
+              <!-- 현황 아코디언 -->
+              <div class="accordion" id="applyForm">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      신청서 등록 사항
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body" id="accordion-body" ></div>
+                  </div>
+                </div>
+              <!-- 질문 생성 아코디언 -->
+              <div class="accordion-item" >
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    신청서 관리
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <!--질문 추가부분-->
+                    <div class="List-Container">
+                      <div id="x-question-container">
+                          <div class="x-question">
+                              항목 : <input id="listQuestionName" type="text" name="questionName">
+                              <button id="x-deleteMemb-btn" type="button" class="btn btn-primary" onclick="deleteDiv(event)">삭제</button><br>
+                          </div>
+                        </div>
+                        <button id="x-addQuestion-btn" type="button" class="btn btn-primary">추가</button>
+                        <button id="x-apply-form" type="button" class="btn btn-primary">등록</button>
+                      </div>
+                  </div>
+                </div>
+              </div>  <!-- 그룹 삭제 -->
+              <div class="accordion-item" >
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    모임 삭제
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <!--질문 추가부분-->
+                    <div class="List-Container">
+                      <div id="x-question-container">
+                        <button id="groupDelete" type="button" class="btn btn-danger">삭제</button>
+                  </div>
+                </div>
+              </div>  <!-- 추가 아코디언 -->
+            </tr>
+        </table>
+    </div>
+    <!-- 부트스트랩 모달 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">모임 신고</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form name="form1">
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">제목:</label>
+                <input type="text" name="title" class="form-control" id="recipient-name">
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label">신고사유:</label>
+                <textarea class="form-control" id="message-text" name="content"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+            <button type="button" id="group-report-exactly"  class="btn btn-primary">신고하기</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- 부트스트랩 모달 -->
+    <script id="br-template" type="text/x-handlebars-template">
+      {{#each this}}
+      <input type="text" value="{{questionName}}" data-qno="{{no}}" class="apply-content" ><br>
+      {{/each}}
+      <button id="x-reform" type="button" class="btn btn-primary">수정</button><br>
+    </script>
+</div>
+<div id="footers"></div>
+</body>
+<script type="module" src="/ssang/groupEdit/index.js"></script>
+<script>
+  function deleteDiv(){
+    var list = document.querySelector('#x-question-container')
+    list.removeChild(list.childNodes[0]);
+  }
+</script>
+</html>

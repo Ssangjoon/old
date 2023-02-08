@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.SnsDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="Sns" id="snsMap">
+    <id column="SNSno" property="no"/>
+    <result column="name" property="name"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="snsMap"> 
+    select
+      SNSno,
+      name
+    from
+      gms_SNS
+    order by
+      SNSno asc
+  </select>
+  
+  <select id="findByNo" resultMap="snsMap" parameterType="int">
+    select 
+      SNSno,
+      name
+    from 
+      gms_SNS
+    where 
+      SNSno=#{no}
+  </select>
+
+  <insert id="insert" parameterType="Sns">
+    insert into gms_SNS(name) 
+    values(#{name})
+  </insert>
+  
+  <update id ="update" parameterType="Sns">
+    update gms_SNS set 
+      name = #{name}
+    where 
+      SNSno = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_memb
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_SNS
+    where 
+      SNSno = #{no}
+  </delete>
+</mapper>

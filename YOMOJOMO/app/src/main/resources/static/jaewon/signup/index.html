@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="/node_modules/sweetalert2/dist/sweetalert2.min.css">
+<link rel="stylesheet"
+	href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/jaewon/css/main.css">
+<link rel="stylesheet" href="/jaewon/signup/css/content.css">
+<title>Manage Page</title>
+</head>
+<body>
+	<div class="header"></div>
+	<div class="content"></div>
+	<div class="footer"></div>
+	<script src="/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+	<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/node_modules/js-cookie/dist/js.cookie.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script src="/jaewon/login/login/signin.js"></script>
+	<script src="/jaewon/signup/signup.js"></script>
+	<script src="https://apis.google.com/js/platform.js?onload=googleInit"></script>
+	<script>
+		$(function() {
+			$(".header").load("/junho/mainHeader.html");
+			$(".content").load("/jaewon/signup/content.html", function() {
+				snsLoginDataCheck();
+				localListSi();
+				localListGu();
+				addLocal();
+				deleteLocal();
+				signForm();
+				pupsList();
+				addPups();
+				deletePups();
+				facebookInit();
+				kakaoInit();
+			});
+			$(".footer").load("/junho/mainfooter.html");
+		})
+	</script>
+
+
+
+</body>
+</html>

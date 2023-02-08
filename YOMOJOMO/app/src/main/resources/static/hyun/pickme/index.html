@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pick me!</title>
+  <link rel="icon" href="/junho/img/logo.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <link rel="stylesheet" href="../css/pickmeindex.css">
+</head>
+
+<body>
+<!--공통헤더-->
+<div id="header"></div>
+
+<div id="body-content">
+  <div class="inner">
+    <div id="pickme-outline">
+      <div id="pickmeHeader">
+        <div id="localSelect" > <!--style="display: inline-block"-->
+          <select name="nameSi" id="nameSi" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+          <select name="nameGu" id="nameGu" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+        </div>
+        <div id="search">
+          <div class="d-flex"> 
+            <input class="form-control me-2" type="search" id="searchInput" placeholder="Search" aria-label="Search">
+            <button class="btn btn-primary btn-sm" type="button" id="searchBtn">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <div id="content" class="table-responsive-lg">
+      <table id="x-board-table" class="table table-hover ">
+        <thead>
+          <tr>
+            <th width="50px">번호</th>
+            <th width="100px">시,도</th>
+            <th width="100px">군,구</th>
+            <th width="400px">제목</th>
+            <th width="100px">작성자</th>
+            <th width="100px">등록일</th>
+            <th width="80px">조회수</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div id="listnone">
+      <h1>작성된 글이 없습니다.<br></h1>
+    </div>
+    <div id="searchnone">
+      <h1>조건에 맞는 글이 없습니다.<br></h1>
+    </div>
+    <button id="x-create-btn" type="button" style="float: right" class="btn btn-primary">등록</button>
+    
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center" id="pagination-ul">
+      </ul>
+    </nav>
+
+  </div>
+</div>
+
+<div id="footer"></div>
+
+<!--전체 페이지네이션 생성 핸들 바-->
+<script id="pageli-template" type="text/x-handlebars-template">
+  <li class="page-item" id="startpageli" >
+    <button class="page-link page-first-link" type="button" id="page-Btn" value="1"><<</button>
+  </li>
+  {{#each this}}
+  <li class="page-item" id="pageli"><button type="button" id="page-Btn" class="page-link" value="{{no}}">{{totalPageSize}}</button></li>
+  {{/each}}
+  
+  <li class="page-item" id="endpageli">
+    <button class="page-link page-end-link" type="button" id="page-Btn" value="">>></button>
+  </li>
+</script>
+<!--전체 페이지네이션 생성 핸들 바-->
+
+<!--시,도 카테고리 생성 핸들 바-->
+<script id="optionSi-template" type="text/x-handlebars-template">
+  <option id="allList" value="0">전체</option>
+  {{#each this}}
+  <option id="selectOp">{{nameSi}}</option>
+  {{/each}}
+</script>
+<!--시,도 카테고리 생성 핸들 바 END-->
+
+<!--군,구 카테고리 생성 핸들 바-->
+<script id="optionGu-template" type="text/x-handlebars-template">
+  <option>군구 선택</option>
+  {{#each this}}
+  <option id="selectGuOp" value="{{no}}">{{nameGu}}</option>
+  {{/each}}
+</script>
+<!--군, 구 카테고리 생성 핸들 바 END-->
+
+<!--게시글 list-->
+<script id="tr-template" type="text/x-handlebars-template">
+  {{#each this}}
+  <tr>
+    <td>{{no}}</td>
+    <td>{{activeLocal.nameSi}}</td>
+    <td>{{activeLocal.nameGu}}</td>
+    <td><a href="view.html?no={{no}}">{{this.title}}</a></td>
+    <td>{{member.memberName}}</td>
+    <td>{{date}}</td>
+    <td>{{viewCnt}}</td>
+  </tr>
+  {{/each}}
+</script>
+<!--게시글 list END-->
+
+<script src="/hyun/js/pickmeindex.js"></script>
+</body>
+</html>

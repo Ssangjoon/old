@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.FinalActiveLocalDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="FinalActiveLocal" id="finalactivelocalMap">
+    <id column="membno" property="no"/>
+    <result column="itrlocalno" property="itrlocalno"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="finalactivelocalMap"> 
+    select
+      membno,
+      itrlocalno
+    from
+      gms_final_activelocal
+    order by
+      membno asc
+  </select>
+  
+  <select id="findByNo" resultMap="finalactivelocalMap" parameterType="int">
+    select 
+      membno,
+      itrlocalno
+    from 
+      gms_final_activelocal
+    where 
+      membno=#{no}
+  </select>
+
+  <insert id="insert" parameterType="FinalActiveLocal">
+    insert into gms_final_activelocal(itrlocalno) 
+    values(#{itrlocalno})
+  </insert>
+  
+  <update id ="update" parameterType="FinalActiveLocal">
+    update gms_final_activelocal set 
+      itrlocalno = #{itrlocalno}
+    where 
+      membno = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_final_activelocal
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_final_activelocal
+    where 
+      membno = #{no}
+  </delete>
+</mapper>

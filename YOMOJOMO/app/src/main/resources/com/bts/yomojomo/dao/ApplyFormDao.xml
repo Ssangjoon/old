@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.ApplyFormDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="ApplyForm" id="ApplyFormMap">
+    <id column="appl_no" property="no"/>
+    <result column="g_no" property="groupNo"/>
+    <result column="memb_no" property="memberNo"/>
+    <result column="content" property="content"/>
+    <result column="appl_dt" property="date"/>
+    <collection property="question" ofType="ApplyQuestion">
+      <id column = "appl_question_no" property="no"/>
+      <result column="appl_no" property="applyNo"/>
+      <result column="question_name" property="questionName"/>
+    </collection>
+  </resultMap>
+
+  <insert id="insert" parameterType="ApplyForm">
+    insert into gms_applyform(g_no) 
+    values(#{gno})
+  </insert>
+  
+  
+  <insert id="insertQuestion" parameterType="ApplyForm">
+    insert into gms_applyform(question_name, appl_no) 
+    values(#{questionName},#{applyNo})
+  </insert>
+  
+  
+  
+  <select id="findAll" resultMap="ApplyFormMap"> 
+    select
+      appl_no,
+      g_no,
+      memb_no,
+      content,
+      appl_dt
+    from
+      gms_applyform
+    order by
+      appl_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="ApplyFormMap" parameterType="int">
+    select 
+      appl_no,
+      g_no,
+      memb_no,
+      content,
+      appl_dt
+    from 
+      gms_applyform
+    where 
+      g_no=#{no}
+  </select>
+
+  
+  <update id ="update" parameterType="ApplyForm">
+    update gms_applyform set 
+      content = #{content}
+    where 
+      appl_no=#{no}
+  </update>
+  
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_applyform
+    where 
+      appl_no=#{no}
+  </delete>
+</mapper>

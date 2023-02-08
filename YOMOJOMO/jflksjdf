@@ -1,0 +1,40 @@
+[33mcommit 6b80d9d7388ee7113613c5d63132156e749d08fc[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Reflog: HEAD@{0} (youcanrun <qkqh34k@gmail.com>)
+Reflog message: reset: moving to HEAD^
+Author: youcanrun <qkqh34k@gmail.com>
+Date:   Fri Apr 22 23:39:33 2022 +0900
+
+    신청서 update
+
+[33mcommit 15b755e1815bf0d4af9bc4eef8841edcc0f291ff[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Reflog: HEAD@{1} (youcanrun <qkqh34k@gmail.com>)
+Reflog message: commit: .
+Merge: 6b80d9d acf6fb3
+Author: youcanrun <qkqh34k@gmail.com>
+Date:   Fri Apr 22 23:42:01 2022 +0900
+
+    .
+
+[33mcommit 6b80d9d7388ee7113613c5d63132156e749d08fc[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Reflog: HEAD@{2} (youcanrun <qkqh34k@gmail.com>)
+Reflog message: commit: 신청서 update
+Author: youcanrun <qkqh34k@gmail.com>
+Date:   Fri Apr 22 23:39:33 2022 +0900
+
+    신청서 update
+
+[33mcommit 7c5a1114d5a33f38b31f92b25d66a77fe633528e[m
+Reflog: HEAD@{3} (youcanrun <qkqh34k@gmail.com>)
+Reflog message: commit: 신청서 textarea 완료
+Author: youcanrun <qkqh34k@gmail.com>
+Date:   Fri Apr 22 17:32:56 2022 +0900
+
+    신청서 textarea 완료
+
+[33mcommit 04fa4dde325039938fe8f731b6fa7b850528093f[m
+Reflog: HEAD@{4} (youcanrun <qkqh34k@gmail.com>)
+Reflog message: clone: from https://github.com/junho-myeong/yomojomo
+Author: junho-myeong <wnsgh9166@naver.com>
+Date:   Fri Apr 22 15:40:50 2022 +0900
+
+    erd update

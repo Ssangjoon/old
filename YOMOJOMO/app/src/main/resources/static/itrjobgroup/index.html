@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>관심 직군명</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>내용</th>
+        <!-- <th>유형</th> -->
+      </tr>
+    </thead>
+    <tbody class="tbodyEl">
+    </tbody>
+  </table>
+  <button type="button"><a href="form.html">등록하기</a></button>
+  <script>
+    var xno = document.querySelector('.no')
+    // var xcate = document.querySelector('.cate')
+    var xtitle = document.querySelector('.title')
+    var xcontent = document.querySelector('.content')
+    var tbody = document.querySelector('.tbodyEl')
+    
+      fetch("/notice/list")
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(notices) {
+        for(var i = 0; i < notices.length; i++){
+          
+
+          var tr = document.createElement('tr')
+          tr.innerHTML = 
+            `<td>${notices[i].no}</td>
+            <td><a href="view.html?no=${notices[i].no}">
+            ${notices[i].title}</a>
+            <td>${notices[i].content}</td>
+            </td>
+            `
+            tbody.appendChild(tr)
+        }
+      })
+   
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.FinalJobDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="FinalJob" id="finaljobMap">
+    <id column="membno" property="no"/>
+    <result column="ijgno" property="ijgno"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="finaljobMap"> 
+    select
+      membno,
+      ijgno
+    from
+      gms_final_job
+    order by
+      membno asc
+  </select>
+  
+  <select id="findByNo" resultMap="finaljobMap" parameterType="int">
+    select 
+      membno,
+      ijgno
+    from 
+      gms_final_job
+    where 
+      membno=#{no}
+  </select>
+
+  <insert id="insert" parameterType="FinalJob">
+    insert into gms_final_job(ijgno) 
+    values(#{ijgno})
+  </insert>
+  
+  <update id ="update" parameterType="FinalJob">
+    update gms_final_job set 
+      ijgno = #{ijgno}
+    where 
+      membno = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_final_job
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_final_job
+    where 
+      membno = #{no}
+  </delete>
+</mapper>

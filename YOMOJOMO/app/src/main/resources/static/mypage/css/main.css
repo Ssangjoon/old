@@ -1,0 +1,66 @@
+.main {
+  padding-top: 100px;
+}
+.sidebar {
+  position: fixed;
+  float: left;
+  margin-top: 20px;
+  font-size: 18px;
+  width: 180px;
+}
+.base {
+  display: flex;
+  flex-direction: column;
+  padding: 60px 100px 0px 220px;
+  margin-bottom: 50px;
+}
+.breadcrumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 20px 0px 0px 220px;
+}
+/* 카테고리 */
+.category {
+  height: 20px;
+  margin: 1px;
+}
+/* 테이블 사용시에만 */
+.table {
+  text-align: center;
+}
+.table-title {
+  max-width: 400px;
+  width: 50%;
+  text-align: center;
+}
+.table-group {
+  max-width: 200px;
+  width: 25%;
+}
+.board-link {
+  text-decoration: none;
+  color: black;
+}
+tr > td {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+tr > .table-title:hover {
+  cursor: pointer;
+}
+.table-on {
+  display: none;
+}
+.form-check-input:hover {
+  cursor: pointer;
+}
+/* 페이지네이션&버튼 */
+.pagination {
+  justify-content: center;
+}
+.btn-delete {
+  float: right;
+  margin: 0px 5px;
+}

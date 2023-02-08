@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모임리스트</title>
+  <!-- 제이쿼리 -->
+  <script src="../../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- 아이콘 연결 코드 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Handlebars -->
+  <script src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!--공용css-->
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/ssang/group/css/index.css">
+  <!--인클루드-->
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#headers').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footers').load('/junho/mainfooter.html'); //푸터부분 인클루드
+    });
+  </script>
+</head>
+<body>  
+<div id="headers"></div>
+<div id="container">
+  <div class="select-cate-div">
+      <span class="title">상세정보</span>
+      <div id="select-flex-div">
+        <div id="localSelect"> <!--지역선택-->
+          <select name="nameSi" id="nameSi" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+          <select name="nameGu" id="nameGu" class="form-select form-select-sm" aria-label=".form-select-sm example"></select>
+        </div>
+        <select class="select purpose" id="selectPurpose">
+          <optgroup>
+        </optgroup>
+      </select>
+    </div><!--select-flex-div-->
+  </div>
+  <div class="group-list-container">
+    <ul id="handlebars-container">
+    </ul>
+    <!-- 페이지 부트스트랩 -->
+  </div><!--group-list-container-->
+
+
+  <!--======================== 모임리스트======================== -->
+  <script id="div-template" type="text/x-handlebars-template">
+    {{#each this}}
+    <li class="item">
+      <div class="item-div">
+        <button type="button" class="btn-show" value="{{no}}">
+          <img src="/group/photo?filename={{logo}}" class="sub-logo">
+        </button>
+        <div class="group-name-div">
+          <div class="group-name">{{groupName}}</div>
+          <div class="group-info">
+            <div style="font-size:20px; top: 5px">{{registDate}}</div>
+            <div class="memb-count" style="font-size: 20px;"><span class="material-icons">
+              accessibility_new
+              </span> {{memberCount}}명/{{maxCount}}명</div>
+          </div>
+        </div>
+      </div>  
+    </li>
+    {{/each}}
+  </script>
+
+  <!--========================== 모임정보 ========================-->
+  <div class="background">
+    <div class="window">
+      <div class="popup">
+        <div class="popup-img-div"><img alt="이리오너라" class="main-logo"></div>
+        <button type="button" class="btn-close" data-dialog="background" aria-label="Close"></button>
+        <div class="popup-group-name"></div>
+        <div class="popup-group-content"></div>
+        <div><button id="apply-form-btn" value="">가입하기</button></div>
+      </div>
+    </div>
+  </div>
+
+
+<!--=============시,도 카테고리 생성 핸들 바==================-->
+<script id="optionSi-template" type="text/x-handlebars-template">
+  <option id="allList" value="0">전체</option>
+  {{#each this}}
+  <option id="selectOp">{{nameSi}}</option>
+  {{/each}}
+</script>
+<!--=============군,구 카테고리 생성 핸들 바==================-->
+<script id="optionGu-template" type="text/x-handlebars-template">
+  <option>군구 선택</option>
+  {{#each this}}
+  <option id="selectGuOp" value="{{no}}">{{nameGu}}</option>
+  {{/each}}
+</script>
+<!--===================목적카테고리 핸들바=====================-->
+<script id="optionPurpose-template" type="text/x-handlebars-template">
+  <option>모임 분류</option>
+  {{#each this}}
+  <option id="selectGuOp" value="{{no}}">{{purposeName}}</option>
+  {{/each}}
+</script>
+
+<script src="/ssang/group/js/index.js"></script>
+</body>
+</html>

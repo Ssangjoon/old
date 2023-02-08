@@ -1,0 +1,89 @@
+
+<div class="m-container">
+	<div class="shadow-sm p-5 bg-body rounded border">
+		<table class="table table-hover tab">
+			<div class="row">
+				<div class="col"></div>
+				<div class="col p-5 title">
+					<h1>문의 목록</h1>
+				</div>
+				<div class="col p-5 searchInput">
+					<form name="search">
+						<div class="input-group mb-3 col">
+							<input name="searchName" type="text"
+								class="form-control input-sm" placeholder="검색"
+								aria-label="Recipient's username"
+								aria-describedby="basic-addon2">
+							<button class="input-group-text btn btn-primary searchBtn"
+								id="basic-addon2">검색</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<thead>
+				<tr class="tables">
+					<th class="col-md-1"></th>
+					<th class="col-md-1">문의번호</th>		
+					<th class="col-md-2">카테고리</th>					
+					<th class="col-md-3">제목</th>
+					<th class="col-md-2">작성자</th>
+					<th class="col-md-3">작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+
+		</table>
+		<nav aria-label="Page navigation example">
+			<div class="row">
+				<div class="col"></div>
+				<ul class="col"></ul>
+				<ul class="col prbtn"></ul>
+				<ul class="pagination justify-content-center col botn">
+
+				</ul>
+				<ul class="col nebtn"></ul>
+				<ul class="col"></ul>
+				<ul class="col"></ul>
+
+			</div>
+		</nav>
+
+	</div>
+</div>
+
+
+
+<script src="/node_modules/handlebars/dist/handlebars.js"></script>
+<script id="content" type="text/x-handlebars-template">
+{{#if this.length}}
+  {{#each this}}
+    <tr>
+      <th scope="row">
+      </th>
+      <th scope="row" value="{{no}}">{{no}}</th>
+      <th scope="row" value="{{no}}">{{queryCate.name}}</th>
+      <td><a href="/jaewon/admin/qna/view/index.html?no={{no}}">{{title}}</a></td>
+      <td>{{member.memberName}}</td>
+      <td>{{queryDate}}</td>
+    </tr>
+  {{/each}}
+{{else}}
+  <tr>
+    <td colspan="4">검색된 데이터가 없습니다.</td>
+  </tr>
+{{/if}}
+</script>
+<script id="prevpage-btn" type="text/x-handlebars-template">
+		<li class="page-item"><a class="page-link" data-num={{num}}>이전 페이지</a></li>
+</script>
+<script id="page-btn" type="text/x-handlebars-template">
+{{#each this}}
+		<li class="pagebtn page-item p{{num}}" aria-current="page"><a class="page-link" data-num={{num}}>{{num}}</a></li>
+{{/each}}
+</script>
+<script id="nextpage-btn" type="text/x-handlebars-template">
+		<li class="page-item"><a class="page-link" data-num={{num}}>다음 페이지</a></li>
+</script>
+</body>
+</html>

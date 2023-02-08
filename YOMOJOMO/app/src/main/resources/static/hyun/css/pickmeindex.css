@@ -1,0 +1,44 @@
+#body-content{ 
+  padding-top: 15vh;
+  height: 90vh;
+  position: relative;
+}
+#pickme-outline {
+  border: 1px solid rgb(17, 147, 218);
+  margin: 20px;
+}
+#pickmeHeader{
+  margin: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+#localSelect{
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 60px;
+}
+#nameSi {
+  width: 250px;
+}
+#nameGu {
+  width: 250px;
+  margin-right: 100px;
+}
+#search {
+  width: 400px;
+  margin-left: 80px;
+} 
+
+table > thead {
+  text-align: center;
+}
+table > tbody > tr > td {
+  text-align: center;
+}
+#listnone, #searchnone {
+  font-size: x-large;
+  text-align: center;
+}
+.pagination {
+  margin-top: 30px;
+}

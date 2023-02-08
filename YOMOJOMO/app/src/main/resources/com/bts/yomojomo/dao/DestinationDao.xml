@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.DestinationDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="Destination" id="DestinationMap">
+    <id column="dest_no" property="no"/>
+    <result column="flat" property="flat"/>
+    <result column="flng" property="flng"/>
+    <result column="store_name" property="storeName"/>
+    <result column="location_id" property="locationId"/>
+    <result column="reg_dt" property="regdt"/>
+    <result column="view_cnt" property="cnt"/>
+    <result column="location_cate_id" property="categoryId"/>
+    <result column="place_URL" property="placeURL"/>
+  </resultMap>
+
+  <select id="findAll" resultMap="DestinationMap"> 
+    select
+      dest_no,
+      flat,
+      flng,
+      store_name,
+      location_id,
+      reg_dt,
+      view_cnt,
+      location_cate_id,
+      place_URL
+    from
+      gms_destination
+    order by
+      view_cnt desc limit 100;
+  </select>
+  
+  <select id="findByNo" resultMap="DestinationMap" parameterType="int">
+    select 
+      dest_no,
+      flat,
+      flng,
+      store_name,
+      location_id,
+      reg_dt,
+      view_cnt
+    from 
+      gms_destination
+    where 
+      dest_no=#{no}
+  </select>
+
+  <insert id="insert" parameterType="Destination">
+    insert into gms_destination(
+      flat,
+      flng,
+      store_name,
+      location_id,
+      location_cate_id,
+      place_URL)
+    values(#{flat}, #{flng}, #{storeName}, #{locationId}, #{categoryId}, #{placeURL})
+    ON DUPLICATE KEY UPDATE view_cnt = view_cnt + 1;
+  </insert>
+  
+  <update id ="update" parameterType="Destination">
+    update gms_destination set 
+      dest_no = #{no},
+      flat = #{flat},
+      flng = #{flng},
+      store_name = #{storeName},
+      location_id = #{locationId},
+      reg_dt = #{regdt},
+      viwe_cnt = #{cnt}
+    where 
+      destno = #{no}
+  </update>
+  
+  <select id ="countAll" parameterType="int">
+    select count(*) from gms_destination
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_destination
+    where 
+      dest_no = #{no}
+  </delete>
+</mapper>

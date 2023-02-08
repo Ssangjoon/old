@@ -1,0 +1,41 @@
+
+/* common*/
+* { 
+    padding : 0; 
+    margin : 0;
+    /*border: 0;*/
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+#container{
+    min-height: 80vh;
+}
+hr{
+    z-index: 99999;
+}
+a, p, span, button {
+    text-decoration: none;
+    color: #616161;
+}
+ol, ul, li {
+    list-style: none;
+}
+div{
+    /* margin: 5px; */
+    /* border-width: 1px;
+    border-style: solid;
+    border-color: #616161; */
+}
+input, button, textarea{
+    position: relative;
+    right: 0;
+}
+
+h1{
+    margin-bottom: 10px;
+}
+div .group-cate{
+
+}

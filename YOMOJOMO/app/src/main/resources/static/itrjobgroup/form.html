@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>그룹 태그명</title>
+</head>
+<body>
+  <span>관심 직군명</span><br>
+  <input type="text" class ="name"><br>
+  <button type="button" class ="add-btn">입력하기</button>
+  <button type="button" class ="cancel-btn">취소하기</button>
+
+  <script>
+    var xname = document.querySelector('.name')
+
+    document.querySelector('.add-btn').addEventListener("click", function() {
+      console.log(xname.value)
+     
+      fetch(`/itrjobgroup/add?name=${xname.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text)
+        location.href = "index.html"
+      });
+    })
+    document.querySelector('.cancel-btn').addEventListener('click', function() {
+      window.location.href = "index.html"
+    })
+    
+
+
+
+  </script>
+  
+</body>
+</html>

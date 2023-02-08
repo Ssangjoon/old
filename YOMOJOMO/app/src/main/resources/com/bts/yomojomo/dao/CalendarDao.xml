@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bts.yomojomo.dao.CalendarDao">
+  
+  <!-- 테이블의 컬럼과 객체필드를 연결한다. -->
+  <resultMap type="Calendar" id="CalendarMap">
+    <id column="cal_no" property="no"/>
+    <result column="name" property="name"/>
+    <result column="content" property="content"/>
+    <result column="result_url" property="resulturl"/>
+    <result column="start_dt" property="startDt"/>
+    <result column="end_dt" property="endDt"/>
+    <association property="joinMemb" javaType="JoinMember">
+      <association property="group" javaType="Group"> <!-- gms_group -->
+	      <id column = "gno" property="no"/>
+	      <result column="gname" property="GroupName"/>
+	    </association>
+	    <association property="memberGrade" javaType="MembGrade"> <!-- gms_memb_grade -->
+	      <id column = "mgno" property="gradeNo"/>
+	      <result column="mgname" property="gradeName"/>
+	    </association>
+    </association>
+     <association property="member" javaType="Member"> <!-- gms_member -->
+       <id column = "mno" property="no"/>
+       <result column="mname" property="memberName"/>
+     </association>
+
+  </resultMap>
+
+  <select id="findAll" resultMap="CalendarMap">
+    select
+      gc.cal_no,
+      gc.name,
+      gc.content,
+      gc.start_dt,
+      gc.end_dt,
+      gc.result_url,
+      g.g_no gno,                    
+      g.name gname,                  
+      jm.memb_no gmmno,              
+      jm.g_memb_grd_no gmgno,        
+      mg.name mgname,                
+      gm.membername mname                  
+    from
+      gms_calendar gc
+      inner join gms_group g on gc.g_no = g.g_no
+      inner join gms_join_memb jm on g.g_no = jm.g_no
+      inner join gms_memb_grade mg on jm.g_memb_grd_no = mg.g_memb_grd_no
+      inner join gms_memb gm on jm.memb_no = gm.memb_no
+    order by
+      gc.cal_no desc
+  </select>
+  
+    <select id="findListByGroup" resultMap="CalendarMap">
+    select
+      gc.cal_no,
+      gc.name,
+      gc.content,
+      gc.start_dt,
+      gc.end_dt,
+      gc.result_url,
+      g.g_no gno,                    
+      g.name gname,                  
+      jm.memb_no gmmno,              
+      jm.g_memb_grd_no gmgno,        
+      mg.name mgname,                
+      gm.membername mname                  
+    from
+      gms_calendar gc
+      inner join gms_group g on gc.g_no = g.g_no
+      inner join gms_join_memb jm on g.g_no = jm.g_no
+      inner join gms_memb_grade mg on jm.g_memb_grd_no = mg.g_memb_grd_no
+      inner join gms_memb gm on jm.memb_no = gm.memb_no
+    where
+      g.g_no=#{joinMemb.group.no}
+    order by
+      gc.cal_no desc
+  </select>
+  
+  <select id="findByNo" resultMap="CalendarMap" parameterType="int">
+    select
+      gc.cal_no,
+      gc.name,
+      gc.content,
+      gc.start_dt,
+      gc.end_dt,
+      gc.result_url,
+      g.g_no gno,                    /*group*/
+      g.name gname,                  /*group*/
+      jm.memb_no gmmno,              /*joinMemb*/
+      jm.g_memb_grd_no gmgno,        /*joinMemb*/
+      mg.name mgname,                /*grade*/
+      gm.membername mname                  /*member*/
+    from
+      gms_calendar gc
+      inner join gms_group g on gc.g_no = g.g_no
+      inner join gms_join_memb jm on g.g_no = jm.g_no
+      inner join gms_memb_grade mg on jm.g_memb_grd_no = mg.g_memb_grd_no
+      inner join gms_memb gm on jm.memb_no = gm.memb_no
+    where 
+      gc.cal_no=#{no}
+  </select>
+
+  <insert id="insert" parameterType="Calendar">
+    insert into gms_calendar(name, content, g_no, start_dt, end_dt, result_url) 
+    values(#{name}, #{content}, #{joinMemb.group.no}, #{startDt}, #{endDt}, #{resulturl})
+  </insert>
+  
+  <update id ="update" parameterType="Calendar">
+    update gms_calendar set 
+      name = #{name},
+      content = #{content},
+      g_no = #{joinMemb.group.no},
+      start_dt=#{startDt},
+      end_dt=#{endDt},
+      result_url = #{resulturl}
+    where 
+      cal_no = #{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from gms_calendar
+    where 
+      cal_no = #{no}
+  </delete>
+</mapper>

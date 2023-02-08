@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=
+  , initial-scale=1.0">
+  <title>고객센터 메인</title>
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- css 초기화 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- 부트스트랩 -->
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- JQUERY -->
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- 아이콘 -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/yoseob/css/style.css">
+</head>
+<body>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $('#header').load('/junho/mainHeader.html'); //헤더 인클루드
+        $('#footer').load('/junho/mainfooter.html'); //푸터부분 인클루드
+        // $('#footers').load('../html'); //푸터부분 인클루드
+    });
+  </script>
+<div id="header"></div>
+  
+<div class = "container">
+  <div class = "all-notice-explanation">
+    <div class ="notice-explanation">
+     <img class = "exclamation-mark"src="../image/Exclamation_mark.png" >
+      <h1 class ="notice-head">고객센터</h1>
+        <p class ="notice-explanation-text">
+          저희 요모조모를 이용하면서 불편했던 점이나<br>
+                궁금한 점을 빠르고 친절하게<br>
+                    안내해 드리겠습니다.<br>
+              아래 카테고리를 선택해 주세요.</p>   
+      </div>
+    </div>
+    <div class ="image">
+      <img class ="service_center" src="../image/service_center.png" >
+    </div>
+    <div class ="notice-category">
+      <span class="material-icons">question_mark</span>
+      <span class ="faq">자주하는 질문</span>
+      <span class="material-icons">volume_up</span>
+      <span class ="announcement">공지사항</span>
+      <span class="material-icons">search</span>
+      <span class ="announcement">서비스 안내</span>
+      <span class="material-icons">call</span>
+      <span class ="announcement">문의사항</span>
+    </div>
+    <span class ="faq_1">자주하는 질문</span>
+    <span class ="more_qna">QnA 더보기</span>
+    <div class ="faq_list">
+      <li>질문1</li>
+      <li>질문2</li>
+      <li>질문3</li>
+      <li>질문4</li>
+      <li>질문5</li>
+    </div>
+    
+      <div class ="announcement_all">
+      <span class ="announcement_1">공지사항</span>
+      <span class ="announcement_more"> 공지사항 더보기</span>
+      <div class ="announcement_list">
+       <li>공지사항1</li>
+       <li>공지사항2</li>
+       <li>공지사항3</li>
+      </div>
+    </div>
+    <div class="information_card">
+      <img class="information_more" src="../image/information_card.png" >
+      <span class ="information_text">서비스 안내</span>
+    </div>
+    <div class="question_card">
+      <img class="question_more" src="../image/inquiry_card.PNG" >
+      <span class="question_text">문의하기</span>
+    </div>
+  </div>
+  
+  <div id="footer"></div>
+
+  
+  
+</body>
+</html>

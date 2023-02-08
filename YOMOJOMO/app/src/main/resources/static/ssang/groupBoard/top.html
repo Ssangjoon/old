@@ -1,0 +1,73 @@
+<meta charset="UTF-8">
+  <!--공용css-->
+  <link rel="stylesheet" href="/css/common.css">
+  <!--내css-->
+  <link rel="stylesheet" href="/ssang/groupboard/css/top.css">
+  
+  <div id="top-container">
+    <div class="menu-container">
+      <div id="group-title">그룹명</div>
+      <button class="group-cate-btn group-board" type="button">게시글</button>
+      <button class="group-cate-btn group-photo" type="button">사진첩</button>
+      <button class="group-cate-btn group-calendar" type="button">일정</button>
+      <!-- <button class="group-cate-btn group-file" type="button">첨부</button> -->
+      <button class="group-cate-btn group-member" type="button">멤버</button>
+      <button class="group-cate-btn group-accounting" type="button">회비 및 정산관리</button>
+      <button class="group-cate-btn group-view" type="button">모임 정보 수정</button>
+    </div>
+    <div class="search-container">
+      <input type="text" class="search-input" value="글 내용, #태그, @작성자 검색"><button class="search-btn btn">검색</button>
+    </div>
+  </div>
+
+<script>
+  // 1) URL에서 쿼리스트링(query string)을 추출한다.
+  var arr = location.href.split("?");
+  // console.log(arr);
+  // if (arr.length == 1) {
+  //   alert("요청 형식이 옳바르지 않습니다.")
+  //   throw "URL 형식 오류!";
+  // }
+  var qs = arr[1];
+  // console.log(qs);
+  // 2) 쿼리 스트링에서 email 값을 추출한다.
+  var params = new URLSearchParams(qs);
+  var gno = params.get("gno");
+  // if (no == null) {
+  //   alert("해당 번호의 모임이 없습니다.");
+  //   throw "파라미터 오류!";
+  // }
+  console.log(gno);
+  
+  fetch(`/group/get?gno=${gno}`)
+  .then(function(res){
+    return res.json();
+  }).then(function(result){
+    document.querySelector("#group-title").innerText=result.data.groupName;
+    console.log(result.data.groupName)
+  })
+  
+      
+  
+  document.querySelector(".group-view").onclick = function() {
+  window.location.href = `/ssang/groupEdit/index.html?gno=${gno}`;
+  };
+  document.querySelector(".group-board").onclick = function() {
+  window.location.href = `/ssang/groupBoard/index.html?gno=${gno}`;
+  };
+  document.querySelector(".group-photo").onclick = function() {
+  window.location.href = `/hyun/photo/index.html?gno=${gno}`;
+};
+  document.querySelector(".group-calendar").onclick = function() {
+  window.location.href = `/hyun/calendar/index.html?gno=${gno}`;
+  };
+  // document.querySelector(".group-file").onclick = function() {
+  //   window.location.href = `?content=/contact/index.html?gno=${gno}`;
+  // };
+  document.querySelector(".group-member").onclick = function() {
+  window.location.href = `/ssang/groupMember/index.html?gno=${gno}`;
+  };
+  document.querySelector(".group-accounting").onclick = function() {
+  window.location.href = `/hyun/accounting/index.html?gno=${gno}`;
+  };
+  </script>

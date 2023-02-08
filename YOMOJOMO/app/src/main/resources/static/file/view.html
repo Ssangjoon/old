@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File</title>
+</head>
+<body>
+  <h1>파일 상세정보</h1>
+  <span>멤버번호</span>
+  <input type="text" class="membNo"><br>
+  <span>파일명</span>
+  <input type="text" class="fileName"><br>
+  <button type="button" class="update-btn">수정하기</button>
+  <button type="button" class="delete-btn">삭제하기</button>
+  <button type="button" class="cancel-btn">취소하기</button>
+
+  <script>
+    var arr = location.href.split("?")
+    console.log(arr)
+
+    if (arr.length == 1){
+      alert("요청 형식이 올바르지 않습니다.")
+      throw "URL 형식 오류 !"
+    }
+
+    var qs = arr[1];
+    console.log(qs)
+
+    var params = new URLSearchParams(qs)
+    var no = params.get('no')
+    console.log(no)
+
+    if (no == null) {
+      alert("해당 번호의 회원이 없습니다")
+      throw "파라미터 오류!"
+    }
+
+    var xMembNo = document.querySelector('.membNo')
+    var xFileName = document.querySelector('.fileName')
+
+    fetch(`/file/get?no=${no}`)
+      .then(function(response) {
+        return response.json()
+      }) 
+      .then(function(fileList) {
+        xMembNo.value = fileList.bno
+        xFileName.value = fileList.name
+      })
+
+
+    document.querySelector('.update-btn').addEventListener('click', function() {
+      fetch(`/file/update?no=${no}&bno=${xMembNo.value}&name=${xFileName.value}`)
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(file) {
+        console.log(file)
+        window.location.href="index.html"
+      })
+    })
+
+    document.querySelector('.delete-btn').addEventListener('click', function() {
+      fetch(`/file/delete?no=${no}`)
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(file) {
+        console.log(file)
+        location.href = "index.html"
+      })
+    })
+
+    document.querySelector('.cancel-btn').addEventListener('click', function() {
+      location.href = "index.html"
+    })
+    
+
+  </script>
+</body>
+
+
+
+</html>

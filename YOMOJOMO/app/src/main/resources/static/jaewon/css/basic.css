@@ -1,0 +1,54 @@
+.body-inner {
+	width: 1100px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.container-inner {
+	width: 800px;
+	margin: 0 auto;
+}
+
+.logo {
+	height: 200px;
+	width: 150px;
+	display: block;
+	margin: 0px auto;
+}
+
+img {
+	display: inline-block;
+}
+
+.snsbtn{
+	margin-right:10px;
+}
+
+.button {
+	width: 450px;
+	margin-bottom: 10px;
+}
+
+
+
+.frame {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.box {
+	width: 800px;
+}
+
+.left {
+	text-align: left;
+}
+
+.top {
+	margin-top: 50px;
+}
+
+.modal {
+	position: absolute;
+	top: 50%;
+}

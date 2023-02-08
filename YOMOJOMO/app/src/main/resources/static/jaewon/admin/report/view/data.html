@@ -1,0 +1,45 @@
+
+<div class="m-container inbox"></div>
+
+
+
+<script src="/node_modules/handlebars/dist/handlebars.js"></script>
+<script id="div-get" type="text/x-handlebars-template">
+		<form name="data" id="data">
+			<div class="shadow p-5">
+				<div class="row mb-5">
+					<h1>신고 내역</h1>
+				</div>
+				<div class="row mb-2 top">
+					<div class="row">
+						<div class="col text-start mt-3 mb-2 fs-4 fw-bold">제목 : {{title}} </div>
+						<div class="col"></div>
+					</div>
+					<div class="border-5 border-bottom border-dark"></div>
+					<div class="row">
+						<div class="col p-2 text-start fw-bold">작성자 : {{member.memberName}}</div>
+						<div class="col p-2 text-start">유형 : {{reportCate.name}}</div>
+						<div class="col p-2 text-start fw-bold">피신고대상 : {{reportedMember.memberName}}</div>
+						<div class="col p-2 text-start fw-bold">상태 : {{valid}}</div>
+					</div>
+					<div class="border-1 border-bottom border-dark"></div>
+					<div class="text-start mt-5 mb-5 fs-5 fw-bold">
+						<pre>{{content}}</pre> 
+					</div>
+					
+					<div class="border-1 border-bottom border-dark""></div>
+
+					<div class="row mt-3">
+					<div class="col"></div>
+					<div class="col"></div>
+					<div class="col">
+						<button type="button" class="btn btn-primary update-btn" value={{rptNo}}>수정</button>
+						<button type="button" class="btn btn-danger delete-btn" value={{rptNo}}>삭제</button>
+						<button type="button" class="btn btn-secondary cancel-btn">취소</button>
+					</div>
+				</div>
+			</div>
+		</form>
+</script>
+</body>
+</html>
