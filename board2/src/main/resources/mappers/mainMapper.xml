@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mainMapper">
+	<select id="selectNoticeList" resultType="com.simple_board.main.vo.NoticeVO">
+SELECT 
+	seq,
+	title, 
+	content, 
+	writer,
+	view_count,
+	YEAR(crt_dt) AS "crt_year",
+	MONTH(crt_dt) AS "crt_month",
+	DAY(crt_dt) AS "crt_day"
+	FROM notice_list
+	ORDER BY crt_dt DESC limit 6
+	</select>
+
+</mapper> 

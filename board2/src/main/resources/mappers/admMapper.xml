@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admMapper">
+
+	<select id="selectLogin" resultType="com.simple_board.adm.vo.MemberVO">
+	<![CDATA[ 
+		SELECT uid, name, state, fail_upw,
+			(
+				SELECT COUNT(*) 
+				FROM member_info 
+				WHERE uid = #{uid} 
+				AND upw = #{upw}
+		    ) AS check_no
+		FROM member_info
+		WHERE uid = #{uid}
+	]]>
+	</select>
+
+	<update id="updateLogin">
+	<![CDATA[ 
+		UPDATE member_info SET 
+			last_login_dt = sysdate(),
+		    fail_upw = 0
+		WHERE uid = #{uid}
+	]]>
+	</update>
+
+	<update id="updateFailLogin">
+	<![CDATA[ 
+		UPDATE member_info SET 
+			state = #{state},
+		    fail_upw = #{fail_upw}
+		WHERE uid = #{uid}
+	]]>
+	</update>
+	
+	<select id="selectEmailInfo" resultType="com.simple_board.adm.vo.MemberVO">
+	<![CDATA[ 
+		SELECT uid, email, name, state
+		FROM member_info
+		WHERE email = #{email} limit 1
+	]]>
+	</select>
+	
+	<update id="updatePassword">
+	<![CDATA[ 
+		UPDATE member_info SET 
+			upw = #{upw} 
+		WHERE uid = #{uid}
+	]]>
+	</update>
+	
+	<select id="countMemberList" resultType="int">
+		SELECT COUNT(*) FROM member_info 
+		WHERE 1=1
+		<if test='search_key!=null and !search_key.equals("")'>
+		  <choose>
+		    <when test='search_option == "1"'>
+		      AND uid LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		    <when test='search_option == "2"'>
+		      AND name LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		  </choose>
+		</if>
+	</select>
+	
+	<select id="selectMemberList" resultType="com.simple_board.adm.vo.MemberVO">
+		SELECT 
+			seq,
+			uid, 
+			name, 
+			contact,
+			email,
+			memo,
+			state,
+			last_login_dt
+		FROM member_info 
+		WHERE 1=1 
+		<if test='search_key!=null and !search_key.equals("")'>
+		  <choose>
+		    <when test='search_option == "1"'>
+		      AND uid LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		    <when test='search_option == "2"'>
+		      AND name LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		  </choose>
+		</if>
+		ORDER BY SEQ DESC
+		limit #{start}, #{cntPerPage}
+	</select>
+
+	<select id="selectMember" resultType="com.simple_board.adm.vo.MemberVO">
+	<![CDATA[ 
+		SELECT 
+			uid, 
+			name, 
+			contact,
+			email,
+			memo,
+			state
+        FROM member_info 
+		WHERE uid = #{uid}
+	]]>
+	</select>
+
+   <insert id="insertMemberList">
+   <![CDATA[
+		INSERT INTO member_info ( 
+			uid, 
+		    name, 
+		    contact,
+		    email,
+		    memo,
+		    state,
+		    upw,
+		    crt_dt
+		) VALUES ( 
+			#{uid}, 
+		    #{name, jdbcType=VARCHAR}, 
+		    #{contact, jdbcType=CHAR},
+		    #{email, jdbcType=VARCHAR},
+		    #{memo, jdbcType=VARCHAR},
+		    #{state},
+		    #{upw},
+		    sysdate()
+		)
+   ]]>
+   </insert>
+   <update id="updateMember">
+  		UPDATE member_info SET 
+			name = #{name, jdbcType=VARCHAR}, 
+			contact = #{contact, jdbcType=CHAR},
+			email = #{email, jdbcType=VARCHAR},
+			memo = #{memo, jdbcType=VARCHAR},
+			state = #{state},
+			fail_upw = 0
+		WHERE uid = #{uid}
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM member_info WHERE uid = #{uid}
+	</delete>
+
+
+	<select id="countNoticeList" resultType="int">
+		SELECT COUNT(*) FROM notice_list 
+		WHERE 1=1
+		<if test='search_key!=null and !search_key.equals("")'>
+		  <choose>
+		    <when test='search_option == "1"'>
+		      AND title LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		    <when test='search_option == "2"'>
+		      AND content LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		  </choose>
+		</if>
+	</select>
+
+	<select id="selectNoticeList" resultType="com.simple_board.adm.vo.NoticeVO">
+		SELECT 
+			ROW_NUMBER() OVER() AS ROWNO,
+			seq,
+			title, 
+			content, 
+			writer,
+			view_count,
+			DATE_FORMAT(crt_dt,'%Y-%m-%d') AS "crt_dt"
+		FROM notice_list 
+		WHERE 1=1
+		<if test='search_key!=null and !search_key.equals("")'>
+		  <choose>
+		    <when test='search_option == "1"'>
+		      AND title LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		    <when test='search_option == "2"'>
+		      AND content LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		  </choose>
+		</if>
+		ORDER BY seq DESC
+		limit #{start}, #{cntPerPage}
+	</select>
+
+	<select id="selectNotice" resultType="com.simple_board.adm.vo.NoticeVO">
+	<![CDATA[ 
+		SELECT 
+			seq,
+			title, 
+			content, 
+			writer
+        FROM notice_list 
+		WHERE seq = #{seq}
+	]]>
+	</select>
+
+	<insert id="insertNoticeList"  parameterType="com.simple_board.adm.vo.NoticeVO" useGeneratedKeys="true" keyProperty="seq">
+		<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+			SELECT IFNULL(MAX(seq + 1), 1) AS seq FROM notice_list order by seq DESC limit 1;
+		</selectKey>
+	<![CDATA[
+		INSERT INTO notice_list ( 
+			title, 
+			content, 
+			writer,
+			crt_dt,
+			up_dt
+		) VALUES ( 
+			#{title}, 
+			#{content}, 
+			#{writer}, 
+			sysdate(), 
+			sysdate()
+		)
+	]]>
+	</insert>
+    <insert id="insertFile" parameterType="hashMap">
+		INSERT INTO file_list (
+			notice_seq,
+			org_file,
+			stored_file,
+			file_size,
+			crt_dt
+		)VALUES(
+			#{notice_seq},
+			#{org_file},
+			#{stored_file},
+			#{file_size},
+			sysdate()
+		)
+    </insert>
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT seq,
+			   org_file,
+			   ROUND(FILE_SIZE/1024,1) AS file_size
+		  FROM file_list
+		 WHERE notice_seq = #{notice_seq}
+		   AND del_yn = 'N'
+	</select>
+	<update id="deleteFile" parameterType="int">
+  		UPDATE file_list SET 
+			del_yn = 'Y'
+		WHERE seq = #{seq}
+	</update>
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT 
+			stored_file,
+			org_file
+		FROM file_list
+		WHERE seq = #{seq}
+	</select>
+   <update id="updateNotice" parameterType="com.simple_board.adm.vo.NoticeVO" useGeneratedKeys="true" keyProperty="seq">
+  		UPDATE notice_list SET 
+			title = #{title},
+			content = #{content},
+			writer = #{writer},
+			up_dt = sysdate()
+		WHERE seq = #{seq}
+	</update>
+
+	<delete id="deleteNotice">
+		DELETE FROM notice_list WHERE seq = #{seq}
+	</delete>
+	
+
+	<select id="countFaqList" resultType="int">
+		SELECT COUNT(*) FROM faq_list 
+		WHERE 1=1
+		<if test='search_key!=null and !search_key.equals("")'>
+		  <choose>
+		    <when test='search_option == "1"'>
+		      AND title LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		    <when test='search_option == "2"'>
+		      AND content LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		  </choose>
+		</if>
+	</select>
+
+	<select id="selectFaqList" resultType="com.simple_board.adm.vo.FaqVO">
+		SELECT 
+			seq,
+			category, 
+			title, 
+			content,
+			sort_num,
+			DATE_FORMAT(crt_dt,'%Y-%m-%d') AS "crt_dt"
+		FROM faq_list 
+		WHERE 1=1
+		<if test='search_key!=null and !search_key.equals("")'>
+		  <choose>
+		    <when test='search_option == "1"'>
+		      AND title LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		    <when test='search_option == "2"'>
+		      AND content LIKE CONCAT('%',#{search_key},'%') 
+		    </when>
+		  </choose>
+		</if>
+		ORDER BY sort_num DESC
+		limit #{start}, #{cntPerPage}
+	</select>
+
+	<select id="selectFaq" resultType="com.simple_board.adm.vo.FaqVO">
+	<![CDATA[ 
+		SELECT 
+			seq,
+			category, 
+			title, 
+			content,
+			sort_num
+        FROM faq_list 
+		WHERE seq = #{seq}
+	]]>
+	</select>
+
+   <insert id="insertFaqList">
+   <![CDATA[
+		INSERT INTO faq_list ( 
+			category, 
+			title, 
+			content,
+			sort_num,
+			crt_dt,
+			up_dt
+		) VALUES ( 
+			#{category}, 
+			#{title}, 
+			#{content}, 
+			#{sort_num}, 
+			sysdate(), 
+			sysdate()
+		)
+   ]]>
+   </insert>
+   <update id="updateFaq">
+  		UPDATE faq_list SET 
+			category = #{category}, 
+			title = #{title},
+			content = #{content},
+			sort_num = #{sort_num},
+			up_dt = sysdate()
+		WHERE seq = #{seq}
+	</update>
+	
+	<delete id="deleteFaq">
+		DELETE FROM faq_list WHERE seq = #{seq}
+	</delete>
+	
+	<select id="countIdeaList" resultType="int">
+    SELECT COUNT(*) FROM idea_list 
+    WHERE 1=1
+    <if test='search_key!=null and !search_key.equals("")'>
+      <choose>
+        <when test='search_option == "1"'>
+          AND title LIKE CONCAT('%',#{search_key},'%') 
+        </when>
+        <when test='search_option == "2"'>
+          AND content LIKE CONCAT('%',#{search_key},'%') 
+        </when>
+      </choose>
+    </if>
+  </select>
+
+  <select id="selectIdeaList" resultType="com.simple_board.adm.vo.IdeaVO">
+    SELECT 
+      ROW_NUMBER() OVER() AS ROWNO,
+      seq,
+      title, 
+      content, 
+      writer,
+      view_count,
+      DATE_FORMAT(crt_dt,'%Y-%m-%d') AS "crt_dt"
+    FROM idea_list 
+    WHERE 1=1
+    <if test='search_key!=null and !search_key.equals("")'>
+      <choose>
+        <when test='search_option == "1"'>
+          AND title LIKE CONCAT('%',#{search_key},'%') 
+        </when>
+        <when test='search_option == "2"'>
+          AND content LIKE CONCAT('%',#{search_key},'%') 
+        </when>
+      </choose>
+    </if>
+    ORDER BY seq DESC
+    limit #{start}, #{cntPerPage}
+  </select>
+  
+  <select id="selectIdea" resultType="com.simple_board.adm.vo.IdeaVO">
+  <![CDATA[ 
+    SELECT 
+      seq,
+      title, 
+      content, 
+      writer
+        FROM idea_list 
+    WHERE seq = #{seq}
+  ]]>
+  </select>
+
+  <insert id="insertIdeaList"  parameterType="com.simple_board.adm.vo.IdeaVO" useGeneratedKeys="true" keyProperty="seq">
+    <selectKey keyProperty="seq" resultType="int" order="BEFORE">
+      SELECT IFNULL(MAX(seq + 1), 1) AS seq FROM idea_list order by seq DESC limit 1;
+    </selectKey>
+  <![CDATA[
+    INSERT INTO idea_list ( 
+      title, 
+      content, 
+      writer,
+      crt_dt,
+      up_dt
+    ) VALUES ( 
+      #{title}, 
+      #{content}, 
+      #{writer}, 
+      sysdate(), 
+      sysdate()
+    )
+  ]]></insert>
+  
+  <update id="updateIdea" parameterType="com.simple_board.adm.vo.IdeaVO" useGeneratedKeys="true" keyProperty="seq">
+      UPDATE idea_list SET 
+      title = #{title},
+      content = #{content},
+      writer = #{writer},
+      up_dt = sysdate()
+    WHERE seq = #{seq}
+  </update>
+
+  <delete id="deleteIdea">
+    DELETE FROM idea_list WHERE seq = #{seq}
+  </delete>
+  
+  <insert id="insertFile" parameterType="hashMap">
+    INSERT INTO file_list (
+      notice_seq,
+      org_file,
+      stored_file,
+      file_size,
+      crt_dt
+    )VALUES(
+      #{notice_seq},
+      #{org_file},
+      #{stored_file},
+      #{file_size},
+      sysdate()
+    )
+    </insert>
+  <!-- 아이디어 첨부파일 조회 -->
+  <select id="selectFileList" parameterType="int" resultType="hashMap">
+    SELECT seq,
+         org_file,
+         ROUND(FILE_SIZE/1024,1) AS file_size
+      FROM file_list
+     WHERE notice_seq = #{notice_seq}
+       AND del_yn = 'N'
+  </select>
+  <update id="deleteFile" parameterType="int">
+      UPDATE file_list SET 
+      del_yn = 'Y'
+    WHERE seq = #{seq}
+  </update>
+  <select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+    SELECT 
+      stored_file,
+      org_file
+    FROM file_list
+    WHERE seq = #{seq}
+  </select>
+  
+</mapper> 
